@@ -1,0 +1,84 @@
+.topBar {
+  height: 7rem;
+  width: 100%;
+  background: rgb(175, 174, 175);
+  background: linear-gradient(
+    0deg,
+    rgba(175, 174, 175, 1) 73%,
+    rgba(0, 0, 0, 1) 73%
+  );
+  position: relative;
+}
+#logo {
+  width: 3rem;
+  height: 3rem;
+}
+.Logo-and-text {
+  position: absolute;
+  top: 30%;
+  left: 5%;
+}
+.searchBar {
+  position: absolute;
+  left: 23%;
+  top: 50%;
+}
+.cartButton {
+  position: absolute;
+  right: 5%;
+  top: 45%;
+}
+
+#cartLogo2 {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.cartButton2 {
+  position: absolute;
+  right: 5%;
+  top: 75%;
+}
+
+.cartNotification2 {
+  position: absolute;
+  width: 0.6rem;
+  height: 0.6rem;
+  background: blue;
+  right: 0%;
+  border-radius: 50%;
+}
+.list-group-item {
+  background-color: black;
+}
+
+.testButton {
+  position: absolute;
+  top: 60%;
+  left: 75.2%;
+}
+#cartLogo {
+  width: 2rem;
+  height: 2rem;
+}
+.cartNotification {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: blue;
+  right: 0%;
+  border-radius: 50%;
+}
+
+.logolink {
+  text-decoration: none;
+  color: black;
+}
+
+#left {
+}
+
+#main {
+}
+
+#right {
+}
