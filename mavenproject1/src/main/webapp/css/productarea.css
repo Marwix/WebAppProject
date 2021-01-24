@@ -27,6 +27,8 @@
 }
 div[class^="card"] img {
   width: 80%;
+  height: 40vh;
+  object-fit: contain;
 }
 
 .product-3d {
@@ -36,13 +38,14 @@ div[class^="card"] img {
 }
 
 .rating {
+  margin-top: 10vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .full-star {
-  width: 1rem;
-  height: 1rem;
+  width: 5vh;
+  height: 5vh;
   clip-path: polygon(
     50% 0%,
     61% 35%,
@@ -60,8 +63,8 @@ div[class^="card"] img {
 
 .half-star {
   background: gold;
-  width: 1rem;
-  height: 1rem;
+  width: 5vh;
+  height: 5vh;
   clip-path: polygon(50% 0%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
 /*Product info area*/
@@ -74,7 +77,7 @@ div[class^="card"] img {
 
 .info-box {
   width: 80%;
-  height: 90%;
+  /*height: 90%; */
   background: #3282b8;
   padding: 2rem 0;
   border-radius: 2rem;
@@ -86,23 +89,51 @@ div[class^="card"] img {
 
 .product-name {
   font-weight: bold;
-  background: grey;
+  font-size: 5vh;
 }
 
 .product-description {
+  padding: 2vh;
+  background: #eeeeee;
   width: 70%;
-  height: 6rem;
-  background: grey;
+  border-radius: 1vh;
+}
+.product-description h4 {
+  font-size: 3vh;
 }
 
 .product-specs {
   width: 70%;
-  height: 4rem;
-  background: grey;
+  /* height: 10vh; */
 }
 
 .product-options {
   width: 70%;
-  height: 2rem;
-  background: grey;
+  /* min-height: 2vh;
+  max-height: 5vh; */
+}
+
+.product-specs table {
+  width: 100%;
+}
+
+.product-specs td {
+  background: #eeeeee;
+  padding: 0.5vh;
+  border-width: 0.3vh;
+  border-color: black;
+}
+
+.product-specs td:nth-child(2) {
+  text-align: end;
+}
+
+.purchase-button {
+  width: 80%;
+  border-radius: 4vh;
+  background-color: rgb(15, 76, 117);
+}
+
+.info-padding {
+  height: 5vh;
 }

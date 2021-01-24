@@ -3,11 +3,12 @@
 const card = document.querySelector('.card');
 const container = document.querySelector('.card-area');
 
-// const title = document.querySelector('.info .title');
-// const catapult = document.querySelector('.productimage img');
-// const purchase = document.querySelector('.info .purchase button');
-// const description = document.querySelector('.info h3');
-// const sizes = document.querySelector('.info .sizes');
+const catapult = document.querySelector('.product-3d img');
+const star1 = document.querySelector('#star1');
+const star2 = document.querySelector('#star2');
+const star3 = document.querySelector('#star3');
+const star4 = document.querySelector('#star4');
+const star5 = document.querySelector('#star5');
 //Moving event
 
 container.addEventListener('mousemove', (e)=> {
@@ -21,24 +22,26 @@ container.addEventListener('mousemove', (e)=> {
 })
 
 container.addEventListener('mouseleave', (e)=> {
-    card.style.transition = "all 0.5s ease";
+    card.style.transition = 'all 0.5s ease';
     card.style.transform = `rotateY(0deg) rotateX(0deg)`;
 
     //Reset pop out
-    // catapult.style.transform = 'translateZ(0px)';
-    // title.style.transform = 'translateZ(0px)';
-    // description.style.transform = 'translateZ(0px)';
-    // sizes.style.transform = 'translateZ(0px)';
-    // purchase.style.transform = 'translateZ(0px)';
+    catapult.style.transform = 'translateZ(0px)';
+    star1.style.transform = 'translateZ(0px)';
+    star2.style.transform = 'translateZ(0px)';
+    star3.style.transform = 'translateZ(0px)';
+    star4.style.transform = 'translateZ(0px)';
+    star5.style.transform = 'translateZ(0px)';
 })
 
 container.addEventListener('mouseenter', (e)=> {
     card.style.transition = "none";
 
     //Pop out
-    // catapult.style.transform = 'translateZ(200px)';
-    // title.style.transform = 'translateZ(150px)';
-    // description.style.transform = 'translateZ(100px)';
-    // sizes.style.transform = 'translateZ(75px)';
-    // purchase.style.transform = 'translateZ(40px)';
+    catapult.style.transform = 'translateZ(200px)';
+    star1.style.transform = 'translateZ(15px)';
+    star2.style.transform = 'translateZ(30px)';
+    star3.style.transform = 'translateZ(45px)';
+    star4.style.transform = 'translateZ(60px)';
+    star5.style.transform = 'translateZ(75px)';
 })
