@@ -20,11 +20,35 @@
 }
 .card2d {
   width: 60%;
-  height: 70%;
+  height: 40%;
   background: #3282b8;
   border-radius: 2rem;
   transform-style: preserve-3d;
 }
+.card2d .rating {
+  display: flex;
+  justify-content: center;
+}
+.card2d .rating .full-star {
+  display: flex;
+  width: 5vh;
+  height: 5vh;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  justify-content: center;
+  background: gold;
+}
+
 div[class^="card"] img {
   width: 80%;
   height: 40vh;
