@@ -55,11 +55,11 @@ div[class^="card"] img {
     2% 35%,
     39% 35%
   );
-  background: chartreuse;
+  background: gold;
 }
 
 .half-star {
-  background: chartreuse;
+  background: gold;
   width: 1rem;
   height: 1rem;
   clip-path: polygon(50% 0%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
