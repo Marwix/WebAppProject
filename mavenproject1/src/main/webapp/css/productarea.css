@@ -1,0 +1,108 @@
+/*Product area*/
+/*Product card area*/
+.card-area {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.card {
+  width: 60%;
+  height: 70%;
+  background: #3282b8;
+  border-radius: 2rem;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card2d {
+  width: 60%;
+  height: 70%;
+  background: #3282b8;
+  border-radius: 2rem;
+  transform-style: preserve-3d;
+}
+div[class^="card"] img {
+  width: 80%;
+}
+
+.product-3d {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.full-star {
+  width: 1rem;
+  height: 1rem;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  background: chartreuse;
+}
+
+.half-star {
+  background: chartreuse;
+  width: 1rem;
+  height: 1rem;
+  clip-path: polygon(50% 0%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+/*Product info area*/
+.info {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-box {
+  width: 80%;
+  height: 90%;
+  background: #3282b8;
+  padding: 2rem 0;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-name {
+  font-weight: bold;
+  background: grey;
+}
+
+.product-description {
+  width: 70%;
+  height: 6rem;
+  background: grey;
+}
+
+.product-specs {
+  width: 70%;
+  height: 4rem;
+  background: grey;
+}
+
+.product-options {
+  width: 70%;
+  height: 2rem;
+  background: grey;
+}
