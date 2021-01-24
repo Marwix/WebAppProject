@@ -39,9 +39,9 @@ container.addEventListener('mouseenter', (e)=> {
 
     //Pop out
     catapult.style.transform = 'translateZ(200px)';
-    star1.style.transform = 'translateZ(15px)';
-    star2.style.transform = 'translateZ(30px)';
-    star3.style.transform = 'translateZ(45px)';
-    star4.style.transform = 'translateZ(60px)';
-    star5.style.transform = 'translateZ(75px)';
+    star1.style.transform = 'translateZ(25px)';
+    star2.style.transform = 'translateZ(50px)';
+    star3.style.transform = 'translateZ(75px)';
+    star4.style.transform = 'translateZ(100px)';
+    star5.style.transform = 'translateZ(125px)';
 })

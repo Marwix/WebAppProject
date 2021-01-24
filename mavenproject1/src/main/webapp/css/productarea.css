@@ -29,6 +29,7 @@ div[class^="card"] img {
   width: 80%;
   height: 40vh;
   object-fit: contain;
+  transition: all 0.75s ease;
 }
 
 .product-3d {
@@ -37,13 +38,13 @@ div[class^="card"] img {
   justify-content: center;
 }
 
-.rating {
+.card .rating {
   margin-top: 10vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.full-star {
+.card .rating .full-star {
   width: 5vh;
   height: 5vh;
   clip-path: polygon(
@@ -59,6 +60,7 @@ div[class^="card"] img {
     39% 35%
   );
   background: gold;
+  transition: all 0.75s ease;
 }
 
 .half-star {
@@ -66,6 +68,7 @@ div[class^="card"] img {
   width: 5vh;
   height: 5vh;
   clip-path: polygon(50% 0%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  transition: all 0.75s ease;
 }
 /*Product info area*/
 .info {
