@@ -1,5 +1,7 @@
 {
-    "elements": {},
+    "elements": {
+        "TopBar": {}
+    },
     "attributes": {
         "integrity": {}
     }
