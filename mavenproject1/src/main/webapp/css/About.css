@@ -1,17 +1,37 @@
-.col {
-}
-.outer-squere {
+.outer-square {
   background: #1b262c;
   display: flex;
   padding-top: 10%;
   padding-bottom: 5%;
   justify-content: center;
 }
-.inner-squere {
+.inner-square {
   background: rgba(15, 76, 117, 0.8);
   width: 60%;
   height: 100%;
-  border-radius: 10%;
+  padding: 1rem 1rem;
+  border-radius: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   color: #eeeeee;
+}
+
+.github-link {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #eeeeee;
+}
+
+.github-link:hover {
+  color: black;
+}
+
+.github-link .responsive {
+  width: 80%;
 }
