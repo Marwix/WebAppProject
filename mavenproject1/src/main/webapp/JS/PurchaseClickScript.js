@@ -18,6 +18,13 @@ var prepareButtons = () => {
         if (isNaN(count)) {
             count = 0;
         }
+        // var products = {
+        //     'catapultValue' : {'name' : fisk, 'option': 'blue', 'price':40},
+        //     'tankValue' : {'name': pangpang, 'option':'standard', 'price':500}
+        // }
+        
+        
+        
         count += 1;
         localStorage.setItem(PurchaseButton.id, count);
         setCartNotification();
