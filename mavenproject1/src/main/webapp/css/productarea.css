@@ -25,6 +25,11 @@
   border-radius: 2rem;
   transform-style: preserve-3d;
 }
+.card2d .product-3d .responsive {
+  height: auto;
+  width: 90%;
+}
+
 .card2d .rating {
   display: flex;
   justify-content: center;
