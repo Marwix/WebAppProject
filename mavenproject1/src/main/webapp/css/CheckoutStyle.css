@@ -1,0 +1,111 @@
+.checkout-card-titles h1 {
+    color:black;
+    text-align: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    font-weight:bolder;
+}
+
+.checkout-items {
+    margin-left:100px; 
+    margin-right:200px; 
+    margin-bottom:auto;
+}
+
+.row .checkout-row h1 {
+    color: #bbe1fa;
+    font-family:monospace;
+}
+
+.checkout-total h2 {
+    margin:20px;
+    color: #bbe1fa;
+    font-size: 30;
+    display:flex;
+    justify-content:center;
+}
+
+/* Number Input */
+.card .item-input-value {
+    font-size: 15px;
+    
+}
+
+.card .col-12 .form-control {
+    margin-bottom:10px;
+}
+
+.card .end-of-form {
+    margin-bottom:-10px;
+}
+
+.row .city-postcode {
+    margin-bottom:10px;
+}
+
+.row .items-column {
+    color: #bbe1fa;
+}
+
+.row .items-column h4 {
+    margin-top:10px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.checkout-container .checkout-row{
+    display:flex;
+    justify-content: center;
+}
+
+.alignment-cardstyle {
+    width:100%;
+    display:flex;
+    justify-content: center;
+    margin-bottom:10px; 
+}
+
+.card .card-height {
+    margin-left:20px;
+}
+
+.row .checkout-row h3 {
+    margin-top:10px;
+    text-align:left; 
+    margin-left: 10px;
+    color: #bbe1fa;
+}
+
+.alignment-cardstyle .terms-conditions-text {
+    color:#bbe1fa;
+}
+
+.btn .btn-primary {
+    height:50px;
+}
+
+.card .input-group-append .apply-coupon-button {
+    background-color:#1b262c;
+}
+
+.d-flex .flex-column {
+    margin-left:20px;
+    margin-bottom:20px;
+    margin-top:20px;
+    text-align: left;
+
+}
+
+.row .checkout-row .card {
+    text-align: center;
+    background-color: #0f4c75;
+    border-spacing: 75px;
+    border-radius: 10px;
+    align-self: flex-start;
+    height:100%;
+}
+
+
+
+
+
