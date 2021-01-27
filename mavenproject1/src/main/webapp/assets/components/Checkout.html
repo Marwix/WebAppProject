@@ -93,7 +93,7 @@
             <div class="card-header">
               <h3>CART:</h3>
             </div>
-            <div class="row items-column">
+            <div class="row items-column" onchange="getTotal()">
                 <div class="col-md-4 title"><h4>Items</h4>
                     <div class="md-4">Mushroom</div>
                     <div class="md-4">Peanuts</div>
@@ -101,20 +101,27 @@
                 </div>
             
                 <div class="col-md-4 title"><h4>Amount</h4>
-                    <div class="md-4">5 st</div>
-                    <div class="md-4">2 st</div>
-                    <div class="md-4">10 st</div>
+                    <div class="md-4">
+                      <input type="number" onchange="updateItemPrice(value)" class="item-input-value" value="1" min="0" max="100">
+                    </div>
+                    <div class="md-4">
+                      <input type="number" onchange="updateItemPrice(value)" class="item-input-value" value="1" min="0" max="100">
+                    </div>
+                    <div class="md-4">
+                      <input type="number" onchange="updateItemPrice(value)" class="item-input-value" value="1" min="0" max="100">
+                    </div>  
                 </div>
-                <div class="col-md-4 title"><h4>Price</h4>
-                    <div class="md-4">$40</div>
-                    <div class="md-4">$80</div>
-                    <div class="md-4">$10</div>
+                <div class="col-md-4 title price"><h4>Price</h4>
+    
+                    <div class="md-4 price_total" data-price="40">$40</div>
+                    <div class="md-4 price_total" data-price="80">$80</div>
+                    <div class="md-4 price_total" data-price="10">$10</div>
                 </div>
             </div>
           <div class="checkout-total">
-            <h2>TOTAL TO PAY: $130</h2>
+            <h2 id="total-pay-text">TOTAL TO PAY: $130</h2>
           </div>
-          <button class="btn btn-primary" type="submit">Pay now!</button>
+          <button onclick="updateItemPrice()" class="btn btn-primary" type="submit">Pay now!</button>
         </div></div>
 
         <!-- TERMS AND CONDITIONS -->
