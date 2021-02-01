@@ -40,6 +40,13 @@ body {
   top: 30%;
   left: 5%;
 }
+.acount-page {
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  text-decoration: none;
+  color: #eeeeee;
+}
 
 .cart-button {
   position: absolute;

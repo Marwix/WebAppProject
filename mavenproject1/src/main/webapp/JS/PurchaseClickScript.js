@@ -4,6 +4,7 @@ var prepareButtons = () => {
     var cartNotification = document.querySelector('TopBar .cart-button .cart-notification');
     var cartText = document.querySelector('TopBar .cart-button .cart-notification h6');
     var count = parseInt(localStorage.getItem(PurchaseButton.id));
+    var cart = localStorage.getItem('Cart');
     
     var setCartNotification = () => {
         if (getUnique() > 0) {
@@ -11,6 +12,7 @@ var prepareButtons = () => {
             cartText.innerText = getUnique();
         };
     }
+    
     setCartNotification();
 
     PurchaseButton.addEventListener('click', (e) => {
@@ -18,13 +20,15 @@ var prepareButtons = () => {
         if (isNaN(count)) {
             count = 0;
         }
+
         // var products = {
         //     'catapultValue' : {'name' : fisk, 'option': 'blue', 'price':40},
         //     'tankValue' : {'name': pangpang, 'option':'standard', 'price':500}
         // }
         
         
-        
+        var color = sessionStorage.getItem("Color");
+        console.log(color);
         count += 1;
         localStorage.setItem(PurchaseButton.id, count);
         setCartNotification();
@@ -40,6 +44,10 @@ var getUnique = () => {
      unique += parseInt(localStorage.getItem('tankValue', 10)) > 0 ? 1 : 0; 
     return unique;
 }
+
+    
+
+
 
 
 
