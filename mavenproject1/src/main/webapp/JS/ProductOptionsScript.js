@@ -2,7 +2,11 @@
 
 var purchaseOptions = () => {
     var PurchaseOptionsButtons = document.querySelectorAll('#productInfo .product-option-button');
-    
+    PurchaseOptionsButtons.forEach(button =>{
+        if(button.id == 'Natural'){
+            button.style.borderStyle = 'inset';
+        }
+    })
     PurchaseOptionsButtons.forEach(button => {
        button.addEventListener('click', (e) => {
         checkButtonStates(button.id);
