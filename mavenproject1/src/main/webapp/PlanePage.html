@@ -18,9 +18,9 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script>
       $(document).ready(function () { 
-      $("TankinfoArea").load("./assets/components/TankinfoArea.html",()=>{
+      $("PlaneinfoArea").load("./assets/components/PlaneinfoArea.html",()=>{
         console.log("CIA")
-        $("TankCard").load("./assets/components/TankCard.html", () => {
+        $("PlaneCard").load("./assets/components/PlaneCard.html", () => {
           console.log("CC")
           $("TopBar").load("./assets/components/TopBar.html",  ()=> {
             console.log("TC")
@@ -44,8 +44,8 @@
               <a href="#" class="list-group-item list-group-item-action">Sneakers</a>
               <a href="About.html" class="list-group-item list-group-item-action">About</a>
             </div>
-            <TankCard class="col-md-5 h-100 card-area col-sm-12"></TankCard>
-            <TankinfoArea id="productInfo" class="col-md-4 h-100 col-sm-12 info"></TankinfoArea>
+            <PlaneCard class="col-md-5 h-100 card-area col-sm-12"></PlaneCard>
+            <PlaneinfoArea id="productInfo" class="col-md-4 h-100 col-sm-12 info"></PlaneinfoArea>
         </div>
       </div>
     </div>

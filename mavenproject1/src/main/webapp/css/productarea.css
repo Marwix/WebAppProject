@@ -107,6 +107,22 @@ div[class^="card"] img {
   justify-content: center;
 }
 
+#Red {
+  background: red;
+  border-style: outset;
+}
+#Green {
+  background: Green;
+  border-style: outset;
+}
+#Blue {
+  background: Blue;
+  border-style: outset;
+}
+#Natural {
+  border-style: outset;
+}
+
 .info-box {
   width: 80%;
   /*height: 90%; */
