@@ -42,7 +42,17 @@ var getUnique = () => {
      var unique = 0;
      unique += parseInt(localStorage.getItem('catapultValue', 10)) > 0 ? 1 : 0; 
      unique += parseInt(localStorage.getItem('tankValue', 10)) > 0 ? 1 : 0; 
+     unique += parseInt(localStorage.getItem('planeValue', 10)) > 0 ? 1 : 0; 
     return unique;
+}
+
+var setCartNotification = () => {
+    var cartNotification = document.querySelector('TopBar .cart-button .cart-notification');
+    var cartText = document.querySelector('TopBar .cart-button .cart-notification h6');
+    if (getUnique() > 0) {
+        cartNotification.style.backgroundColor="#49FF00";
+        cartText.innerText = getUnique();
+    };
 }
 
     
