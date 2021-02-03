@@ -13,9 +13,11 @@ body {
   height: 3rem;
 }
 
-#cart-logo {
+#cart-logo 
+{
   width: 2rem;
   height: 2rem;
+  margin-bottom:px;
 }
 
 .title {
@@ -40,6 +42,7 @@ body {
   top: 30%;
   left: 5%;
 }
+
 .acount-page {
   position: absolute;
   top: 15%;
