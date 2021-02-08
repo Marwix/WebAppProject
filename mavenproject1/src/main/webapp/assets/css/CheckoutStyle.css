@@ -25,6 +25,12 @@
     justify-content:center;
 }
 
+/* Number Input */
+.card .item-input-value {
+    font-size: 15px;
+    
+}
+
 .card .col-12 .form-control {
     margin-bottom:10px;
 }

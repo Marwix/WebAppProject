@@ -13,9 +13,11 @@ body {
   height: 3rem;
 }
 
-#cart-logo {
+#cart-logo 
+{
   width: 2rem;
   height: 2rem;
+  margin-bottom:px;
 }
 
 .title {
@@ -41,6 +43,14 @@ body {
   left: 5%;
 }
 
+.acount-page {
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  text-decoration: none;
+  color: #eeeeee;
+}
+
 .cart-button {
   position: absolute;
   right: 5%;
@@ -51,9 +61,14 @@ body {
   position: absolute;
   width: 1rem;
   height: 1rem;
-  background: blue;
+  background: transparent;
   right: 0%;
   border-radius: 50%;
+}
+
+.cart-notification h6 {
+  text-align: center;
+  font-size: small;
 }
 
 .logo-link {
@@ -61,13 +76,25 @@ body {
   color: black;
 }
 
+
+#login-logo {
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-right: 10px;
+}
+
+
 /*Side bar*/
 
 .list-group-item {
   background-color: rgba(15, 76, 117, 0.8);
   border-color: #1b262c;
   color: #eeeeee;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15%;
+  font-size: xx-large;
 }
 
 .list-group-item:hover {

@@ -11,19 +11,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/productarea.css">
+    <link rel="stylesheet" href="assets/css/normalize.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/productarea.css">
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script>
-        $(document).ready(function () { 
-        $("CatapultinfoArea").load("/assets/components/CatapultinfoArea.html"); 
-        $("catapultcard").load("/assets/components/CatapultCard.html"); 
-        $("tankinfoArea").load("/assets/components/TankinfoArea.html"); 
-        $("tankcard").load("/assets/components/TankCard.html");
-        $("TopBar").load("/assets/components/TopBar.html");
-    });</script>
+      $(document).ready(function () { 
+      $("TankinfoArea").load("./assets/components/TankinfoArea.html",()=>{
+        console.log("CIA")
+        $("TankCard").load("./assets/components/TankCard.html", () => {
+          console.log("CC")
+          $("TopBar").load("./assets/components/TopBar.html",  ()=> {
+            console.log("TC")
+            prepareButtons();
+            purchaseOptions();
+          })})});
+  });</script>
   </head>
   <body>
       <div class="container-fluid d-flex h-100 flex-column">
@@ -36,16 +40,17 @@
             <div class="list-group sidebar-height-extension col-md-3 col-sm-12">
               <a href="index.html" id="Catapult" class="list-group-item list-group-item-action"> Catapult</a>
               <a href="TankPage.html" id="Tank" class="list-group-item list-group-item-action">Tank</a>
-              <a href="#" class="list-group-item list-group-item-action">Träningsskor</a>
+              <a href="PlanePage.html" class="list-group-item list-group-item-action">Plane</a>
               <a href="#" class="list-group-item list-group-item-action">Sneakers</a>
               <a href="About.html" class="list-group-item list-group-item-action">About</a>
             </div>
-            <tankcard class="col-md-5 h-100 card-area col-sm-12"></tankcard>
-            <tankinfoArea class="col-md-4 h-100 col-sm-12 info"></tankinfoArea>
+            <TankCard class="col-md-5 h-100 card-area col-sm-12"></TankCard>
+            <TankinfoArea id="productInfo" class="col-md-4 h-100 col-sm-12 info"></TankinfoArea>
         </div>
       </div>
     </div>
-    <script src="/JS/ButtonClick.js"></script>
+    <script src="assets/JS/ProductOptionsScript.js"></script>
+    <script src="assets/JS/PurchaseClickScript.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" 
       crossorigin="anonymous">
