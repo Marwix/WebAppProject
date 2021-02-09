@@ -31,24 +31,21 @@ public class ProductDAO extends AbstractDAO<Product> {
     
 
     public List<Product> getProductByName(String name){
-        EntityManagerFactory emf
-                = Persistence.createEntityManagerFactory("BigStoreDB");
-        EntityManager em = emf.createEntityManager();
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
+        QProduct product = QProduct.product;
         
         List<Product> p = queryFactory.selectFrom(product).where(product.product_name.eq(name)).fetch();
         
         return p;
         
     }
-    
-    public Product getProductByID(int product_id){
-        EntityManagerFactory emf
-                = Persistence.createEntityManagerFactory("BigStoreDB");
-        EntityManager em = emf.createEntityManager();
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+   
+    public List<Product>  getProductByID(int product_id){
         
-         Product p = queryFactory.selectFrom(product).where(product.prodoct_id.eq(product_id)).fetchOne();
+        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
+        QProduct product = QProduct.product;
+        
+        List<Product> p = queryFactory.selectFrom(product).where(product.prodoct_id.eq(product_id)).fetch();
         
         return p;
     

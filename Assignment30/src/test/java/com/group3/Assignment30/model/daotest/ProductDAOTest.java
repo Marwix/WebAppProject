@@ -57,17 +57,25 @@ public class ProductDAOTest {
         
         assertEquals(4L, Amount);
     }
-    
+    @InSequence(1)
     @Test
     public void checkIfWeGetCorrectProductWithID() {
         
-        Product retrievedProduct = productDAO.getProductByID(4);
-        Product retrievedProduct2 = productDAO.getProductByID(3);
-        assertEquals(p4, retrievedProduct);
-        assertEquals(p3, retrievedProduct2);
+        Product retrived1;
+        Product retrived2;
+        
+        List<Product> retrievedProduct = productDAO.getProductByID(4);
+        List<Product> retrievedProduct2 = productDAO.getProductByID(3);
+        
+        retrived1 = retrievedProduct.get(0);
+        retrived2 = retrievedProduct2.get(0);
+        
+        assertEquals(p4, retrived1);
+        assertEquals(p3, retrived2);
     }
-    /*
+    
     @Test
+    @InSequence(2)
     public void checkIfGetProductByName() {
         List<Product> retrivedProducts = productDAO.getProductByName("Catapult");
         assertTrue(retrivedProducts.contains(p1));
@@ -75,7 +83,10 @@ public class ProductDAOTest {
         assertTrue(retrivedProducts.contains(p3));
         assertFalse(retrivedProducts.contains(p4));
     }
+    
+    /*
     @Test
+    @InSequence(3)
     public void checkIfProductRemoved() {
         List<Product> retrivedProducts = productDAO.findAll();
         assertTrue(retrivedProducts.contains(p1));

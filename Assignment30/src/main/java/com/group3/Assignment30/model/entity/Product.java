@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Product implements Serializable{
     @Id 
-    private int prodoct_id;
+    public int prodoct_id;
     
     private String product_name;
     private int price;
