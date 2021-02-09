@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-  <!-- Define Persistence Unit -->
-  <persistence-unit name="my_persistence_unit">
-    <class>com.group3.mavenproject1.model.entity.Product</class>
-  </persistence-unit>
+<persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence 
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+    
+            <persistence-unit name="BigStoreDB" transaction-type="JTA">
+                <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+                    <jta-data-source>jdbc/BigStoreDB</jta-data-source>
+                    <properties>
+                    <property name="eclipselink.ddl-generation" value="create-tables"/>
+                </properties>
+            </persistence-unit>
 </persistence>
