@@ -84,7 +84,7 @@ public class ProductDAOTest {
         assertFalse(retrivedProducts.contains(p4));
     }
     
-    /*
+    
     @Test
     @InSequence(3)
     public void checkIfProductRemoved() {
@@ -97,11 +97,12 @@ public class ProductDAOTest {
         productDAO.remove(p2);
         
         List<Product> retrivedProductsAfterRemoved = productDAO.findAll();
+        
         assertTrue(retrivedProductsAfterRemoved.contains(p1));
         assertFalse(retrivedProductsAfterRemoved.contains(p2));
         assertTrue(retrivedProductsAfterRemoved.contains(p3));
         assertTrue(retrivedProductsAfterRemoved.contains(p4));
         
-    }*/
+    }
     
 }
