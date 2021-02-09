@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource
-Definitions//EN" "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
+<!DOCTYPE resources PUBLIC "-//Payara.fish//DTD Payara Server 5 Resource Definitions//EN" 
+"https://raw.githubusercontent.com/payara/Payara-Server-Documentation/master/schemas/payara-resources_1_6.dtd">
 <resources>
     <jdbc-connection-pool datasource-classname="org.apache.derby.jdbc.ClientDataSource"
                     name="derby_net_BigStoreDB_appPool" res-type="javax.sql.DataSource">
