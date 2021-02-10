@@ -51,7 +51,5 @@ public class ProductDAO extends AbstractDAO<Product> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
-    
-    
+  
 }
