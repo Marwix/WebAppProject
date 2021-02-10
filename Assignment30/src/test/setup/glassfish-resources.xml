@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//Payara.fish//DTD Payara Server 5 Resource Definitions//EN" 
+"https://raw.githubusercontent.com/payara/Payara-Server-Documentation/master/schemas/payara-resources_1_6.dtd">
+<resources>
+    <jdbc-connection-pool datasource-classname="org.apache.derby.jdbc.ClientDataSource"
+                    name="derby_net_BigStoreDB_appPool" res-type="javax.sql.DataSource">
+            <property name="serverName" value="localhost"/>
+            <property name="portNumber" value="1527"/>
+            <property name="databaseName" value="BigStoreDB"/>
+            <property name="User" value=""/>
+            <property name="Password" value=""/>
+            <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
+            
+    </jdbc-connection-pool>
+    <jdbc-resource enabled="true" jndi-name="jdbc/BigStoreDB"
+     object-type="user" pool-name="derby_net_BigStoreDB_appPool"/>
+</resources>
