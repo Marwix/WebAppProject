@@ -7,14 +7,10 @@ package com.group3.Assignment30.model.dao;
 
 import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.model.entity.QProduct;
-import static com.group3.Assignment30.model.entity.QProduct.product;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import lombok.Getter;
 
@@ -55,7 +51,4 @@ public class ProductDAO extends AbstractDAO<Product> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
-    
-    
 }

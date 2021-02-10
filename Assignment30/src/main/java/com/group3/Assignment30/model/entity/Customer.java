@@ -7,7 +7,6 @@ package com.group3.Assignment30.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.Column;
-import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -21,17 +20,15 @@ import lombok.NoArgsConstructor;
 public class Customer implements Serializable{
     @Id
     private int user_id;
-    
+    private String first_name;
+    private String last_name;
     //Make unique
     @Column(unique=true)
     private String email;
-    
     private String password;
-    private String first_name;
-    private String last_name;
     private String phonenumber;
     private String city;
     private String region;
-    
-    
+
+
 }
