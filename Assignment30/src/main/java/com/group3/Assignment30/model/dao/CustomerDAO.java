@@ -56,7 +56,6 @@ public class CustomerDAO extends AbstractDAO<Customer> {
         List<Customer> u = queryFactory.selectFrom(user).where(user.email.eq(email)).fetch();
         return u;
     }
-   
 
     @Override
     protected EntityManager getEntityManager() {

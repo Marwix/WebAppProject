@@ -7,8 +7,10 @@ package com.group3.Assignment30.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.Column;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +31,8 @@ public class Customer implements Serializable{
     private String phonenumber;
     private String city;
     private String region;
-
-
+    private String postal_code;
+    
+     //alt: 2
+    //private List<Order> order_list;
 }

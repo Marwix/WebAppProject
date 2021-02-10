@@ -6,10 +6,16 @@
 package com.group3.Assignment30.model.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,14 +27,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order implements Serializable{
+public class Purchase implements Serializable{
     @Id
     private int order_id;
     
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime time;
+    private LocalDate time;
+    
+    @ManyToOne //gör klasserna så enkla som möjligt!!
     private Customer customer;
     
-    @OneToMany
-    private List<Product> product_list;
+    //@ManyToMany(cascade = CascadeType.MERGE) //försök att skapa 1 relation åtgången!!
+    //private List<Product> product_list;
+    
+    //private BigDecimal TotalCost;
 }
