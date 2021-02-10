@@ -2,6 +2,8 @@ package com.group3.Assignment30.model.daotest;
 
 import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.entity.Customer;
+import com.querydsl.core.QueryFactory;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -10,10 +12,13 @@ import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.After;
+import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -38,20 +43,21 @@ public class CustomerDAOTest {
     
     @Before
     public void init() {
-        user1 =  new Customer(1, "Allan", "Ridha", "allan-ridha@live.se", "Password1", "0760272740", "Gothenburg", "Goteland");
-        user2 =  new Customer(2, "Lars", "Svensson", "test@mail.se", "Password12", "0760272740", "Gothenburg", "Goteland");
-        user3 =  new Customer(3, "Mojtaba", "Ataie", "mojje@mail.se", "Password123", "0760272740", "Gothenburg", "Goteland");
-        user4 =  new Customer(4, "Ridha", "Lorensson", "allan-rid@testmail.se", "Password1234", "0760272740", "Gothenburg", "Goteland");
+        user1 =  new Customer(1, "Allan", "Ridha", "allan-ridha@live.se", "Password1", "0760272740", "Gothenburg", "Goteland", "42455");
+        user2 =  new Customer(2, "Lars", "Svensson", "test@mail.se", "Password12", "0760272740", "Gothenburg", "Goteland", "42455");
+        user3 =  new Customer(3, "Mojtaba", "Ataie", "mojje@mail.se", "Password123", "0760272740", "Gothenburg", "Goteland", "42455");
+        user4 =  new Customer(4, "Ridha", "Lorensson", "allan-rid@testmail.se", "Password1234", "0760272740", "Gothenburg", "Goteland", "42455");
+        
+        customerDAO.create(user1);
+        customerDAO.create(user2);
+        customerDAO.create(user3);
+        customerDAO.create(user4);
     }
     
     
     @InSequence(0)
     @Test
     public void checkIfWeGetCorrectCustomerWithID() {
-        customerDAO.create(user1);
-        customerDAO.create(user2);
-        customerDAO.create(user3);
-        customerDAO.create(user4);
         
         Customer p1;
         Customer p2;
@@ -126,7 +132,12 @@ public class CustomerDAOTest {
     public void checkIfUserAlreadyExist() {
         // Check if new customer already exists in list of customers.
         List<Customer> customers = customerDAO.findAll();
-        Customer p1 = new Customer(1, "Allan", "Ridha", "allan-ridha@live.se", "Password1", "0760272740", "Gothenburg", "Goteland");
+        Customer p1 = new Customer(1, "Allan", "Ridha", "allan-ridha@live.se", "Password1", "0760272740", "Gothenburg", "Goteland", "42455");
         assertTrue(customers.contains(p1));
+    }
+    
+    @After
+    public void cleanup(){
+       customerDAO.cleanAll();
     }
 }

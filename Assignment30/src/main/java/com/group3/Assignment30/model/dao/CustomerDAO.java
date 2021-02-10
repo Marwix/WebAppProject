@@ -56,6 +56,9 @@ public class CustomerDAO extends AbstractDAO<Customer> {
         List<Customer> u = queryFactory.selectFrom(user).where(user.email.eq(email)).fetch();
         return u;
     }
+    public void cleanAll(){
+        em.createQuery("DELETE FROM Customer where 1=1").executeUpdate();
+    }
 
     @Override
     protected EntityManager getEntityManager() {

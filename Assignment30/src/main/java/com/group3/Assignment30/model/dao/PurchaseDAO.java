@@ -47,6 +47,11 @@ public class PurchaseDAO extends AbstractDAO<Purchase> {
     
     }
     
+    public void cleanAll(){
+        em.createQuery("DELETE FROM Purchase where 1=1").executeUpdate();
+    }
+    
+    
     
     @Override
     protected EntityManager getEntityManager() {

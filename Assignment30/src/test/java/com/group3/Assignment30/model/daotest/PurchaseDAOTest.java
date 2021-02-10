@@ -97,11 +97,7 @@ public class PurchaseDAOTest {
         o6 = new Purchase(6, LocalDate.of(2020, 2, 10),c1);
         o7 = new Purchase(7, LocalDate.of(2020, 2, 2),c1);
         o8 = new Purchase(8, LocalDate.of(2020, 1, 5),c1);
-    }
-    //@InSequence(0) bestämmer ordningen
-    @InSequence(0)
-    @Test
-    public void checkCorrectAmountInserted() {
+        
         customerDAO.create(c1);
         customerDAO.create(c2);
         purchaseDAO.create(o1);
@@ -117,6 +113,11 @@ public class PurchaseDAOTest {
         //productDAO.create(p2);
         //productDAO.create(p3);
        // productDAO.create(p4);
+    }
+    //@InSequence(0) bestämmer ordningen
+    @InSequence(0)
+    @Test
+    public void checkCorrectAmountInserted() {
         
         long Amount = customerDAO.count();
         long Amount2 = purchaseDAO.count();
@@ -178,5 +179,10 @@ public class PurchaseDAOTest {
         
     }
     
+    @After
+    public void cleanup(){
+       purchaseDAO.cleanAll();
+       customerDAO.cleanAll();
+    }
     
 }

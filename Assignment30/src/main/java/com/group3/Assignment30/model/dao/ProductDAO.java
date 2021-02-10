@@ -46,6 +46,9 @@ public class ProductDAO extends AbstractDAO<Product> {
         return p;
     
     }
+    public void cleanAll(){
+        em.createQuery("DELETE FROM Product where 1=1").executeUpdate();
+    }
     
     @Override
     protected EntityManager getEntityManager() {

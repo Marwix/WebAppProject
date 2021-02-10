@@ -44,15 +44,17 @@ public class ProductDAOTest {
         p2 = new Product(2, "Catapult", 30000, 4, 1, "Green", "3m","3m","3m", "3m","HIGH", "TEST");
         p3 = new Product(3, "Catapult", 30000, 4, 1, "Red", "3m","3m","3m", "3m","HIGH", "TEST");
         p4 = new Product(4, "Plane", 30000, 4, 1, "Red", "3m","3m","3m", "3m","HIGH", "TEST");
+        
+        productDAO.create(p1);
+        productDAO.create(p2);
+        productDAO.create(p3);
+        productDAO.create(p4);
     }
     //@InSequence(0) bestämmer ordningen
     @InSequence(0)
     @Test
     public void checkCorrectAmountInserted() {
-        productDAO.create(p1);
-        productDAO.create(p2);
-        productDAO.create(p3);
-        productDAO.create(p4);
+        
         
         long Amount = productDAO.count();
         
@@ -106,5 +108,9 @@ public class ProductDAOTest {
         
     }
     
+    @After
+    public void cleanup(){
+       productDAO.cleanAll();
+    }
     
 }
