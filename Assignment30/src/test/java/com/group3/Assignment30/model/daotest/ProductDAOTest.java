@@ -10,6 +10,7 @@ import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -104,5 +105,6 @@ public class ProductDAOTest {
         assertTrue(retrivedProductsAfterRemoved.contains(p4));
         
     }
+    
     
 }
