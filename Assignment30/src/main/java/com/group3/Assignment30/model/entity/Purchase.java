@@ -6,21 +6,12 @@
 package com.group3.Assignment30.model.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Purchase implements Serializable{
-    @Id
+
     private int order_id;
     
     private LocalDate time;
@@ -38,12 +29,12 @@ public class Purchase implements Serializable{
     @ManyToOne //gör klasserna så enkla som möjligt!!
     private Customer customer;
     
-    //aldrig typen i namn dålig form!!!!!!
-    @ManyToMany() //försök att skapa 1 relation åtgången!!
-    @JoinTable(name = "purchesehistory",
-            joinColumns = @JoinColumn(name = "purchese"),
-            inverseJoinColumns = @JoinColumn(name = "product"))
-    private List<Product> products;
+
+    private Product products;
     
-    //private BigDecimal TotalCost;
+    private int count;
+    
+    @Id
+    @GeneratedValue
+    private long id;
 }

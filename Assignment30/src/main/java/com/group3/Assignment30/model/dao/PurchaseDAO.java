@@ -47,6 +47,15 @@ public class PurchaseDAO extends AbstractDAO<Purchase> {
     
     }
     
+    public List<Purchase> getOrdersByOrderID(int order_id){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
+        QPurchase purchase = QPurchase.purchase;
+        
+        List<Purchase> orders = queryFactory.selectFrom(purchase).where(purchase.order_id.eq(order_id)).fetch();
+        
+        return orders;
+    }
+    
     public void cleanAll(){
         em.createQuery("DELETE FROM Purchase where 1=1").executeUpdate();
     }
