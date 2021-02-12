@@ -50,7 +50,7 @@ public class PurchaseDAOTest {
     private Customer c1;
     private Customer c2;
     
-    private List<Product> products_list;
+    private List<Product> products;
     
     
     
@@ -59,7 +59,7 @@ public class PurchaseDAOTest {
         return ShrinkWrap.create(WebArchive.class)
                 .addClasses(PurchaseDAO.class, Purchase.class)
                 .addClasses(CustomerDAO.class, Customer.class)
-                //.addClasses(ProductDAO.class, Product.class)
+                .addClasses(ProductDAO.class, Product.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
@@ -68,35 +68,40 @@ public class PurchaseDAOTest {
     private PurchaseDAO purchaseDAO;
     @EJB
     private CustomerDAO customerDAO;
-   // @EJB
-    //private ProductDAO productDAO;
+    @EJB
+    private ProductDAO productDAO;
 
     @Before
     public void init() {
         
-       // p1 = new Product(1, "Catapult", 30000, 4, 1, "Blue", "3m","3m","3m", "3m","HIGH", "TEST");
-        //p2 = new Product(2, "Catapult", 30000, 4, 1, "Green", "3m","3m","3m", "3m","HIGH", "TEST");
-        //p3 = new Product(3, "Catapult", 30000, 4, 1, "Red", "3m","3m","3m", "3m","HIGH", "TEST");
-        //p4 = new Product(4, "Plane", 30000, 4, 1, "Red", "3m","3m","3m", "3m","HIGH", "TEST");
+        p1 = new Product(1, "Catapult", 30000, 4, 1, "Blue", "3m","3m","3m", "3m","HIGH", "TEST");
+        p2 = new Product(2, "Catapult", 30000, 4, 1, "Green", "3m","3m","3m", "3m","HIGH", "TEST");
+        p3 = new Product(3, "Catapult", 30000, 4, 1, "Red", "3m","3m","3m", "3m","HIGH", "TEST");
+        p4 = new Product(4, "Plane", 30000, 4, 1, "Red", "3m","3m","3m", "3m","HIGH", "TEST");
         
-        //products_list = new ArrayList<Product>();
+        productDAO.create(p1);
+        productDAO.create(p2);
+        productDAO.create(p3);
+        productDAO.create(p4);
         
-       // products_list.add(p1);
-       // products_list.add(p2);
-       // products_list.add(p3);
-       // products_list.add(p4);
+        products = new ArrayList<Product>();
+        
+        products.add(p1);
+        products.add(p2);
+        products.add(p3);
+        products.add(p4);
         
         c1 = new Customer(1, "Sahin1121@hotmail.com", "123456", "Keskin", "Keskin", "0704797796", "Goteborg", "Angered", "42437");
         c2 = new Customer(2, "Robin1121@hotmail.com", "123456", "Robin", "Rehnberg", "0704797796", "Goteborg", "Angered", "42437");
-        o1 = new Purchase(1, LocalDate.of(2021, 2, 10),c1 );
-        o2 = new Purchase(2, LocalDate.of(2021, 2, 8),c2);
-        o3 = new Purchase(3, LocalDate.of(2021, 2, 9),c1);
-        o4 = new Purchase(4, LocalDate.of(2020, 2, 10),c2);
+        o1 = new Purchase(1, LocalDate.of(2021, 2, 10),c1, products );
+        o2 = new Purchase(2, LocalDate.of(2021, 2, 8),c2, products);
+        o3 = new Purchase(3, LocalDate.of(2021, 2, 9),c1, products);
+        o4 = new Purchase(4, LocalDate.of(2020, 2, 10),c2, products);
         
-        o5 = new Purchase(5, LocalDate.of(2021, 1, 10),c1);
-        o6 = new Purchase(6, LocalDate.of(2020, 2, 10),c1);
-        o7 = new Purchase(7, LocalDate.of(2020, 2, 2),c1);
-        o8 = new Purchase(8, LocalDate.of(2020, 1, 5),c1);
+        o5 = new Purchase(5, LocalDate.of(2021, 1, 10),c1, products);
+        o6 = new Purchase(6, LocalDate.of(2020, 2, 10),c1, products);
+        o7 = new Purchase(7, LocalDate.of(2020, 2, 2),c1, products);
+        o8 = new Purchase(8, LocalDate.of(2020, 1, 5),c1, products);
         
         customerDAO.create(c1);
         customerDAO.create(c2);
@@ -109,10 +114,6 @@ public class PurchaseDAOTest {
         purchaseDAO.create(o7);
         purchaseDAO.create(o8);
         
-        //productDAO.create(p1);
-        //productDAO.create(p2);
-        //productDAO.create(p3);
-       // productDAO.create(p4);
     }
     //@InSequence(0) bestämmer ordningen
     @InSequence(0)
@@ -183,6 +184,7 @@ public class PurchaseDAOTest {
     public void cleanup(){
        purchaseDAO.cleanAll();
        customerDAO.cleanAll();
+       productDAO.cleanAll();
     }
     
 }

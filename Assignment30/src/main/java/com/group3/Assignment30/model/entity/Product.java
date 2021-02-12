@@ -36,4 +36,5 @@ public class Product implements Serializable{
     private String weight;
     private String value;
     private String description;
+    
 }

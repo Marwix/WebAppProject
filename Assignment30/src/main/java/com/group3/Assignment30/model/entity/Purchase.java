@@ -14,6 +14,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -36,8 +38,12 @@ public class Purchase implements Serializable{
     @ManyToOne //gör klasserna så enkla som möjligt!!
     private Customer customer;
     
-    //@ManyToMany(cascade = CascadeType.MERGE) //försök att skapa 1 relation åtgången!!
-    //private List<Product> product_list;
+    //aldrig typen i namn dålig form!!!!!!
+    @ManyToMany() //försök att skapa 1 relation åtgången!!
+    @JoinTable(name = "purchesehistory",
+            joinColumns = @JoinColumn(name = "purchese"),
+            inverseJoinColumns = @JoinColumn(name = "product"))
+    private List<Product> products;
     
     //private BigDecimal TotalCost;
 }
