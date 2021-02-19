@@ -8,6 +8,7 @@ package com.group3.Assignment30.model.dao;
 import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.model.entity.QProduct;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -35,6 +36,26 @@ public class ProductDAO extends AbstractDAO<Product> {
         return p;
         
     }
+    
+    // CREATE TEST FOR THIS METHOD!
+    public List<Product> getXUniqueProducts(long count){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
+        QProduct product = QProduct.product;
+        
+        List<Product> temp = queryFactory.selectFrom(product).orderBy(product.product_name.desc()).fetch();
+        
+        List<Product> p = new ArrayList<Product>();
+        
+        String current = "";
+        for (Product prod: temp) {
+            if (!prod.getProduct_name().equals(current)){
+                p.add(prod);
+                current = prod.getProduct_name();
+                if (p.size() == count) break;
+            }
+        }
+        return p;
+    }
    
     public List<Product>  getProductByID(int product_id){
         
@@ -46,6 +67,7 @@ public class ProductDAO extends AbstractDAO<Product> {
         return p;
     
     }
+    
     public void cleanAll(){
         em.createQuery("DELETE FROM Product where 1=1").executeUpdate();
     }

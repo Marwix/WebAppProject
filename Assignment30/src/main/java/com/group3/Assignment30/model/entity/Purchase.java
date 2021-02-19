@@ -26,7 +26,7 @@ public class Purchase implements Serializable{
     
     private LocalDate time;
     
-    @ManyToOne //gör klasserna så enkla som möjligt!!
+    @ManyToOne 
     private Customer customer;
     
 
