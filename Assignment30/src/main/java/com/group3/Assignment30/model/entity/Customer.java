@@ -30,7 +30,7 @@ public class Customer implements Serializable{
     private String password;
     private String phonenumber;
     private String city;
-    private String region;
+    private String adress;
     private String postal_code;
     
      //alt: 2

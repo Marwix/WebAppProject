@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Login/Register Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="assets/css/LoginStyle.css" />
+    </h:head>
+    <ui:decorate template="assets/template/topbar.xhtml">
+        <ui:define name="content">
+            <h:body>
+              <link rel="stylesheet" href="assets/css/LoginStyle.css" />
+                <div class="card">
+                    <p:tabView>
+                        <p:tab title="Login">
+                            <h:form>
+                                <div class="ui-fluid p-formgrid p-grid">
+                                    <div class="p-field p-col-12 p-md-3">
+                                        <p:outputLabel for="emaillogin" value="Email" />
+                                        <p:inputText id="emaillogin" required="true" value="#{loginBackingBean.email}"/>
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-3">
+                                        <p:outputLabel for="pwd" styleClass="p-col-fixed" style="width:100px" value="Password"/>
+                                        <div class="p-col">
+                                            <p:password id="pwd" label="Password 1" required="true" value="#{loginBackingBean.password}"/>
+                                        </div>
+                                    </div>
+
+                                    <br/>
+                                    <p:commandButton type="sumbit" value="Register" styleClass="rounded-button" action="#{loginController.onLogin()}" />
+                                </div>  
+                            </h:form>
+                        </p:tab>
+                        <p:tab title="Register">
+                            <h:form>
+                                <div class="ui-fluid p-formgrid p-grid">
+                                    <div class="p-field p-col-12 p-md-3">
+                                        <p:outputLabel for="userid" value="Userid" />
+                                        <p:inputText id="userid" required="true" value="#{registerBackingBean.id}"/>
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-3">
+                                        <p:outputLabel for="email" value="Email" />
+                                        <p:inputText id="email" required="true" value="#{registerBackingBean.email}"/>
+                                    </div>
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="pwd1" styleClass="p-col-fixed" style="width:100px" value="Password"/>
+                                        <div class="p-col">
+                                            <p:password id="pwd1" match="pwd2" label="Password 1" required="true" value="#{registerBackingBean.password}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="pwd2" styleClass="p-col-fixed" style="width:100px" value="Password"/>
+                                        <div class="p-col">
+                                            <p:password id="pwd2" value="#{registerBackingBean.password}" label="Password 2" required="true"/>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="firstname" value="Firstname" />
+                                        <p:inputText id="firstname" required="true" value="#{registerBackingBean.firstname}"/>
+                                    </div>
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="lastname" value="Lastname" />
+                                        <p:inputText id="lastname" required="true" value="#{registerBackingBean.lastname}"/>
+                                    </div>
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="phonenumber" value="Phonenumber" />
+                                        <p:inputText id="phonenumber" required="true" value="#{registerBackingBean.phonenumber}"/>
+                                    </div>
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="address" value="Address" />
+                                        <p:inputText id="address" required="true" value="#{registerBackingBean.address}"/>
+                                    </div>
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="city" value="City" />
+                                        <p:inputText id="city" required="true" value="#{registerBackingBean.city}" />
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-3">
+                                        <p:outputLabel for="zip" value="Zip" />
+                                        <p:inputText id="zip" required="true" value="#{registerBackingBean.zip}" />
+                                    </div>
+                                    <br/>
+                                    <p:commandButton type="submit" value="Register" styleClass="rounded-button" action="#{registerController.onRegister}" />
+                                    <h:panelGroup rendered="#{registerBackBean.username != null}">
+                                        <h2>Current data</h2>
+                                        <h3>#{registerBackBean.username}</h3>
+                                    </h:panelGroup>
+                                </div>
+                            </h:form>
+                        </p:tab>
+                    </p:tabView>
+                </div>
+            </h:body>  
+        </ui:define>
+    </ui:decorate>
+</html>
+
