@@ -91,10 +91,6 @@ and open the template in the editor.
                                     </div>
                                     <br/>
                                     <p:commandButton type="submit" value="Register" styleClass="rounded-button" action="#{registerController.onRegister}" />
-                                    <h:panelGroup rendered="#{registerBackBean.username != null}">
-                                        <h2>Current data</h2>
-                                        <h3>#{registerBackBean.username}</h3>
-                                    </h:panelGroup>
                                 </div>
                             </h:form>
                         </p:tab>

@@ -72,6 +72,7 @@ public class PurchaseDAOTest {
     @EJB
     private ProductDAO productDAO;
 
+    
     @Before
     public void init() {
         

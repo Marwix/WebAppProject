@@ -5,6 +5,8 @@ import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.views.LoginBackingBean;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,7 +14,7 @@ import lombok.Data;
 
 @Data
 @Named
-@ViewScoped
+@SessionScoped
 public class LoginController  implements Serializable{
     
     @Inject
@@ -21,15 +23,19 @@ public class LoginController  implements Serializable{
     @EJB
     private CustomerDAO customerDAO;
     
-    public boolean onLogin(){
+    private SessionContextController sessionContextController = SessionContextController.getInstance();
+    
+    public String onLogin(){
         boolean exists = customerDAO.checkUserLogin(loginBackingBean.getEmail(), loginBackingBean.getPassword()).size() == 1;
         
-        if (exists) 
-            System.out.println("YAY Logged in!");
+        if (exists){
+          System.out.println("YAY Logged in!");
+           sessionContextController.setAttribute("name", loginBackingBean.getEmail()); 
+        } 
         else
             System.out.println("who da fuck are you");
         
-        return exists;
+        return "hej";
     }
     
     

@@ -17,37 +17,10 @@ and open the template in the editor.
     </h:head>
     
     <h:body>
-       <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col-12 p-md-6">
-                <p:outputLabel for="firstname" value="Firstname" />
-                <p:inputText id="firstname" />
-            </div>
-            <div class="p-field p-col-12 p-md-6">
-                <p:outputLabel for="lastname" value="Lastname" />
-                <p:inputText id="lastname" />
-            </div>
-            <div class="p-field p-col-12">
-                <p:outputLabel for="address" value="Address" />
-                <p:inputTextarea id="address" rows="4" />
-            </div>
-            <div class="p-field p-col-12 p-md-6">
-                <p:outputLabel for="city" value="City" />
-                <p:inputText id="city" />
-            </div>
-            <div class="p-field p-col-12 p-md-3">
-                <p:outputLabel for="state" value="State" />
-                <p:selectOneMenu id="state">
-                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                    <f:selectItem itemLabel="Option 1" itemValue="Option 1" />
-                    <f:selectItem itemLabel="Option 2" itemValue="Option 2" />
-                    <f:selectItem itemLabel="Option 3" itemValue="Option 3" />
-                </p:selectOneMenu>
-            </div>
-            <div class="p-field p-col-12 p-md-3">
-                <p:outputLabel for="zip" value="Zip" />
-                <p:inputText id="zip" />
-            </div>
-             <p:button value="Submit" icon="pi pi-check" iconPos="right" />
-        </div>
+        <h:form>
+          
+     <p:commandButton type="submit" value="Save" styleClass="rounded-button" action="#{accountPageController.fuckthisshit()}" />
+
+        </h:form>
     </h:body>
 </html>

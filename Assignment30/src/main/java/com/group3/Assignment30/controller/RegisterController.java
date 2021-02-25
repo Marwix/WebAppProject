@@ -6,6 +6,8 @@ import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.views.RegisterBackingBean;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,8 +15,9 @@ import lombok.Data;
 
 @Data
 @Named
-@ViewScoped
+@SessionScoped
 public class RegisterController implements Serializable{
+    
     @Inject
     private RegisterBackingBean registerBackingBean;
     
@@ -22,10 +25,13 @@ public class RegisterController implements Serializable{
     @EJB
     private CustomerDAO customerDAO;
     
+    private SessionContextController sessionContextController = SessionContextController.getInstance();
     
     
     public String onRegister(){
         customer = new Customer();
+        
+        
         
         customer.setUser_id(registerBackingBean.getId());
         customer.setFirst_name(registerBackingBean.getFirstname());
@@ -40,7 +46,6 @@ public class RegisterController implements Serializable{
         customerDAO.create(customer);
         
         System.out.println("hej");
-        System.out.println(registerBackingBean.getUsername());
         System.out.println(registerBackingBean.getLastname());
         System.out.println(registerBackingBean.getEmail());
         System.out.println(registerBackingBean.getFirstname());
@@ -48,7 +53,9 @@ public class RegisterController implements Serializable{
         System.out.println(registerBackingBean.getZip());
         System.out.println(registerBackingBean.getAddress());
         System.out.println(registerBackingBean.getCity());
-        return registerBackingBean.getUsername();
+        sessionContextController.setAttribute("name", customer.getEmail());
+        
+        return "index.xhtml";
     }
     
 }
