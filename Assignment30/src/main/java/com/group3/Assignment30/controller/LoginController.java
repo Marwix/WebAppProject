@@ -2,14 +2,18 @@
 package com.group3.Assignment30.controller;
 
 import com.group3.Assignment30.model.dao.CustomerDAO;
+import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.views.LoginBackingBean;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.print.attribute.standard.Severity;
 import lombok.Data;
 
 @Data
@@ -26,16 +30,25 @@ public class LoginController  implements Serializable{
     private SessionContextController sessionContextController = SessionContextController.getInstance();
     
     public String onLogin(){
-        boolean exists = customerDAO.checkUserLogin(loginBackingBean.getEmail(), loginBackingBean.getPassword()).size() == 1;
         
-        if (exists){
-          System.out.println("YAY Logged in!");
-           sessionContextController.setAttribute("name", loginBackingBean.getEmail()); 
+        // Attempt to log in
+        List<Customer> customer = customerDAO.checkUserLogin(loginBackingBean.getEmail(), loginBackingBean.getPassword());
+        
+        // If user is found, sign in
+        //If user is not found inform user
+        if (customer.size()==1){
+           sessionContextController.setAttribute("user_id", customer.get(0).getUser_id());
+           return "accountPage";
         } 
-        else
-            System.out.println("who da fuck are you");
+        else {
+            FacesMessage message = new FacesMessage();
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            message.setSummary("Account could not be found");
+            FacesContext.getCurrentInstance().addMessage(null,message);
+            
+        }
         
-        return "hej";
+        return "Not found";
     }
     
     

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -20,8 +21,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer implements Serializable{
+    
     @Id
+    @GeneratedValue
     private int user_id;
+    
     private String first_name;
     private String last_name;
     //Make unique

@@ -27,36 +27,56 @@
                                         <div class="ui-fluid p-formgrid p-grid">
                                             <div class="p-field p-col-12 p-md-3">
                                                 <p:outputLabel for="email" value="Email" />
-                                                <p:inputText id="email" value="#{accountBackingBean.email}"/>
+                                                <p:inputText id="email" required="true" value="#{accountBackingBean.email}" validatorMessage="The provided email is not using a valid email format">
+                                                    <f:validateRegex pattern="[a-z0-9][-a-z0-9._]+@([-a-z0-9]+[.])+[a-z]{2,5}$"/>
+                                                </p:inputText>
+                                                <p:message for="email" display="both"/> 
                                             </div>
-                                            <br/>
                                             <div class="p-field  p-col-12 p-md-3">
                                                 <p:outputLabel for="firstname" value="Firstname" />
-                                                <p:inputText id="firstname" value="#{accountBackingBean.firstname}"/>
+                                                <p:inputText id="firstname" required="true" value="#{accountBackingBean.firstname}">
+                                                    <f:validateLength minimum="2" maximum="50" />
+                                                </p:inputText>
+                                                <p:message for="firstname" display="both"/>
                                             </div>
                                             <div class="p-field  p-col-12 p-md-3">
                                                 <p:outputLabel for="lastname" value="Lastname" />
-                                                <p:inputText id="lastname" value="#{accountBackingBean.lastname}"/>
+                                                <p:inputText id="lastname" required="true" value="#{accountBackingBean.lastname}">
+                                                    <f:validateLength minimum="2" maximum="50" />
+                                                </p:inputText>
+                                                <p:message for="lastname" display="both"/> 
                                             </div>
                                             <div class="p-field  p-col-12 p-md-3">
                                                 <p:outputLabel for="phonenumber" value="Phonenumber" />
-                                                <p:inputText id="phonenumber" value="#{accountBackingBean.phonenumber}"/>
+                                                <p:inputText id="phonenumber" type="number" required="true" value="#{accountBackingBean.phonenumber}">
+                                                    <f:validateLength minimum="8" maximum="20" />
+                                                </p:inputText>
+                                                <p:message for="phonenumber" display="both"/> 
                                             </div>
                                             <div class="p-field  p-col-12 p-md-3">
                                                 <p:outputLabel for="address" value="Address" />
-                                                <p:inputText id="address" value="#{accountBackingBean.address}"/>
+                                                <p:inputText id="address" required="true" value="#{accountBackingBean.address}">
+                                                    <f:validateLength minimum="5" maximum="100" />
+                                                </p:inputText>
+                                                <p:message for="address" display="both"/> 
                                             </div>
                                             <div class="p-field  p-col-12 p-md-3">
                                                 <p:outputLabel for="city" value="City" />
-                                                <p:inputText id="city" value="#{accountBackingBean.city}" />
+                                                <p:inputText id="city" required="true" value="#{accountBackingBean.city}">
+                                                    <f:validateLength minimum="2" maximum="100" />
+                                                </p:inputText>
+                                                <p:message for="city" display="both"/> 
                                             </div>
                                             <div class="p-field p-col-12 p-md-3">
                                                 <p:outputLabel for="zip" value="Zip" />
-                                                <p:inputText id="zip" value="#{accountBackingBean.zip}" />
+                                                <p:inputText id="zip" type="number" required="true" value="#{accountBackingBean.zip}">
+                                                    <f:validateLength minimum="5" maximum="5" />
+                                                </p:inputText>
+                                                <p:message for="zip" display="both"/> 
                                             </div>
                                             <br/>
                                             
-                                            <p:commandButton type="submit" value="Save" styleClass="rounded-button" action="#{accountPageController.updateUserInformation()}" />
+                                            <p:commandButton type="submit" value="Save" update="@form" styleClass="rounded-button" action="#{accountPageController.updateUserInformation()}" />
                                         </div>
                                     </h:form>
                                 </div>
@@ -75,17 +95,23 @@
                                                 <div class="p-col">
                                                     <p:password id="pwd" required="true" value="#{accountBackingBean.oldpassword}"/>
                                                 </div>
+                                                <p:message for="pwd" display="both"/>
                                             </div>
                                             <div class="p-field  p-col-12 p-md-3">
                                                 <p:outputLabel for="pwd1" styleClass="p-col-fixed" value="New Password"/>
                                                 <div class="p-col">
-                                                    <p:password id="pwd1" match="pwd2" label="Password 1" required="true" value="#{accountBackingBean.password}"/>
+                                                    <p:password id="pwd1" match="pwd2" validatorMessage="Password does not match" label="Password 1" required="true" value="#{accountBackingBean.password}">
+                                                        <f:validateLength minimum="6" maximum="20"/>
+                                                    </p:password>
+                                                    <p:message for="pwd1" display="both"/>
                                                 </div>
                                             </div>
                                             <div class="p-field  p-col-12 p-md-3">
-                                                <p:outputLabel for="pwd2" styleClass="p-col-fixed" value="Repeat Password"/>
+                                                <p:outputLabel for="pwd2" styleClass="p-col-fixed" value="Repeat New Password"/>
                                                 <div class="p-col">
-                                                    <p:password id="pwd2" value="#{accountBackingBean.password}" label="Password 2" required="true"/>
+                                                    <p:password id="pwd2" value="#{accountBackingBean.password}" label="Password 2" required="true">
+                                                        <f:validateLength minimum="6" maximum="20"/>
+                                                    </p:password>
                                                 </div>
                                             </div>
                                             <br/>
@@ -106,9 +132,9 @@
                                         <li>
                                                 <div class="header">
                                                     <div class="order-column-date">Date</div>
-                                                    <div class="order-column-order-number">Ordernumber</div>
+                                                    <div class="order-column-order-number">Order Number</div>
                                                     <div class="order-column-status">Status</div>
-                                                    <div class="order-column-total">Ordervalue</div>
+                                                    <div class="order-column-total">Order value</div>
                                                 </div>
                                             </li>
                                         <ui:repeat value="#{accountBackingBean.purchases}" var="purchase">

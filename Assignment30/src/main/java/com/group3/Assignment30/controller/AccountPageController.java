@@ -13,6 +13,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,18 +29,20 @@ public class AccountPageController implements Serializable{
     
     private Customer customer;
     
-    @EJB
-    private CustomerDAO customerDAO;
+    private SessionContextController sessionContextController = SessionContextController.getInstance();
+    private int activeUserID;
     
     @EJB
+    private CustomerDAO customerDAO;
+    @EJB
     private ProductDAO productDAO;
-
     @EJB
     private PurchaseDAO purchaseDAO;
     
     @PostConstruct
     public void init(){
-     List<Customer> customerInfo = customerDAO.getUserInformationByID(600);
+     activeUserID = (int) sessionContextController.getAttribu("user_id");
+     List<Customer> customerInfo = customerDAO.getUserInformationByID(activeUserID);
       
       customer = customerInfo.get(0);
       System.out.println(customer.getEmail());

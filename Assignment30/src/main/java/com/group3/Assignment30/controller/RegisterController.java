@@ -7,6 +7,7 @@ import com.group3.Assignment30.views.RegisterBackingBean;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -29,11 +30,16 @@ public class RegisterController implements Serializable{
     
     
     public String onRegister(){
+        boolean emailTaken = customerDAO.checkUserExist(registerBackingBean.getEmail()).size()==1;
+        
+        if (emailTaken) {
+            FacesMessage message = new FacesMessage();
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            message.setSummary("Email already in use.");
+            FacesContext.getCurrentInstance().addMessage(null,message);
+        }
         customer = new Customer();
         
-        
-        
-        customer.setUser_id(registerBackingBean.getId());
         customer.setFirst_name(registerBackingBean.getFirstname());
         customer.setLast_name(registerBackingBean.getLastname());
         customer.setEmail(registerBackingBean.getEmail());
@@ -53,9 +59,9 @@ public class RegisterController implements Serializable{
         System.out.println(registerBackingBean.getZip());
         System.out.println(registerBackingBean.getAddress());
         System.out.println(registerBackingBean.getCity());
-        sessionContextController.setAttribute("name", customer.getEmail());
+        sessionContextController.setAttribute("user_id", customer.getUser_id());
         
-        return "index.xhtml";
+        return "accountPage";
     }
     
 }
