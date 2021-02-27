@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
@@ -17,37 +13,72 @@ and open the template in the editor.
     </h:head>
     
     <h:body>
-       <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col-12 p-md-6">
-                <p:outputLabel for="firstname" value="Firstname" />
-                <p:inputText id="firstname" />
-            </div>
-            <div class="p-field p-col-12 p-md-6">
-                <p:outputLabel for="lastname" value="Lastname" />
-                <p:inputText id="lastname" />
-            </div>
-            <div class="p-field p-col-12">
-                <p:outputLabel for="address" value="Address" />
-                <p:inputTextarea id="address" rows="4" />
-            </div>
-            <div class="p-field p-col-12 p-md-6">
-                <p:outputLabel for="city" value="City" />
-                <p:inputText id="city" />
-            </div>
-            <div class="p-field p-col-12 p-md-3">
-                <p:outputLabel for="state" value="State" />
-                <p:selectOneMenu id="state">
-                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                    <f:selectItem itemLabel="Option 1" itemValue="Option 1" />
-                    <f:selectItem itemLabel="Option 2" itemValue="Option 2" />
-                    <f:selectItem itemLabel="Option 3" itemValue="Option 3" />
-                </p:selectOneMenu>
-            </div>
-            <div class="p-field p-col-12 p-md-3">
-                <p:outputLabel for="zip" value="Zip" />
-                <p:inputText id="zip" />
-            </div>
-             <p:button value="Submit" icon="pi pi-check" iconPos="right" />
+        
+        <div class="product card">
+            <f:metadata>
+                            <f:viewAction action="#{productController.init()}" />
+            </f:metadata>
+            <h:form id="form">
+                
+                <p:dataView var="product" value="#{productBackingBean.products}" rows="12" paginator="true"
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                            gridIcon="pi pi-th-large" listIcon="pi pi-bars"
+                            layout="grid" gridRowStyleClass="p-lg-6 p-xl-4" flex="true">
+
+                    <p:dataViewGridItem>
+                        <div class="product-grid-item card border-1">
+                            <div class="product-grid-item-top">
+                                <div>
+                                    <i class="pi pi-tag product-category-icon"/>
+                                    <span class="product-category">Category</span>
+                                </div>
+                                <span class="product-badge">In Stock</span>
+                            </div>
+                            <div class="product-grid-item-content">
+                                <p:graphicImage library="Images" name="products/#{product.product_name}.png"/>
+                                <div class="product-name">#{product.product_name}</div>
+                                <div class="product-description">#{product.description}</div>
+                                <p:rating readonly="true" value="#{product.fullStar}"/>
+                            </div>
+                            <div class="product-grid-item-bottom">
+                                <h:outputText value="#{product.price}" styleClass="product-price">
+                                    <f:convertNumber currencySymbol="$" type="currency"/>
+                                </h:outputText>
+                                <p:commandButton type="button"
+                                                 value="Add To Cart"
+                                                 icon="pi pi-shopping-cart"
+                                                 disabled="Out of Stock">
+                                </p:commandButton>
+                            </div>
+                        </div>
+                    </p:dataViewGridItem>
+
+                    <p:dataViewListItem>
+                        <div class="product-list-item">
+                            <p:graphicImage library="Images" name="products/#{product.product_name}.png" />
+                            <div class="product-list-detail">
+                                <div class="product-name">#{product.product_name}</div>
+                                <div class="product-description">#{product.description}</div>
+                                <p:rating readonly="true" value="#{product.fullStar}"/>
+                                <i class="pi pi-tag product-category-icon"/><span
+                                    class="product-category">Category</span>
+                            </div>
+                            <div class="product-list-action">
+                                <h:outputText value="#{product.price}" styleClass="product-price">
+                                    <f:convertNumber currencySymbol="$" type="currency"/>
+                                </h:outputText>
+                                <p:commandButton type="button"
+                                                 value="Add To Cart"
+                                                 icon="pi pi-shopping-cart"
+                                                 disabled="Out of Stock">
+                                </p:commandButton>
+                                <span class="product-badge">In Stock</span>
+                            </div>
+                        </div>
+                    </p:dataViewListItem>
+                </p:dataView>
+
+            </h:form>
         </div>
     </h:body>
 </html>
