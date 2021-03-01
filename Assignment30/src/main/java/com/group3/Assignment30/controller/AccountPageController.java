@@ -28,10 +28,9 @@ public class AccountPageController implements Serializable{
     @Inject
     private AccountBackingBean accountBackingBean;
     
-    private Customer customer;
-    
     private SessionContextController sessionContextController = SessionContextController.getInstance();
     private int activeUserID;
+    private Customer customer;
     
     @EJB
     private CustomerDAO customerDAO;
@@ -58,6 +57,10 @@ public class AccountPageController implements Serializable{
       accountBackingBean.setZip(customer.getPostal_code());
       accountBackingBean.setAddress(customer.getAdress());
       getOrderHistory();
+    }
+    
+    public boolean adminAuthorize(){
+        return customer.isAdminAccess();
     }
     
     public void updateUserInformation() {

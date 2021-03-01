@@ -37,7 +37,5 @@ public class Customer implements Serializable{
     private String adress;
     private String postal_code;
     private int salt;
-    
-     //alt: 2
-    //private List<Order> order_list;
+    private boolean adminAccess = false;
 }

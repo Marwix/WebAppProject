@@ -40,10 +40,37 @@ public class ProductDAOTest {
 
     @Before
     public void init() {
-        p1 = new Product(1, "Catapult", 30000, 4, 1, "Blue", "3m","3m","3m", "3m","HIGH", "TEST");
-        p2 = new Product(2, "Catapult", 30000, 4, 1, "Green", "3m","3m","3m", "3m","HIGH", "TEST");
-        p3 = new Product(3, "Catapult", 30000, 4, 1, "Red", "3m","3m","3m", "3m","HIGH", "TEST");
-        p4 = new Product(4, "Plane", 30000, 4, 1, "Red", "3m","3m","3m", "3m","HIGH", "TEST");
+        p1 = new Product();
+        p1.setProduct_name("Catapult");
+        p1.setPrice(30000);
+        p1.setFullStar(4);
+        p1.setColor("Blue");
+        p1.setMeasurements("3mx3mx3m");
+        p1.setDescription("TEST");
+                
+        p2 = new Product();
+        p2.setProduct_name("Catapult");
+        p2.setPrice(30000);
+        p2.setFullStar(4);
+        p2.setColor("Green");
+        p2.setMeasurements("3mx3mx3m");
+        p2.setDescription("TEST");
+        
+        p3 = new Product();
+        p3.setProduct_name("Catapult");
+        p3.setPrice(30000);
+        p3.setFullStar(4);
+        p3.setColor("Red");
+        p3.setMeasurements("3mx3mx3m");
+        p3.setDescription("TEST");
+        
+        p4 = new Product();
+        p4.setProduct_name("Plane");
+        p4.setPrice(700000);
+        p4.setFullStar(4);
+        p4.setColor("Metal");
+        p4.setMeasurements("25mx12mx7m");
+        p4.setDescription("TEST");
         
         productDAO.create(p1);
         productDAO.create(p2);
@@ -67,8 +94,8 @@ public class ProductDAOTest {
         Product retrived1;
         Product retrived2;
         
-        List<Product> retrievedProduct = productDAO.getProductByID(4);
-        List<Product> retrievedProduct2 = productDAO.getProductByID(3);
+        List<Product> retrievedProduct = productDAO.getProductByID(p4.prodoct_id);
+        List<Product> retrievedProduct2 = productDAO.getProductByID(p3.prodoct_id);
         
         retrived1 = retrievedProduct.get(0);
         retrived2 = retrievedProduct2.get(0);
