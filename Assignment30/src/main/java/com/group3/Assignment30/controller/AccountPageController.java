@@ -6,6 +6,7 @@ import com.group3.Assignment30.model.dao.PurchaseDAO;
 import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.model.entity.Purchase;
+import com.group3.Assignment30.service.PasswordManager;
 import com.group3.Assignment30.views.AccountBackingBean;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -39,6 +40,7 @@ public class AccountPageController implements Serializable{
     @EJB
     private PurchaseDAO purchaseDAO;
     
+    //Load active user data
     @PostConstruct
     public void init(){
      activeUserID = (int) sessionContextController.getAttribu("user_id");
@@ -67,6 +69,7 @@ public class AccountPageController implements Serializable{
         customer.setCity(accountBackingBean.getCity());
         customer.setPostal_code(accountBackingBean.getZip());
         
+        //On email change return error if email is already taken
         try {
             customerDAO.updateUserInformation(customer);
         } catch (EJBException e) {
@@ -76,18 +79,18 @@ public class AccountPageController implements Serializable{
             }
 
         }
-        System.out.println("JAAAAAA jag är här åtminstone");
         
     }
     
     public void changePassword(){
        
-        List<Customer> customerInfo = customerDAO.getUserInformationByID(600);
+        PasswordManager pwManager = new PasswordManager();
+        List<Customer> customerInfo = customerDAO.getUserInformationByID(activeUserID);
       
         customer = customerInfo.get(0);
         
-        
-        if(customer.getPassword().equals(accountBackingBean.getOldpassword())){
+        if(pwManager.passwordMatching(customer.getPassword(), customer.getSalt(), accountBackingBean.getOldpassword()))
+        {
             customer.setPassword(accountBackingBean.getPassword());
             customerDAO.changePassword(customer);
         }

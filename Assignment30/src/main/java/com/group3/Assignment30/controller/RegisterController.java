@@ -3,6 +3,7 @@ package com.group3.Assignment30.controller;
 
 import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.entity.Customer;
+import com.group3.Assignment30.service.PasswordManager;
 import com.group3.Assignment30.views.RegisterBackingBean;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -39,11 +40,14 @@ public class RegisterController implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null,message);
         }
         customer = new Customer();
+        PasswordManager pwManager = new PasswordManager();
+        int[] pw = pwManager.HashNSalt(registerBackingBean.getPassword());
         
         customer.setFirst_name(registerBackingBean.getFirstname());
         customer.setLast_name(registerBackingBean.getLastname());
         customer.setEmail(registerBackingBean.getEmail());
-        customer.setPassword(registerBackingBean.getPassword());
+        customer.setPassword(String.valueOf(pw[1]));
+        customer.setSalt(pw[0]);
         customer.setPhonenumber(registerBackingBean.getPhonenumber());
         customer.setCity(registerBackingBean.getCity());
         customer.setAdress(registerBackingBean.getAddress());

@@ -31,4 +31,12 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/test.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>accountPage</from-action>
+            <to-view-id>/index.html</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

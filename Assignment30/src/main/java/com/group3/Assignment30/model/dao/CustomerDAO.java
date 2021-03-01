@@ -6,6 +6,7 @@
 package com.group3.Assignment30.model.dao;
 import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.model.entity.QCustomer;
+import com.group3.Assignment30.service.PasswordManager;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -75,10 +76,13 @@ public class CustomerDAO extends AbstractDAO<Customer> {
     }
     
     public void changePassword(Customer customer){
+        PasswordManager pwManager = new PasswordManager();
+        int[] pw = pwManager.HashNSalt(customer.getPassword());
         JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
         QCustomer user = QCustomer.customer;
         
-        queryFactory.update(user).set(user.password, customer.getPassword())
+        queryFactory.update(user).set(user.password, String.valueOf(pw[1]))
+                .set(user.salt, pw[0])
                 .where(user.user_id.eq(customer.getUser_id())).execute();
     }
     

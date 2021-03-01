@@ -3,6 +3,7 @@ package com.group3.Assignment30.controller;
 
 import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.entity.Customer;
+import com.group3.Assignment30.service.PasswordManager;
 import com.group3.Assignment30.views.LoginBackingBean;
 import java.io.Serializable;
 import java.util.List;
@@ -31,25 +32,35 @@ public class LoginController  implements Serializable{
     
     public String onLogin(){
         
-        // Attempt to log in
-        List<Customer> customer = customerDAO.checkUserLogin(loginBackingBean.getEmail(), loginBackingBean.getPassword());
+        PasswordManager pwManager = new PasswordManager();
         
-        // If user is found, sign in
-        //If user is not found inform user
-        if (customer.size()==1){
-           sessionContextController.setAttribute("user_id", customer.get(0).getUser_id());
-           return "accountPage";
+        // See if user exists
+        List<Customer> customer = customerDAO.checkUserExist(loginBackingBean.getEmail());
+        
+        //If user does not exist
+        if (customer.size()==0){
+            
+            sendWarning(FacesMessage.SEVERITY_ERROR, "Account not found");
         } 
         else {
-            FacesMessage message = new FacesMessage();
-            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-            message.setSummary("Account could not be found");
-            FacesContext.getCurrentInstance().addMessage(null,message);
+            if (pwManager.passwordMatching(customer.get(0).getPassword(), customer.get(0).getSalt(), loginBackingBean.getPassword())){
+                sessionContextController.setAttribute("user_id", customer.get(0).getUser_id());
+                return "accountPage";
+            } else {
+               sendWarning(FacesMessage.SEVERITY_ERROR, "Account not found"); 
+            }
+           
             
         }
         
         return "Not found";
     }
     
+    private void sendWarning(FacesMessage.Severity severity, String message){
+            FacesMessage fMessage = new FacesMessage();
+            fMessage.setSeverity(severity);
+            fMessage.setSummary(message);
+            FacesContext.getCurrentInstance().addMessage(null,fMessage);
+    }
     
 }
