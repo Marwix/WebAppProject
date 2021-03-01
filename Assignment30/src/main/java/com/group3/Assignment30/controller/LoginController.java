@@ -63,4 +63,5 @@ public class LoginController  implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null,fMessage);
     }
     
+    
 }

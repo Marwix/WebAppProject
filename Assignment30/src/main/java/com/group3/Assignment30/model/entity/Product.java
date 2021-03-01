@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.group3.Assignment30.model.entity;
 
 import java.io.Serializable;
@@ -20,15 +15,15 @@ import lombok.NoArgsConstructor;
 public class Product implements Serializable{
     @Id 
     public int prodoct_id;
-    
+
     private String product_name;
     private int price;
     // Image? clob and blob
-    
+
     //Assuming we can do loops 
     private int fullStar;
     private int halfStar;
-    
+
     private String color;
     private String height;
     private String width;
@@ -36,5 +31,5 @@ public class Product implements Serializable{
     private String weight;
     private String value;
     private String description;
-    
+
 }
