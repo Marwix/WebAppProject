@@ -23,5 +23,20 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
-
+    <navigation-rule>
+        <from-view-id>/loginregister.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>accountPage</from-outcome>
+            <to-view-id>/accountPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/test.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>accountPage</from-action>
+            <to-view-id>/index.html</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

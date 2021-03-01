@@ -10,126 +10,151 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <ui:decorate template="assets/template/topbar.xhtml">
         <ui:define name="content">
-            <div class="container-fluid d-flex h-100 flex-column">
-                <div class="account-row row col-12">
-                    <div class="account-panel">
-                        <!-- Account Information Area -->
-                        <div class="col-12 account-alignment-cardstyle"> 
-                            <div class="account-information">
-                                <div>
-                                    <h1>Account Information</h1>
+            <h:body>
+                <f:metadata>
+                    <f:viewAction action="#{accountPageController.init()}" />
+                </f:metadata>
+                <div class="container-fluid d-flex h-100 flex-column">
+                    <div class="account-row row col-12">
+                        <div class="account-panel">
+                            <!-- Account Information Area -->
+                            <div class="col-12 account-alignment-cardstyle"> 
+                                <div class="account-information">
+                                    <div>
+                                        <h1>Account Information</h1>
+                                    </div>
+                                    <h:form>
+                                        <div class="ui-fluid p-formgrid p-grid">
+                                            <div class="p-field p-col-12 p-md-3">
+                                                <p:outputLabel for="email" value="Email" />
+                                                <p:inputText id="email" required="true" value="#{accountBackingBean.email}" validatorMessage="The provided email is not using a valid email format">
+                                                    <f:validateRegex pattern="[a-z0-9][-a-z0-9._]+@([-a-z0-9]+[.])+[a-z]{2,5}$"/>
+                                                </p:inputText>
+                                                <p:message for="email" display="both"/> 
+                                            </div>
+                                            <div class="p-field  p-col-12 p-md-3">
+                                                <p:outputLabel for="firstname" value="Firstname" />
+                                                <p:inputText id="firstname" required="true" value="#{accountBackingBean.firstname}">
+                                                    <f:validateLength minimum="2" maximum="50" />
+                                                </p:inputText>
+                                                <p:message for="firstname" display="both"/>
+                                            </div>
+                                            <div class="p-field  p-col-12 p-md-3">
+                                                <p:outputLabel for="lastname" value="Lastname" />
+                                                <p:inputText id="lastname" required="true" value="#{accountBackingBean.lastname}">
+                                                    <f:validateLength minimum="2" maximum="50" />
+                                                </p:inputText>
+                                                <p:message for="lastname" display="both"/> 
+                                            </div>
+                                            <div class="p-field  p-col-12 p-md-3">
+                                                <p:outputLabel for="phonenumber" value="Phonenumber" />
+                                                <p:inputText id="phonenumber" type="number" required="true" value="#{accountBackingBean.phonenumber}">
+                                                    <f:validateLength minimum="8" maximum="20" />
+                                                </p:inputText>
+                                                <p:message for="phonenumber" display="both"/> 
+                                            </div>
+                                            <div class="p-field  p-col-12 p-md-3">
+                                                <p:outputLabel for="address" value="Address" />
+                                                <p:inputText id="address" required="true" value="#{accountBackingBean.address}">
+                                                    <f:validateLength minimum="5" maximum="100" />
+                                                </p:inputText>
+                                                <p:message for="address" display="both"/> 
+                                            </div>
+                                            <div class="p-field  p-col-12 p-md-3">
+                                                <p:outputLabel for="city" value="City" />
+                                                <p:inputText id="city" required="true" value="#{accountBackingBean.city}">
+                                                    <f:validateLength minimum="2" maximum="100" />
+                                                </p:inputText>
+                                                <p:message for="city" display="both"/> 
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-3">
+                                                <p:outputLabel for="zip" value="Zip" />
+                                                <p:inputText id="zip" type="number" required="true" value="#{accountBackingBean.zip}">
+                                                    <f:validateLength minimum="5" maximum="5" />
+                                                </p:inputText>
+                                                <p:message for="zip" display="both"/> 
+                                            </div>
+                                            <br/>
+                                            
+                                            <p:commandButton type="submit" value="Save" update="@form" styleClass="rounded-button" action="#{accountPageController.updateUserInformation()}" />
+                                        </div>
+                                    </h:form>
                                 </div>
-                                <form> 
-                                    <div class="col-12">       
-                                        <input type="text" class="form-control" placeholder="First name"/>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <input type="text" class="form-control" placeholder="Last name" />
-                                    </div>
-
-                                    <div class="col-12">       
-                                        <input type="email" class="form-control" placeholder="Email adress"/>
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="text" class="form-control" placeholder="Phone number" />
-                                    </div>
-
-                                    <div class="row city-postcode">
-                                        <div class="col-8">
-                                            <input type="text" class="form-control" placeholder="City" />
-                                        </div>
-                                        <div class="col-4">
-                                            <input type="text" class="form-control postcode-text"  placeholder="Postcode" />
-                                        </div>
-                                    </div>  
-
-                                    <div class="end-of-form">
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" placeholder="Region" />
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
 
-
-                        </div>
-                        <div class="account-save-button account-button">
-                            <button type="button" class="btn btn-primary btn-lg">Save</button>
-                        </div>
-
-                        <!-- Change Password Area -->
-                        <div class="col-12 password-alignment-cardstyle"> 
-                            <div class="password-information-area">
-                                <div>
-                                    <h2>Change Password</h2>
+                            <!-- Change Password Area -->
+                            <div class="col-12 password-alignment-cardstyle"> 
+                                <div class="password-information-area">
+                                    <div>
+                                        <h2>Change Password</h2>
+                                    </div>
+                                    <h:form>
+                                        <div class="ui-fluid p-formgrid p-grid">
+                                            <div class="p-field  p-col-12 p-md-3">
+                                                <p:outputLabel for="pwd" styleClass="p-col-fixed" value="Old Password"/>
+                                                <div class="p-col">
+                                                    <p:password id="pwd" required="true" value="#{accountBackingBean.oldpassword}"/>
+                                                </div>
+                                                <p:message for="pwd" display="both"/>
+                                            </div>
+                                            <div class="p-field  p-col-12 p-md-3">
+                                                <p:outputLabel for="pwd1" styleClass="p-col-fixed" value="New Password"/>
+                                                <div class="p-col">
+                                                    <p:password id="pwd1" match="pwd2" validatorMessage="Password does not match" label="Password 1" required="true" value="#{accountBackingBean.password}">
+                                                        <f:validateLength minimum="6" maximum="20"/>
+                                                    </p:password>
+                                                    <p:message for="pwd1" display="both"/>
+                                                </div>
+                                            </div>
+                                            <div class="p-field  p-col-12 p-md-3">
+                                                <p:outputLabel for="pwd2" styleClass="p-col-fixed" value="Repeat New Password"/>
+                                                <div class="p-col">
+                                                    <p:password id="pwd2" value="#{accountBackingBean.password}" label="Password 2" required="true">
+                                                        <f:validateLength minimum="6" maximum="20"/>
+                                                    </p:password>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <p:commandButton type="submit" value="Change Password" styleClass="rounded-button" action="#{accountPageController.changePassword()}" update="@form"/>
+                                        </div>
+                                    </h:form>
                                 </div>
-                                <form>
-                                    <div class="col-12">       
-                                        <input type="password" class="form-control" id="old-password" placeholder="Old password"/>
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="password" class="form-control" id="new-password"  placeholder="New password" />
-                                    </div>
-                                    <div class="col-12">       
-                                        <input type="password" class="form-control" id="repeat-password" placeholder="Repeat new password" />
-                                    </div>
-                                </form>
+
+                            </div>
+                            
+                            <!-- Orderlist Area -->
+                            <div class="orderlist-area col-12">
+                                <div class="order-history-text">
+                                    <h2>Order history</h2>
+                                </div>
+                                <div class="orderlist col-12">
+                                    <ul class="list">
+                                        <li>
+                                                <div class="header">
+                                                    <div class="order-column-date">Date</div>
+                                                    <div class="order-column-order-number">Order Number</div>
+                                                    <div class="order-column-status">Status</div>
+                                                    <div class="order-column-total">Order value</div>
+                                                </div>
+                                            </li>
+                                        <ui:repeat value="#{accountBackingBean.purchases}" var="purchase">
+                                            <li>
+                                                <div class="header">
+                                                    <div class="order-column-date">#{purchase.time}</div>
+                                                    <div class="order-column-order-number">#{purchase.order_id}</div>
+                                                    <div class="order-column-status">Sent</div>
+                                                    <div class="order-column-total">#{purchase.products.price * purchase.count}</div>
+                                                </div>
+                                            </li>
+                                        </ui:repeat>
+                                    </ul>
+                                </div>
                             </div>
 
                         </div>
-                        <div class="account-save-button password-button">
-
-                            <button type="button" class="btn btn-primary btn-lg">Change Password</button>
-
-                        </div>
-                        <!-- Orderlist Area -->
-                        <div class="orderlist-area col-12">
-                            <div class="order-history-text">
-                                <h2>Order history</h2>
-                            </div>
-                            <div class="orderlist col-12">
-                                <ul class="list">
-                                    <li>
-                                        <div class="header">
-                                            <div class="order-column-date">Date</div>
-                                            <div class="order-column-order-number">Ordernumber</div>
-                                            <div class="order-column-status">Status</div>
-                                            <div class="order-column-total">Ordervalue</div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="header">
-                                            <div class="order-column-date">2021-01-20</div>
-                                            <div class="order-column-order-number">12146</div>
-                                            <div class="order-column-status">Sent</div>
-                                            <div class="order-column-total">Ordervalue</div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="header">
-                                            <div class="order-column-date">2020-12-31</div>
-                                            <div class="order-column-order-number">145665</div>
-                                            <div class="order-column-status">Sent</div>
-                                            <div class="order-column-total">120.000</div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="header">
-                                            <div class="order-column-date">2020-12-20</div>
-                                            <div class="order-column-order-number">12465</div>
-                                            <div class="order-column-status">Sent</div>
-                                            <div class="order-column-total">60.000</div>
-                                        </div>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>  
-            </div>
+                    </div>  
+                </div>
+            </h:body>
             <script src="assets/JS/PurchaseClickScript.js"></script>
             <script src="assets/JS/AccountPageScript.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 

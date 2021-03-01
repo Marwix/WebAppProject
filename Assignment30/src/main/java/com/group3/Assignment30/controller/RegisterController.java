@@ -3,9 +3,13 @@ package com.group3.Assignment30.controller;
 
 import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.entity.Customer;
+import com.group3.Assignment30.service.PasswordManager;
 import com.group3.Assignment30.views.RegisterBackingBean;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,8 +17,9 @@ import lombok.Data;
 
 @Data
 @Named
-@ViewScoped
+@SessionScoped
 public class RegisterController implements Serializable{
+    
     @Inject
     private RegisterBackingBean registerBackingBean;
     
@@ -22,16 +27,27 @@ public class RegisterController implements Serializable{
     @EJB
     private CustomerDAO customerDAO;
     
+    private SessionContextController sessionContextController = SessionContextController.getInstance();
     
     
     public String onRegister(){
-        customer = new Customer();
+        boolean emailTaken = customerDAO.checkUserExist(registerBackingBean.getEmail()).size()==1;
         
-        customer.setUser_id(registerBackingBean.getId());
+        if (emailTaken) {
+            FacesMessage message = new FacesMessage();
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            message.setSummary("Email already in use.");
+            FacesContext.getCurrentInstance().addMessage(null,message);
+        }
+        customer = new Customer();
+        PasswordManager pwManager = new PasswordManager();
+        int[] pw = pwManager.HashNSalt(registerBackingBean.getPassword());
+        
         customer.setFirst_name(registerBackingBean.getFirstname());
         customer.setLast_name(registerBackingBean.getLastname());
         customer.setEmail(registerBackingBean.getEmail());
-        customer.setPassword(registerBackingBean.getPassword());
+        customer.setPassword(String.valueOf(pw[1]));
+        customer.setSalt(pw[0]);
         customer.setPhonenumber(registerBackingBean.getPhonenumber());
         customer.setCity(registerBackingBean.getCity());
         customer.setAdress(registerBackingBean.getAddress());
@@ -40,7 +56,6 @@ public class RegisterController implements Serializable{
         customerDAO.create(customer);
         
         System.out.println("hej");
-        System.out.println(registerBackingBean.getUsername());
         System.out.println(registerBackingBean.getLastname());
         System.out.println(registerBackingBean.getEmail());
         System.out.println(registerBackingBean.getFirstname());
@@ -48,7 +63,9 @@ public class RegisterController implements Serializable{
         System.out.println(registerBackingBean.getZip());
         System.out.println(registerBackingBean.getAddress());
         System.out.println(registerBackingBean.getCity());
-        return registerBackingBean.getUsername();
+        sessionContextController.setAttribute("user_id", customer.getUser_id());
+        
+        return "accountPage";
     }
     
 }

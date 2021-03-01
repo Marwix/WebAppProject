@@ -11,6 +11,8 @@ import lombok.Data;
 @Named
 @ViewScoped
 public class LoginBackingBean implements Serializable{
+    
+    private int id;
     @NotEmpty private String Email;
     @NotEmpty private String password;
 }
