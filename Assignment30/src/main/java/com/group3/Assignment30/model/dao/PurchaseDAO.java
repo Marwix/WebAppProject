@@ -36,6 +36,22 @@ public class PurchaseDAO extends AbstractDAO<Purchase> {
     
     }
     
+     public int getMaxOrderID(){
+        
+        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
+        QPurchase purchase = QPurchase.purchase;
+        
+        Purchase latestorder = queryFactory.selectFrom(purchase).orderBy(purchase.order_id.desc()).fetchFirst();
+        
+        int count = latestorder.getOrder_id();
+ 
+         System.out.println("hej" + count );
+        
+        return count;
+    
+    }
+    
+    
     public List<Purchase>  getOrderPurchasesByCustomer(Customer customer){
         
         JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());

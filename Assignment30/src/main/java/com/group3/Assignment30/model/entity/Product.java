@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product implements Serializable{
+    
     @Id
     @GeneratedValue
     public int prodoct_id;

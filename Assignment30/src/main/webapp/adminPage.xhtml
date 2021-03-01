@@ -6,11 +6,11 @@
 
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <link rel="stylesheet" href="assets/css/accountPageStyle.css" />
-    <link rel="stylesheet" href="assets/css/errorPage.css" />
+    <link rel="stylesheet" href="resources/css/accountPageStyle.css" />
+    <link rel="stylesheet" href="resources/css/errorPage.css" />
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <ui:decorate template="assets/template/topbar.xhtml">
+    <ui:decorate template="resources/template/topbar.xhtml">
         <ui:define name="content">
             <h:body>
                 <f:metadata>
@@ -21,7 +21,7 @@
                         <div class="product-panel">
                             <!-- Product addition area -->
                             <div class="col-12 account-alignment-cardstyle"> 
-                                <div class="account-information">
+                                <div class="accountInfoFormStyle">
                                     <h:form rendered="#{adminController.authorize()}">
                                         <div>
                                             <h1>Add new product</h1>
