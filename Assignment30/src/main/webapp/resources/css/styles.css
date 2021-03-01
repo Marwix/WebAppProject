@@ -56,14 +56,6 @@ body {
   right: 5%;
   top: 45%;
 }
-.producttitletext{
-     color: #eeeeee;
-}
-
-.logout-logo{
-    color: white;
-    font-size: 1rem;
-}
 
 .cart-notification {
   position: absolute;

@@ -107,6 +107,10 @@ public class AccountPageController implements Serializable{
        
     }
     
+    public boolean adminAuthorize(){
+        return customer.isAdminAccess();
+    }
+    
     
 }
     

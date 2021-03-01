@@ -1,6 +1,7 @@
-.account-row {
-  display: flex;
+.account-info-container {
+  display: flex ;
   justify-content: center;
+  align-items: center;
 }
 
 .account-panel {
@@ -10,40 +11,13 @@
   flex-direction: column;
   align-items: center;
 }
-.account-information {
+
+.accountInfoFormStyle {
   margin-top: 2%;
-  padding: 1rem;
+  padding: 1rem 10rem;
   background-color: rgb(15, 76, 117);
   color: #eeeeee;
   border-radius: 10px;
-}
-#errortext{
-    color: #eeeeee;
-}
-
-.account-information .form-control {
-  margin-top: 1%;
-}
-.account-alignment-cardstyle .city-postcode .postcode-text {
-  margin-top: 1.9%;
-}
-
-.password-information-area {
-  background: rgb(15, 76, 117);
-  color: #eeeeee;
-  margin-top: 1%;
-  padding: 1rem;
-  border-radius: 10px;
-}
-.password-information-area .form-control {
-  margin-top: 1%;
-}
-.account-save-button .btn {
-  background: rgb(15, 76, 117);
-  color: #eeeeee;
-  margin-top: 10%;
-  border: none;
-  width: 9rem;
 }
 .orderlist {
   overflow-y: scroll;
@@ -81,3 +55,4 @@ div[class*="order-column"] {
   padding: 1rem;
   border-radius: 10px;
 }
+

@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <link rel="stylesheet" href="resources/css/errorPage.css" />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <ui:decorate template="resources/template/topbar.xhtml">
+        <ui:define name="content">
+            <h:body class="errBody">
+                <div class="container-fluid d-flex h-100 flex-column error-container">
+                    <div class="error-info">
+                        <h2>Error: 404</h2>
+                        <p>The requested page does not exist</p>
+                        <a href="index.xhtml">Return to main page</a>
+                    </div>
+                </div>
+            </h:body>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
+                    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" 
+                    crossorigin="anonymous">
+            </script>
+        </ui:define>
+    </ui:decorate>
+</html>
