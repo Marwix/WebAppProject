@@ -17,6 +17,9 @@
   color: #eeeeee;
   border-radius: 10px;
 }
+#errortext{
+    color: #eeeeee;
+}
 
 .account-information .form-control {
   margin-top: 1%;

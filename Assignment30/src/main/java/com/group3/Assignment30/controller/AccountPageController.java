@@ -43,21 +43,26 @@ public class AccountPageController implements Serializable{
     //Load active user data
     @PostConstruct
     public void init(){
-     activeUserID = (int) sessionContextController.getAttribu("user_id");
-     List<Customer> customerInfo = customerDAO.getUserInformationByID(activeUserID);
-      
-      customer = customerInfo.get(0);
-      System.out.println(customer.getEmail());
-      System.out.println("Jag hatar mitt liv");
-      
-      accountBackingBean.setEmail(customer.getEmail());
-      accountBackingBean.setFirstname(customer.getFirst_name());
-      accountBackingBean.setLastname(customer.getLast_name());
-      accountBackingBean.setPhonenumber(customer.getPhonenumber());
-      accountBackingBean.setCity(customer.getCity());
-      accountBackingBean.setZip(customer.getPostal_code());
-      accountBackingBean.setAddress(customer.getAdress());
-      getOrderHistory();
+        try {
+            activeUserID = (int) sessionContextController.getAttribu("user_id");
+            List<Customer> customerInfo = customerDAO.getUserInformationByID(activeUserID);
+
+            customer = customerInfo.get(0);
+            System.out.println(customer.getEmail());
+            System.out.println("Jag hatar mitt liv");
+
+            accountBackingBean.setEmail(customer.getEmail());
+            accountBackingBean.setFirstname(customer.getFirst_name());
+            accountBackingBean.setLastname(customer.getLast_name());
+            accountBackingBean.setPhonenumber(customer.getPhonenumber());
+            accountBackingBean.setCity(customer.getCity());
+            accountBackingBean.setZip(customer.getPostal_code());
+            accountBackingBean.setAddress(customer.getAdress());
+            getOrderHistory();
+        } catch (Exception e) {
+        }
+            
+        
     }
     
     public void updateUserInformation() {

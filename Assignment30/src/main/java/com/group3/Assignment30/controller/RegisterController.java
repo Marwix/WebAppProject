@@ -4,6 +4,7 @@ package com.group3.Assignment30.controller;
 import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.service.PasswordManager;
+import com.group3.Assignment30.views.LoginBackingBean;
 import com.group3.Assignment30.views.RegisterBackingBean;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -22,6 +23,8 @@ public class RegisterController implements Serializable{
     
     @Inject
     private RegisterBackingBean registerBackingBean;
+    @Inject
+    private LoginBackingBean loginBackingBean;
     
     private Customer customer;
     @EJB
@@ -64,8 +67,9 @@ public class RegisterController implements Serializable{
         System.out.println(registerBackingBean.getAddress());
         System.out.println(registerBackingBean.getCity());
         sessionContextController.setAttribute("user_id", customer.getUser_id());
+        loginBackingBean.setLoggedin(true);
         
-        return "accountPage";
+        return "homepage";
     }
     
 }

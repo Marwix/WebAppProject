@@ -1,0 +1,155 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>BigStore</title>
+        <link rel="stylesheet" href="./assets/css/checkoutpagestyle.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=z80NtZMj-EMTCQb7W-rv91R57e1H4Ike2dR_kpDXW_oVXDNmGZSBJE390EyNE0gIqm56IodDXcWlAOjAet3tqn0mS7ht0o81cegbWMwKevua5wWPlnyeQOW9SyXwgXd3A5uPMuhxL6VhxqYWkkMJZmgaQvN4C-xG3lv7uK8V1hE" charset="UTF-8"></script></head>
+
+    <ui:decorate template="assets/template/topbar.xhtml">
+        <ui:define name="content">
+            <h:body>
+                <ui:fragment rendered="#{loginBackingBean.loggedin}">
+                    <f:metadata>
+                        <f:viewAction action="#{checkoutController.init()}" />
+                    </f:metadata>
+                    <div class="center-layout">
+
+                        <!-- Title -->
+                        <h1>CHECKOUT</h1>
+
+                        <!-- Delivery Country -->
+                        <div class="card-tile">
+                            <p:card>
+                                <f:facet class="card-title" name="title">DELIVERY COUNTRY:</f:facet>
+                                <div class="p-grid">
+                                    <div class="p-col-12">
+                                        <label for="country" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Country: </label>
+                                        <h:selectOneMenu required="true" label="Select Country">
+                                            <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
+                                            <f:selectItem itemLabel="USA" itemValue="1"/>
+                                            <f:selectItem itemLabel="Canada" itemValue="2"/>
+                                            <f:selectItem itemLabel="Sweden" itemValue="3"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                            </p:card>
+                        </div>
+
+                        <!-- Coupon Code -->
+                        <div class="card-tile">
+                            <p:card>
+                                <f:facet class="card-coupon" name="title">COUPON CODE:</f:facet>
+                                <div class="p-grid">
+                                    <div class="p-col-12">
+                                        <label for="coupon" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Code: </label>
+                                        <p:inputText id="coupon" type="text"/>
+                                    </div>
+                                </div>
+                            </p:card>
+                        </div>
+
+                        <!-- Email Address -->
+                        <div class="card-tile">
+                            <p:card>
+                                <f:facet class="card-mail" name="title">EMAIL ADDRESS:</f:facet>
+                                <div class="p-grid">
+                                    <div class="p-col-12">
+                                        <label for="email" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Email: </label>
+                                        <p:inputText id="email" type="text" value="#{checkoutBackingBean.email}"/>
+                                    </div>
+                                </div>
+                            </p:card>
+                        </div>
+
+                        <!-- Delivery Address -->
+                        <div class="card-tile">
+                            <p:card>
+                                <f:facet class="card-delivery" name="title">DELIVERY ADDRESS:</f:facet>
+                                <div class="p-grid">
+                                    <div class="p-col-12">
+                                        <div class="ui-fluid p-formgrid p-grid">
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="firstname">Firstname</label>
+                                                <p:inputText id="firstname" type="text" value="#{checkoutBackingBean.firstname}" />
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="lastname">Lastname</label>
+                                                <p:inputText id="lastname" type="text" value="#{checkoutBackingBean.lastname}"/>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="address">Address</label>
+                                                <p:inputText id="address" type="text" value="#{checkoutBackingBean.address}"/>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="city">City</label>
+                                                <p:inputText id="city" type="text" value="#{checkoutBackingBean.city}"/>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">      
+                                                <label for="phonenumber">Phone number</label>
+                                                <p:inputText id="phonenumber" type="text" value="#{checkoutBackingBean.phonenumber}"/>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="postcode">Postcode</label>
+                                                <p:inputText id="postcode" type="text" value="#{checkoutBackingBean.postcode}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p:card>
+                        </div>
+
+                        <!-- Cart -->
+                        <div class="card-tile">
+                            <p:card>
+                                <f:facet class="card-cart" name="title">CART:</f:facet>
+                                <div class="p-grid ">
+
+                                    <p:dataTable var="product" value="#{checkoutController.keyList}" showGridlines="true">
+                                        <p:column headerText="Items">
+                                            <h:outputText value="#{product.product_name}" />
+                                        </p:column>
+                                        <p:column headerText="Amount">
+                                            <h:outputText value="#{checkoutController.getCount(product)}" />
+                                        </p:column>
+
+                                        <p:column headerText="Color">
+                                            <h:outputText value="#{product.color}" />
+                                        </p:column>
+
+                                        <p:column headerText="Price">
+                                            <h:outputText value="#{product.price * checkoutController.getCount(product)}" />
+                                        </p:column>
+                                    </p:dataTable>
+
+                                    <br></br>
+                                    <h:form>
+                                        <p:commandButton type="submit" value="Pay now" styleClass="rounded-button" process="@this" action="#{checkoutController.addOrder()}"/>   
+                                    </h:form>      
+                                </div>
+
+                                <div class="terms-conditions-text"><br></br>
+                                    <p>
+                                        By placing your order you agree to our Terms and Conditions, privacy and 
+                                        return policies. You also consent to some of your data being stored by BigStore, 
+                                        which may be used to make future shopping experiences better for you.
+                                    </p>
+                                </div>
+
+                            </p:card>
+                        </div>  
+                    </div>
+                </ui:fragment>
+                
+                <ui:fragment rendered="#{!loginBackingBean.loggedin}">
+                    <h2 id="errortext">
+                        Sorry you need to login/register to visit buy items.
+                    </h2>
+                    <p:button value="Click here to register/login" styleClass="rounded-button" outcome="loginregister" />
+                </ui:fragment>
+
+            </h:body>
+        </ui:define>
+    </ui:decorate>
+</html>

@@ -5,6 +5,7 @@ import com.group3.Assignment30.model.dao.ProductDAO;
 import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.views.CartBackingBean;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
@@ -29,7 +30,6 @@ public class CartController implements Serializable{
     public void addToCart(){
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Map<String,String> params = facesContext.getExternalContext().getRequestParameterMap();
-
         String action = params.get("action");
 
          int id = Integer.parseInt(action);
@@ -39,17 +39,21 @@ public class CartController implements Serializable{
         List<Product> products = productDAO.getProductByID(id);
         System.out.println(products);
         
-        try{
-            List<Product> cartItems = cartBackingBean.getProducts();
-            
-            cartItems.add(products.get(0));
-            cartBackingBean.setProducts(cartItems);
-            
-        }catch(Exception e){
-            cartBackingBean.setProducts(products);
+        if(cartBackingBean.getCart() != null){
+            HashMap<Product,Integer> cartItems = cartBackingBean.getCart();
+            if(cartItems.containsKey(products.get(0))){
+                cartItems.put(products.get(0), cartItems.get(products.get(0)) + 1);
+            }else{
+                cartItems.put(products.get(0), 1);
+            }
+            cartBackingBean.setCart(cartItems);
+        }else{
+            HashMap<Product,Integer> cartItems = new HashMap<>();
+            cartItems.put(products.get(0), 1);
+            cartBackingBean.setCart(cartItems);
         }
         
-        updateCartValue(cartBackingBean.getProducts());
+        System.out.println("" + cartBackingBean.getCart());
     }
     
     public void updateCartValue(List<Product> products){

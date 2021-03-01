@@ -26,7 +26,7 @@
           <div class="col-lg-12 col-md-12 col-sm-12">
               <div class="top-bar">
                   <div class="logo-and-text col-lg-4 col-md-4 col-sm-4">
-                      <a class="logo-link col-lg-4 col-md-4 col-sm-4" href="./index.html">
+                      <a class="logo-link col-lg-4 col-md-4 col-sm-4" href="./index.xhtml">
                           <img
                               class="col-lg-2 col-md-2 col-sm-2"
                               id="logo"
@@ -36,6 +36,9 @@
                           <div></div>
                           <b class="title"> BigStore </b>
                           <!-- TODO: Change to h1 -->
+                      </a>
+                      <a href="index.xhtml">
+                          <b class="producttitletext"> Products </b>
                       </a>
                   </div>
 
@@ -48,12 +51,19 @@
 
                       <!-- Account page-->
                       <a href="accountPage.xhtml"><img id="login-logo" src="resources/Images/profile.png" alt="accountpage button"/></a>
-
+                      
+                      <ui:fragment rendered="#{loginBackingBean.loggedin}">
                       <!-- Login page -->
                       <a href="loginregister.xhtml"><img id="login-logo" src="resources/Images/login-btn.png" alt="login button"/></a>
+                      </ui:fragment>
+                      
+                      <ui:fragment rendered="#{!loginBackingBean.loggedin}">
+                      <!-- Login page -->
+                      <a class="logout-logo pi pi-sign-in" href="loginregister.xhtml"></a>
+                      </ui:fragment> 
 
                       <!-- Checkout page -->
-                      <a href="Checkoutpage.html"><img id="cart-logo" src="resources/Images/cart4.svg" alt="checkout button"/></a>
+                      <a href="checkoutpage.xhtml"><img id="cart-logo" src="resources/Images/cart4.svg" alt="checkout button"/></a>
                   </div>
               </div>
           </div>

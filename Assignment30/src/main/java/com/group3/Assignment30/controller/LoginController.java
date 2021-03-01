@@ -45,7 +45,8 @@ public class LoginController  implements Serializable{
         else {
             if (pwManager.passwordMatching(customer.get(0).getPassword(), customer.get(0).getSalt(), loginBackingBean.getPassword())){
                 sessionContextController.setAttribute("user_id", customer.get(0).getUser_id());
-                return "accountPage";
+                loginBackingBean.setLoggedin(true);
+                return "homepage";
             } else {
                sendWarning(FacesMessage.SEVERITY_ERROR, "Account not found"); 
             }
