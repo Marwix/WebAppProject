@@ -37,7 +37,7 @@ public class AdminController implements Serializable{
     private SessionContextController sessionContextController = SessionContextController.getInstance();
     private int activeUserID;
     
-    // Prepare to display products at the bottom
+    
     @PostConstruct
     public void init(){
         List<Product> products = productDAO.findAll();
@@ -67,6 +67,7 @@ public class AdminController implements Serializable{
         adminBackinBean.setMeasurements("");
         adminBackinBean.setWeight("");
         adminBackinBean.setDescription("");
+        System.out.println("form cleared");
         
     }
     
@@ -82,6 +83,7 @@ public class AdminController implements Serializable{
         
         if (adminBackinBean.getStars() < 1 || adminBackinBean.getStars() > 5 ) {
             sendWarning(FacesMessage.SEVERITY_ERROR, "Stars must be within 1-5 range");
+            return;
         }
         product.setFullStar(adminBackinBean.getStars());
         
@@ -89,6 +91,11 @@ public class AdminController implements Serializable{
         product.setMeasurements(adminBackinBean.getMeasurements());
         product.setWeight(adminBackinBean.getWeight());
         product.setDescription(adminBackinBean.getDescription());
+        
+        if (productExists(product)){
+            sendWarning(FacesMessage.SEVERITY_ERROR, "Product already exists in database");
+            return;
+        }
         
         try {
             productDAO.create(product);
@@ -101,7 +108,8 @@ public class AdminController implements Serializable{
             System.out.println("###########################################");
             System.out.println(e.getStackTrace());
         }
-            
+        System.out.println("Product added");
+        clearForm();
     }
     
     private void sendWarning(FacesMessage.Severity severity, String message){
@@ -110,4 +118,16 @@ public class AdminController implements Serializable{
             fMessage.setSummary(message);
             FacesContext.getCurrentInstance().addMessage(null,fMessage);
     }
+    
+    private boolean productExists(Product product){
+        List<Product> existinProducts = productDAO.getProductByName(product.getProduct_name());
+        for (Product p: existinProducts){
+            if (p.getProduct_name().equals(product.getProduct_name()) &&
+                p.getColor().equals(product.getColor()) &&
+                p.getPrice() == product.getPrice() &&
+                p.getDescription().equals(product.getDescription()))
+                return true;
+            }
+        return false;
+        }
 }
