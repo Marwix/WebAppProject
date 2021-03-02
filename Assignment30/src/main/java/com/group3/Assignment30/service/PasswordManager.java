@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.group3.Assignment30.service;
 
 import sun.security.krb5.internal.PAData;
 
-/**
- *
- * @author Robin
- */
 public class PasswordManager {
     
     public int[] HashNSalt(String password) {
