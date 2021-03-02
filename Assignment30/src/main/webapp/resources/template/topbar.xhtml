@@ -54,12 +54,12 @@
                       
                       <ui:fragment rendered="#{loginBackingBean.loggedin}">
                       <!-- Login page -->
-                      <a href="loginregister.xhtml"><img id="login-logo" src="resources/Images/login-btn.png" alt="login button"/></a>
+                      <a href="logoutpage.xhtml"> <img id="logout-logo" src="resources/Images/logout.svg"/></a>
                       </ui:fragment>
                       
                       <ui:fragment rendered="#{!loginBackingBean.loggedin}">
                       <!-- Login page -->
-                      <a class="logout-logo pi pi-sign-in" href="loginregister.xhtml"></a>
+                      <a href="loginregister.xhtml"><img id="login-logo" src="resources/Images/login.svg"/></a>
                       </ui:fragment> 
 
                       <!-- Checkout page -->
