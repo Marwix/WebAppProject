@@ -1,5 +1,31 @@
 body .ui-tabs .ui-tabs-panels {
-    background: rgb(15, 76, 117);
+    background: rgb(15, 76, 117) !important;
     color: #eeeeee;
     
+}
+
+.card {
+    margin-top: 2rem;
+    align-self: center;
+    width: 80%;
+    border-color: rgb(15, 76, 117) !important;
+}
+
+.ui-outputlabel {
+    color: #eeeeee;
+}
+
+.ui-tabs.ui-tabs-top .ui-tabs-nav {
+    background-color: rgb(15, 76, 117) !important;
+}
+
+li {
+    background: rgb(15, 76, 117) !important;
+}
+li a {
+    color: #eeeeee;
+}
+
+body .ui-tabs .ui-tabs-panels{
+    padding: 1rem 10rem !important;
 }

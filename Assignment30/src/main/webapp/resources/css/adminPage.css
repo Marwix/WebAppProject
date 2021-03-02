@@ -1,6 +1,28 @@
+.adminPageBody {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center;
+  align-content: center;
+}
+
+.accountInfoFormStyle {
+  margin-top: 2%;
+  padding: 1rem 5rem;
+  align-self: center;
+  width: 80%;
+  background-color: rgb(15, 76, 117);
+  color: #eeeeee;
+  border-radius: 10px;
+  
+}
+
+.buttonPadding {
+    height: 1rem;
+}
+
 .errBody {
     margin-top: 2%;
-    height: 100vh;
+    height: 90vh;
 }
 
 .error-container {
@@ -15,7 +37,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 1rem;
+    border-radius: 2rem;
     padding: 2rem;
     color: #eeeeee;
 }
@@ -37,5 +59,4 @@
 
 html {
     overflow: hidden;
-    width: 101%;
 }
