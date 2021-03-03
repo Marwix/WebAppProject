@@ -36,6 +36,22 @@ public class PurchaseDAO extends AbstractDAO<Purchase> {
     
     }
     
+     public int getMaxOrderID(){
+        
+        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
+        QPurchase purchase = QPurchase.purchase;
+        
+        Purchase latestorder = queryFactory.selectFrom(purchase).orderBy(purchase.order_id.desc()).fetchFirst();
+        
+        if (latestorder == null)
+            return 0;
+        
+        int count = latestorder.getOrder_id();
+        return count;
+    
+    }
+    
+    
     public List<Purchase>  getOrderPurchasesByCustomer(Customer customer){
         
         JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
@@ -46,6 +62,20 @@ public class PurchaseDAO extends AbstractDAO<Purchase> {
         return orders;
     
     }
+    
+    public List<Purchase> getOrdersByOrderID(int order_id){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
+        QPurchase purchase = QPurchase.purchase;
+        
+        List<Purchase> orders = queryFactory.selectFrom(purchase).where(purchase.order_id.eq(order_id)).fetch();
+        
+        return orders;
+    }
+    
+    public void cleanAll(){
+        em.createQuery("DELETE FROM Purchase where 1=1").executeUpdate();
+    }
+    
     
     
     @Override

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Login/Register Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="resources/css/LoginStyle.css" />
+    </h:head>
+    <ui:decorate template="resources/template/topbar.xhtml">
+        <ui:define name="content">
+            <h:body>
+              <link rel="stylesheet" href="assets/css/LoginStyle.css" />
+                <div class="card">
+                    <p:tabView>
+                        <p:tab title="Login">
+                            <h:form>
+                                <p:messages id="msgs"/> 
+                                <div class="ui-fluid p-formgrid p-grid">
+                                    <div class="p-field p-col-12 p-md-3">
+                                        <p:outputLabel for="emaillogin" value="Email" />
+                                        <p:inputText id="emaillogin" required="true" value="#{loginBackingBean.email}"/>
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-3">
+                                        <p:outputLabel for="pwd" styleClass="p-col-fixed" style="width:100px" value="Password"/>
+                                        <div class="p-col">
+                                            <p:password id="pwd" label="Password 1" required="true" value="#{loginBackingBean.password}"/>
+                                        </div>
+                                    </div>
+
+                                    <br/>
+                                    <p:commandButton type="sumbit" value="Sign in" styleClass="rounded-button" icon="pi pi-lock-open" action="#{loginController.onLogin()}" update="@form"/>
+                                </div>  
+                            </h:form>
+                        </p:tab>
+                        <p:tab title="Register">
+                            <h:form>
+                                <div class="ui-fluid p-formgrid p-grid">
+                                    <div class="p-field p-col-12 p-md-3">
+                                        <p:outputLabel for="email" value="Email" />
+                                        <p:inputText id="email" required="true" value="#{registerBackingBean.email}" validatorMessage="The provided email is not using a valid email format">
+                                            <f:validateRegex pattern="[a-z0-9][-a-z0-9._]+@([-a-z0-9]+[.])+[a-z]{2,5}$"/>
+                                        </p:inputText>
+                                            <p:message for="email" display="both"/> 
+                                       
+                                    </div>
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="pwd1" styleClass="p-col-fixed" style="width:100px" value="Password"/>
+                                        <div class="p-col">
+                                            <p:password id="pwd1" feedback="true" match="pwd2" validatorMessage="Passwords do not match!" label="Password 1" required="true" value="#{registerBackingBean.password}">
+                                                <f:validateLength minimum="6" maximum="20"/>
+                                            </p:password>
+                                        </div>
+                                        <p:message for="pwd1" display="both"/>
+                                    </div>
+
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="pwd2" styleClass="p-col-fixed" style="width:100px" value="Password"/>
+                                        <div class="p-col">
+                                            <p:password id="pwd2" value="#{registerBackingBean.password}" label="Password 2" required="true">
+                                                <f:validateLength minimum="6" maximum="20"/>
+                                            </p:password>
+                                            
+                                        <p:message for="pwd2" display="both"/> 
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="firstname" value="Firstname" />
+                                        <p:inputText id="firstname" required="true" value="#{registerBackingBean.firstname}">
+                                            <f:validateLength minimum="2" maximum="50" />
+                                        </p:inputText>
+                                        <p:message for="firstname" display="both"/> 
+                                    </div>
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="lastname" value="Lastname" />
+                                        <p:inputText id="lastname" required="true" value="#{registerBackingBean.lastname}">
+                                            <f:validateLength minimum="2" maximum="50" />
+                                        </p:inputText>
+                                        <p:message for="lastname" display="both"/> 
+                                    </div>
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="phonenumber" value="Phonenumber" />
+                                        <p:inputText id="phonenumber" type="number" required="true" value="#{registerBackingBean.phonenumber}">
+                                            <f:validateLength minimum="8" maximum="20" />
+                                        </p:inputText>
+                                        <p:message for="phonenumber" display="both"/> 
+                                    </div>
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="address" value="Address" />
+                                        <p:inputText id="address" required="true" value="#{registerBackingBean.address}">
+                                            <f:validateLength minimum="5" maximum="100" />
+                                        </p:inputText>
+                                        <p:message for="address" display="both"/> 
+                                    </div>
+                                    <div class="p-field  p-col-12 p-md-3">
+                                        <p:outputLabel for="city" value="City" />
+                                        <p:inputText id="city" required="true" value="#{registerBackingBean.city}">
+                                            <f:validateLength minimum="2" maximum="100" />
+                                        </p:inputText>
+                                        <p:message for="city" display="both"/> 
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-3">
+                                        <p:outputLabel for="zip" value="Zip" />
+                                        <p:inputText id="zip" type="number" required="true" value="#{registerBackingBean.zip}">
+                                            <f:validateLength minimum="5" maximum="5" />
+                                        </p:inputText>
+                                        <p:message for="zip" display="both"/> 
+                                    </div>
+                                    <br/>
+                                    <p:commandButton type="submit" value="Register" icon="pi pi-id-card" update="@form" styleClass="rounded-button" action="#{registerController.onRegister}" />
+                                </div>
+                            </h:form>
+                        </p:tab>
+                    </p:tabView>
+                </div>
+            </h:body>  
+        </ui:define>
+    </ui:decorate>
+</html>
+

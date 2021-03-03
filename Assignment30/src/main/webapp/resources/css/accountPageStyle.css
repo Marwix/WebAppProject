@@ -1,0 +1,62 @@
+.account-info-container {
+  display: flex ;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-panel {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.accountInfoFormStyle {
+  margin-top: 2%;
+  padding: 1rem 10rem;
+  background-color: rgb(15, 76, 117);
+  color: #eeeeee;
+  border-radius: 10px;
+}
+.orderlist {
+  overflow-y: scroll;
+  height: 20rem;
+  box-shadow: 1px 1px 0px 4px rgba(0, 0, 0, 0.1);
+}
+.orderlist .list {
+  list-style: none;
+
+  height: 100%;
+  width: 100%;
+  color: #eeeeee;
+}
+.orderlist .list .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div[class*="order-column"] {
+  display: flex;
+  justify-content: space-between;
+  flex: 1 0 80px;
+}
+.li {
+  display: list-item;
+}
+.order-history-text {
+  margin-top: 2%;
+  color: #eeeeee;
+}
+.orderlist-area {
+  margin-top: 2%;
+  background: rgb(15, 76, 117);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.errortext{
+ color: #eeeeee; 
+}
+

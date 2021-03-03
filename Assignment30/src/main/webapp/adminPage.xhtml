@@ -1,0 +1,143 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <link rel="stylesheet" href="resources/css/adminPage.css" />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <ui:decorate template="resources/template/topbar.xhtml">
+        <ui:define name="content">
+            <h:body class="adminPageBody">
+                <f:metadata>
+                    <f:viewAction action="#{adminController.init()}" />
+                </f:metadata>
+                <div class="accountInfoFormStyle">
+                    <h:form rendered="#{adminController.authorize()}">
+                        <div>
+                            <h1>Add new product</h1>
+                        </div>
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-3">
+                                <p:outputLabel for="product-name" value="Product and image name" />
+                                <p:inputText id="product-name" required="true" value="#{adminBackingBean.productName}">
+                                    <f:validateLength minimum="3" maximum="30"/>
+                                </p:inputText>
+                                <p:message for="product-name" display="both"/> 
+                            </div>
+
+                            <div class="p-field  p-col-12 p-md-3">
+                                <p:outputLabel for="product-price" value="Price" />
+                                <p:inputText id="product-price" type="number" required="true" value="#{adminBackingBean.price}">
+                                    <f:validateLength minimum="1" maximum="9" />
+                                </p:inputText>
+                                <p:message for="product-price" display="both"/>
+                            </div>
+
+                            <div class="p-field  p-col-12 p-md-3">
+                                <p:outputLabel for="stars" value="Stars (1-5)" />
+                                <p:inputText id="stars" required="true" type="number" value="#{adminBackingBean.stars}"/>
+                                <p:message for="stars" display="both"/> 
+                            </div>
+
+                            <div class="p-field  p-col-12 p-md-3">
+                                <p:outputLabel for="productColor" value="Color" />
+                                <p:inputText id="productColor" required="true" value="#{adminBackingBean.color}">
+                                    <f:validateLength minimum="2" maximum="15" />
+                                </p:inputText>
+                                <p:message for="productColor" display="both"/> 
+                            </div>
+
+                            <div class="p-field  p-col-12 p-md-3">
+                                <p:outputLabel for="productMeasurements" value="Measurements (Width * Length * Height)" />
+                                <p:inputText id="productMeasurements" required="true" value="#{adminBackingBean.measurements}"/>
+                                <p:message for="productMeasurements" display="both"/> 
+                            </div>
+
+                            <div class="p-field  p-col-12 p-md-3">
+                                <p:outputLabel for="productWeight" value="Weight" />
+                                <p:inputText id="productWeight" required="true" value="#{adminBackingBean.weight}"/>
+                                <p:message for="productWeight" display="both"/> 
+                            </div>
+
+                            <div class="p-field p-col-12 p-md-3">
+                                <p:outputLabel for="productDescription" value="Product description" />
+                                <p:inputText id="productDescription" required="true" value="#{adminBackingBean.description}"/>
+                                <p:message for="productDescription" display="both"/> 
+                            </div>
+
+                            <br/>
+                            <p:messages id="msgs"/> 
+                            <p:commandButton type="submit" value="Add product" update="@form" styleClass="rounded-button" action="#{adminController.addProduct()}" />
+
+                        </div>
+                    </h:form>
+                    <h:form rendered="#{adminController.authorize()}">
+                        <div>
+                            <h1>Add new Coupon</h1>
+                        </div>
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-3">
+                                <p:outputLabel for="coupon-code" value="Coupon Code" />
+                                <p:inputText id="coupon-code" required="true" value="#{adminBackingBean.newCouponCode}">
+                                    <f:validateLength minimum="2" maximum="10"/>
+                                </p:inputText>
+                                <p:message for="coupon-code" display="both"/> 
+                            </div>
+
+                            <div class="p-field  p-col-12 p-md-3">
+                                <p:outputLabel for="coupon-multiplier" value="Multiplier" />
+                                <p:inputNumber id="coupon-multiplier" required="true" symbol="%" symbolPosition="s" value="#{adminBackingBean.price}" >
+                                    <f:validateDoubleRange minimum="1" maximum="100"/>
+                                </p:inputNumber>
+                                <p:message for="coupon-multiplier" display="both"/>
+                            </div>
+                            
+                            <br/>
+                            <p:messages id="msgs"/> 
+                            <p:commandButton type="submit" value="Add coupon" update="couponTable" styleClass="rounded-button" action="#{adminController.addCoupon()}" />
+
+                        </div>
+                    </h:form>
+                    <div class="buttonPadding"/>
+                    <p:dataTable id="couponTable" rendered="#{adminController.authorize()}" var="coupon" value="#{adminBackingBean.couponList}" showGridlines="true">
+                        <p:column headerText="Coupon Code">
+                            <h:outputText value="#{coupon.couponCode}" />
+                        </p:column>
+                        <p:column headerText="Multiplier">
+                            <h:outputText value="#{coupon.priceMultiplier}" />
+                        </p:column>
+
+                        <p:column headerText=" ">
+                            <p:messages id="msgs"/>
+                            <p:commandButton process="@this" update="couponTable" icon="pi pi-times" styleClass="rounded-button ui-button-danger" action="#{adminController.removeCoupon()}">
+                                <f:param name="action" value="#{coupon.couponCode}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                    <h:form rendered="#{!adminController.authorize()}">
+                        <div class="container-fluid d-flex h-100 flex-column error-container">
+                            <div class="error-info">
+                                <h2>Error: 404</h2>
+                                <p>The requested page does not exist</p>
+                                <a href="index.xhtml">Return to main page</a>
+                            </div>
+                        </div>
+                    </h:form>
+                    <div class="buttonPadding"/>
+                    
+
+                </div>
+            </h:body>
+            <script src="assets/JS/PurchaseClickScript.js"></script>
+            <script src="assets/JS/AccountPageScript.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
+                    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" 
+                    crossorigin="anonymous">
+            </script>
+        </ui:define>
+    </ui:decorate>
+</html>

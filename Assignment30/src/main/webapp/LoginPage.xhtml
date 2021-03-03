@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      >
+     <link rel="stylesheet" href="resources/css/LoginStyle.css"/>
+     
+    <ui:decorate template="resources/template/topbar.xhtml">
+        <ui:define name="content">
+            <div class="login-container col-md-9 col-sm-12">
+                <ul class="nav nav-tabs" id="myTab" role="tablist" >
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="login-tab" data-bs-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">LOGIN</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="register-tab" data-bs-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">REGISTER</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                        <div class="row login-row">
+                            <div class="login-card-title">
+                                <h1>LOGIN</h1>
+                            </div>
+
+                            <!-- LOGIN FORM --> 
+                            <div class="col-md-12 col-sm-12 alignment-cardstyle">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3></h3>
+                                    </div> 
+                                    <div class="form-group mb-3">
+                                        <!-- Login input-->
+                                        <div class="col-12 input-texts">       
+                                            <input type="text" class="form-control" placeholder="Email" required="true" />
+                                        </div>
+                                        <div class="col-12">       
+                                            <input type="text" class="form-control" placeholder="Password" required="true" />
+                                        </div>
+
+                                        <!-- Login button -->
+                                        <div class="button-style">
+                                            <div class="d-grid gap-2 col-4 mx-auto">
+
+                                                <button type="button" class="btn btn-primary">Login</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+
+
+                    <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab"> 
+                        <div class="row login-row">
+                            <div class="login-card-title">
+                                <h1>REGISTER</h1>
+                            </div>  
+                            <div class="col-md-12 col-sm-12 alignment-cardstyle">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3></h3>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <div class="col-12 input-texts">    
+                                            <h:outputLabel for="username">User Name</h:outputLabel>  
+                                            <h:inputText id="username" value="#{registerBackingBean.username}" required="true" requiredMessage="Username is required"/>
+                                        </div>
+                                        <div class="col-12">       
+                                            <input type="text" class="form-control" placeholder="Email" required="true" /> 
+                                        </div>
+                                        <div class="col-12">       
+                                            <input type="text" class="form-control" placeholder="Password" required="true" /> 
+                                        </div>
+                                        <div class="col-12">       
+                                            <input type="text" class="form-control" placeholder="First Name" required="true" /> 
+                                        </div>
+                                        <div class="col-12">       
+                                            <input type="text" class="form-control" placeholder="Last Name" required="true" /> 
+                                        </div>
+                                        <div class="col-12">       
+                                            <input type="text" class="form-control" placeholder="Phone number" required="true" /> 
+                                        </div>
+                                        <div class="col-12">       
+                                            <input type="text" class="form-control" placeholder="Adress" required="true" /> 
+                                        </div>
+                                        <div class="col-12">       
+                                            <input type="text" class="form-control" placeholder="Postcode" required="true" /> 
+                                        </div>
+                                        <div class="col-12">       
+                                            <input type="text" class="form-control" placeholder="City" required="true" /> 
+                                        </div>
+                                        <div class="button-style">
+                                            <div class="d-grid gap-2 col-4 mx-auto">
+                                                <commandButton id="submit-button" value="Submit" action="#{registerController.onRegister}"/>  
+                                            </div>
+                                            <h:panelGroup rendered="#{registerBackBean.username != null}">
+                                                <h2>Current data</h2>
+                                                <h3>#{registerBackBean.username}</h3>
+                                            </h:panelGroup>
+                                            <h:commandButton id="submit-button" value="Submit" action="#{registerController.onRegister}"/>  
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:decorate>
+</html>

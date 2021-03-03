@@ -7,9 +7,9 @@ package com.group3.Assignment30.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.Column;
-import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -21,21 +21,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer implements Serializable{
+    
     @Id
+    @GeneratedValue
     private int user_id;
     
+    private String first_name;
+    private String last_name;
     //Make unique
     @Column(unique=true)
     private String email;
-    
     private String password;
-    private String first_name;
-    private String last_name;
     private String phonenumber;
     private String city;
-    private String region;
+    private String adress;
     private String postal_code;
-    
-     //alt: 2
-    //private List<Order> order_list;
+    private byte[] salt;
+    private boolean adminAccess = false;
 }
