@@ -77,12 +77,12 @@ public class CustomerDAO extends AbstractDAO<Customer> {
     
     public void changePassword(Customer customer){
         PasswordManager pwManager = new PasswordManager();
-        int[] pw = pwManager.HashNSalt(customer.getPassword());
+        List<byte[]> pw = pwManager.HashNSalt(customer.getPassword());
         JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
         QCustomer user = QCustomer.customer;
         
-        queryFactory.update(user).set(user.password, String.valueOf(pw[1]))
-                .set(user.salt, pw[0])
+        queryFactory.update(user).set(user.password, pwManager.passwordByteArrToString(pw.get(1)))
+                .set(user.salt, pw.get(0))
                 .where(user.user_id.eq(customer.getUser_id())).execute();
     }
     
