@@ -22,7 +22,7 @@ public class ProductBackingBean implements Serializable {
     private int price;
    
     private int fullStar;
-    private int halfStar;
+    //private int halfStar;
 
     @NotEmpty private String color;
     @NotEmpty private String height;

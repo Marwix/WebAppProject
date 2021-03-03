@@ -104,9 +104,9 @@ public class AdminController implements Serializable{
         } catch (Exception e) {
             sendWarning(FacesMessage.SEVERITY_FATAL, "Error while adding product");
             System.out.println("###########################################");
-            System.out.println("ERROR ENCOUNTERED IN AdminController ROW 73");
+            System.out.println("ERROR ENCOUNTERED IN AdminController ROW 101");
             System.out.println("###########################################");
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
         }
         System.out.println("Product added");
         clearForm();
