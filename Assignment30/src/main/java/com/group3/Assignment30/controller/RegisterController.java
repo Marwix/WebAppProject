@@ -35,7 +35,7 @@ public class RegisterController implements Serializable{
     
     
     public String onRegister(){
-        boolean emailTaken = customerDAO.checkUserExist(registerBackingBean.getEmail()).size()==1;
+        boolean emailTaken = customerDAO.checkRegistered(registerBackingBean.getEmail()).size()==1;
         
         if (emailTaken) {
             FacesMessage message = new FacesMessage();

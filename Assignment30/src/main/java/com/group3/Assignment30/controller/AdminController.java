@@ -5,13 +5,16 @@
  */
 package com.group3.Assignment30.controller;
 
+import com.group3.Assignment30.model.dao.CouponDAO;
 import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.dao.ProductDAO;
+import com.group3.Assignment30.model.entity.Coupon;
 import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.views.AdminBackingBean;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -33,6 +36,8 @@ public class AdminController implements Serializable{
     private ProductDAO productDAO;
     @EJB 
     private CustomerDAO customerDAO;
+    @EJB
+    private CouponDAO couponDAO;
     
     private SessionContextController sessionContextController = SessionContextController.getInstance();
     private int activeUserID;
@@ -40,14 +45,22 @@ public class AdminController implements Serializable{
     
     @PostConstruct
     public void init(){
-        List<Product> products = productDAO.findAll();
-        adminBackinBean.setProductList(products);
+        refreshProducts();
+        refreshCoupons();
+        
+    }
+    
+    private void refreshCoupons(){
+        adminBackinBean.setCouponList(couponDAO.findAll());
+    }
+    
+    private void refreshProducts(){
+        adminBackinBean.setProductList(productDAO.findAll());
     }
     
     
     // Assert that the logged in user is Admin
     public boolean authorize(){
-        System.out.println("Authorizing");
         try {
             activeUserID = (int) sessionContextController.getAttribu("user_id");
         } catch (Exception e) {
@@ -67,7 +80,6 @@ public class AdminController implements Serializable{
         adminBackinBean.setMeasurements("");
         adminBackinBean.setWeight("");
         adminBackinBean.setDescription("");
-        System.out.println("form cleared");
         
     }
     
@@ -108,8 +120,21 @@ public class AdminController implements Serializable{
             System.out.println("###########################################");
             System.out.println(e.getStackTrace());
         }
-        System.out.println("Product added");
         clearForm();
+    }
+    
+    public void addCoupon(){
+        couponDAO.createCoupon(adminBackinBean.getNewCouponCode(), adminBackinBean.getNewCouponMultiplier());
+        refreshCoupons();
+    }
+    
+    public void removeCoupon() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
+        String couponCode = params.get("action");
+        
+        couponDAO.deleteCouponByCouponCode(couponCode);
+        refreshCoupons();
     }
     
     private void sendWarning(FacesMessage.Severity severity, String message){

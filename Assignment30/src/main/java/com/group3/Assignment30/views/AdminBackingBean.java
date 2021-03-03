@@ -5,6 +5,7 @@
  */
 package com.group3.Assignment30.views;
 
+import com.group3.Assignment30.model.entity.Coupon;
 import com.group3.Assignment30.model.entity.Product;
 import java.io.Serializable;
 import java.util.List;
@@ -25,6 +26,10 @@ public class AdminBackingBean implements Serializable{
     @NotEmpty private String weight;
     @NotEmpty private String description;
     
+    @NotEmpty private String newCouponCode;
+    private double newCouponMultiplier;
+    
     List<Product> productList;
+    List<Coupon> couponList;
     
 }

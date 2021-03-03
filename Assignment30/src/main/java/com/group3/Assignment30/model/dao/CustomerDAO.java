@@ -42,22 +42,6 @@ public class CustomerDAO extends AbstractDAO<Customer> {
         List<Customer> u = queryFactory.selectFrom(user).where(user.email.eq(email)).fetch();
         return u;
     }
-
-    public List<Customer> checkUserLogin(String email, String password) {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
-        QCustomer user = QCustomer.customer;
-        
-        List<Customer> u = queryFactory.selectFrom(user).where(user.email.eq(email), user.password.eq(password)).fetch();
-        return u;
-    }
-    
-    public List<Customer> checkUserExist(String email) {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
-        QCustomer user = QCustomer.customer;
-        
-        List<Customer> u = queryFactory.selectFrom(user).where(user.email.eq(email)).fetch();
-        return u;
-    }
     
     public boolean updateUserInformation(Customer customer){
         JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
