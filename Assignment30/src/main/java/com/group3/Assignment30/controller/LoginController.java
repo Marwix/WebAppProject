@@ -35,7 +35,7 @@ public class LoginController  implements Serializable{
         PasswordManager pwManager = new PasswordManager();
         
         // See if user exists
-        List<Customer> customer = customerDAO.checkUserExist(loginBackingBean.getEmail());
+        List<Customer> customer = customerDAO.checkRegistered(loginBackingBean.getEmail());
         
         //If user does not exist
         if (customer.size()==0){

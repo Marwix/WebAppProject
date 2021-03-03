@@ -43,10 +43,10 @@ public class PurchaseDAO extends AbstractDAO<Purchase> {
         
         Purchase latestorder = queryFactory.selectFrom(purchase).orderBy(purchase.order_id.desc()).fetchFirst();
         
-        int count = latestorder.getOrder_id();
- 
-         System.out.println("hej" + count );
+        if (latestorder == null)
+            return 0;
         
+        int count = latestorder.getOrder_id();
         return count;
     
     }

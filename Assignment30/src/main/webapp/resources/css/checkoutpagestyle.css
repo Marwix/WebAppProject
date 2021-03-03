@@ -1,0 +1,47 @@
+#errortext{
+    color: #eeeeee;
+}
+
+#couponButton {
+    font-family:monospace;
+    margin-left:5px;
+    bottom:2px;
+}
+
+.center-layout {
+    margin-top: 1.6%;
+    padding: 1rem 10rem;
+    background-color: rgb(15, 76, 117);
+    color: #eeeeee;
+    border-radius: 10px;
+    font-family:monospace;
+}
+
+.center-layout .ui-card {
+    display:flex;
+    justify-content: center;
+    margin-bottom:10px; 
+    font-family:monospace;
+}
+
+.ui-card-body .ui-card-title {
+    text-align:center;
+}
+
+#tableRowStyle {
+    text-align:center;
+    width:50%;
+}
+
+.center-layout h1 {
+    color: white;
+    justify-content:center;
+    display:flex;
+    font-family:monospace;
+    margin-top:2%;
+    margin-bottom:2%;
+}
+
+.terms-conditions-text {
+    text-align:center;
+}

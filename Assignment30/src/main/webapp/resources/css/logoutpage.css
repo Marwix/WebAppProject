@@ -1,0 +1,21 @@
+.container .logout-text{
+    color: #eeeeee;
+}
+
+.logout-container{
+    display: flex;
+    align-items: center;
+}
+
+.logout-info{
+    background-color: #0f4c75;
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    padding: 2rem;
+    color: #eeeeee;
+    margin: 12vw;
+}

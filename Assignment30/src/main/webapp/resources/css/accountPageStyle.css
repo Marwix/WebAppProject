@@ -56,3 +56,7 @@ div[class*="order-column"] {
   border-radius: 10px;
 }
 
+.errortext{
+ color: #eeeeee; 
+}
+

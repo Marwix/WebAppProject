@@ -1,34 +1,82 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.group3.Assignment30.service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import sun.security.krb5.internal.PAData;
 
-/**
- *
- * @author Robin
- */
 public class PasswordManager {
+    private int PASSWORD_STRENGTH = 65536;
+    private int PASSWORD_KEYLENGTH = 128;
+    private int SALT_LENGTH = 16;
     
-    public int[] HashNSalt(String password) {
-        int[] hns = new int[2];
-        hns[0] = getRandomSalt();
+    public List<byte[]> HashNSalt(String password) {
+        ArrayList<byte[]> hashNSalt = new ArrayList<>();
+        byte[] salt = getRandomSalt();
+        byte[] hashedPW = getHashedPassword(password, salt);
         
-        //TODO - Improve hash
-        hns[1] = (password+hns[0]).hashCode();
-        return hns;
+        hashNSalt.add(salt);
+        hashNSalt.add(hashedPW);
+        
+        return hashNSalt;
     } 
     
-    private int getRandomSalt() {
-        return (int)(Math.random() * 1009);
+    private byte[] getRandomSalt() {
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[SALT_LENGTH];
+        random.nextBytes(salt);
+        return salt;
     }
     
-    public boolean passwordMatching(String stored_password, int salt, String entered_password){
-        System.out.println((entered_password+salt).hashCode());
-        return stored_password.equals(String.valueOf((entered_password+salt).hashCode()));
+    private byte[] getHashedPassword(String password, byte[] salt) {
+        byte[] hashedPW;
+        
+        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, PASSWORD_STRENGTH, PASSWORD_KEYLENGTH);
+        SecretKeyFactory factory;
+        try {
+            factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            hashedPW = factory.generateSecret(spec).getEncoded();
+        
+        } catch (NoSuchAlgorithmException algE) {
+            System.out.println("##################################################");
+            System.out.println("Password Algorith missing. class: PaswordManager");
+            System.out.println("##################################################");
+            algE.printStackTrace();
+            return null;
+        } catch (InvalidKeySpecException keyE){
+            System.out.println("##################################################");
+            System.out.println("key Spec issue. class: PaswordManager");
+            System.out.println("##################################################");
+            keyE.printStackTrace();
+            return null;
+        }
+        return hashedPW;
+    }
+    
+    public boolean passwordMatching(String stored_password, byte[] salt, String entered_password){
+        byte[] enteredPasswordHash = getHashedPassword(entered_password, salt);
+        String enteredPW = passwordByteArrToString(enteredPasswordHash);
+        
+        System.out.println("Entered password: " + enteredPW);
+        System.out.println("Stored password: " + stored_password);
+        return enteredPW.equals(stored_password);
+    }
+    
+    public String passwordByteArrToString(byte[] password){
+        return Base64.getEncoder().encodeToString(password);
+    }
+    
+    public byte[] passwordStringToByteArr(String password) {
+        return Base64.getDecoder().decode(password);
     }
     
 }

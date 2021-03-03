@@ -12,10 +12,33 @@
          <h:outputStylesheet name="resources/css/primeflex/primeflex.css"/>
     </h:head>
     <h:body>
-
+        <link rel="stylesheet" href="resources/css/logoutpage.css"/>
         <ui:decorate template="resources/template/topbar.xhtml"> 
             <ui:define name="content">
-               
+                    <div class="container-fluid d-flex h-100 flex-column ">
+                        <ui:fragment rendered="#{loginBackingBean.loggedin}">
+                            <div class="logout-info">
+                                <h1 class="logout-text">
+                                    Press here to logout
+                                </h1>
+                                <h:form>
+                                    <p:commandButton value="Press here to logout" styleClass="rounded-button" action="#{logoutController.onLogout()}" />
+                                </h:form>
+                             
+                            </div>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{!loginBackingBean.loggedin}">
+                            <div class="logout-info">
+                                <h1 class="logout-text">
+                                    Successfully logged out
+                                </h1>
+                                <p:button value="Press here to login again" styleClass="rounded-button" href="loginregister.xhtml" />
+                                <br/>
+                                <br/>
+                                <p:button value="Press here to get to our products" styleClass="rounded-button" href="index.xhtml" />
+                            </div>
+                        </ui:fragment>
+                    </div> 
             </ui:define>
         </ui:decorate>        
         

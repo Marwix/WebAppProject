@@ -28,5 +28,4 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>vela</param-value>
     </context-param>
-
 </web-app>

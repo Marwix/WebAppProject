@@ -29,5 +29,5 @@ public class CheckoutBackingBean implements Serializable {
     @NotEmpty private String postcode;
     @NotEmpty private String phonenumber;
     
-    @NotEmpty private HashMap<Product,Integer> products;
+    private HashMap<Product,Integer> products;
 }
