@@ -75,6 +75,49 @@
 
                         </div>
                     </h:form>
+                    <h:form rendered="#{adminController.authorize()}">
+                        <div>
+                            <h1>Add new Coupon</h1>
+                        </div>
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-3">
+                                <p:outputLabel for="coupon-code" value="Coupon Code" />
+                                <p:inputText id="coupon-code" required="true" value="#{adminBackingBean.newCouponCode}">
+                                    <f:validateLength minimum="2" maximum="10"/>
+                                </p:inputText>
+                                <p:message for="coupon-code" display="both"/> 
+                            </div>
+
+                            <div class="p-field  p-col-12 p-md-3">
+                                <p:outputLabel for="coupon-multiplier" value="Multiplier" />
+                                <p:inputNumber id="coupon-multiplier" required="true" symbol="%" symbolPosition="s" value="#{adminBackingBean.price}" >
+                                    <f:validateDoubleRange minimum="1" maximum="100"/>
+                                </p:inputNumber>
+                                <p:message for="coupon-multiplier" display="both"/>
+                            </div>
+                            
+                            <br/>
+                            <p:messages id="msgs"/> 
+                            <p:commandButton type="submit" value="Add coupon" update="couponTable" styleClass="rounded-button" action="#{adminController.addCoupon()}" />
+
+                        </div>
+                    </h:form>
+                    <div class="buttonPadding"/>
+                    <p:dataTable id="couponTable" rendered="#{adminController.authorize()}" var="coupon" value="#{adminBackingBean.couponList}" showGridlines="true">
+                        <p:column headerText="Coupon Code">
+                            <h:outputText value="#{coupon.couponCode}" />
+                        </p:column>
+                        <p:column headerText="Multiplier">
+                            <h:outputText value="#{coupon.priceMultiplier}" />
+                        </p:column>
+
+                        <p:column headerText=" ">
+                            <p:messages id="msgs"/>
+                            <p:commandButton process="@this" update="couponTable" icon="pi pi-times" styleClass="rounded-button ui-button-danger" action="#{adminController.removeCoupon()}">
+                                <f:param name="action" value="#{coupon.couponCode}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
                     <h:form rendered="#{!adminController.authorize()}">
                         <div class="container-fluid d-flex h-100 flex-column error-container">
                             <div class="error-info">
@@ -84,6 +127,8 @@
                             </div>
                         </div>
                     </h:form>
+                    <div class="buttonPadding"/>
+                    
 
                 </div>
             </h:body>

@@ -20,7 +20,7 @@ public class Product implements Serializable{
     public int prodoct_id;
 
     private String product_name;
-    private int price;
+    private double price;
     // Image? clob and blob
 
     //Assuming we can do loops 
