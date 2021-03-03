@@ -59,7 +59,6 @@ public class RegisterController implements Serializable{
         
         customerDAO.create(customer);
         
-        System.out.println("hej");
         System.out.println(registerBackingBean.getLastname());
         System.out.println(registerBackingBean.getEmail());
         System.out.println(registerBackingBean.getFirstname());

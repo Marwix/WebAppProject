@@ -48,8 +48,6 @@ public class AccountPageController implements Serializable{
             List<Customer> customerInfo = customerDAO.getUserInformationByID(activeUserID);
 
             customer = customerInfo.get(0);
-            System.out.println(customer.getEmail());
-            System.out.println("Jag hatar mitt liv");
 
             accountBackingBean.setEmail(customer.getEmail());
             accountBackingBean.setFirstname(customer.getFirst_name());

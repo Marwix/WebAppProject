@@ -34,7 +34,6 @@ public class CartController implements Serializable{
 
          int id = Integer.parseInt(action);
          
-         System.out.println("" + id);
          
         List<Product> products = productDAO.getProductByID(id);
         System.out.println(products);
@@ -53,7 +52,6 @@ public class CartController implements Serializable{
             cartBackingBean.setCart(cartItems);
         }
         
-        System.out.println("" + cartBackingBean.getCart());
     }
     
     public void updateCartValue(List<Product> products){

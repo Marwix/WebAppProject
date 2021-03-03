@@ -56,7 +56,6 @@ public class CheckoutController implements Serializable {
     public void init() 
     {
         try {
-            
             activeUserID = (int) sessionContextController.getAttribu("user_id");
             List<Customer> customerInfo = customerDAO.getUserInformationByID(activeUserID);
 
@@ -74,9 +73,10 @@ public class CheckoutController implements Serializable {
             HashMap<Product,Integer> listProducts = cartBackingBean.getCart();
             checkoutBackingBean.setProducts(listProducts);     
         } 
-        catch (Exception e) 
+        catch (NullPointerException e) 
         {
-            System.out.println(e.getMessage());
+           HashMap<Product,Integer> listProducts = new HashMap<Product,Integer>();
+            checkoutBackingBean.setProducts(listProducts);   
         }     
     } 
     
@@ -100,19 +100,21 @@ public class CheckoutController implements Serializable {
         
         cartBackingBean.setCart(new HashMap<Product, Integer>());
         checkoutBackingBean.setProducts(new HashMap<Product, Integer>()); 
-        
-        /*ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());*/
-        
+            
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.redirect(ec.getRequestContextPath() + "/" + "paymentResult.xhtml");
     }
     
     // Retrieve all items added to cart and display them at checkout.
     public List<Product> getKeyList()
-    {  
+    {  try {
+            
         return new ArrayList<>(checkoutBackingBean.getProducts().keySet());
+        } catch (NullPointerException e) {
+            return new ArrayList<Product>();
+        }
     }
+  
     
     // Count the number of products available. 
     public int getCount(Product product)

@@ -65,9 +65,7 @@ public class PasswordManager {
     public boolean passwordMatching(String stored_password, byte[] salt, String entered_password){
         byte[] enteredPasswordHash = getHashedPassword(entered_password, salt);
         String enteredPW = passwordByteArrToString(enteredPasswordHash);
-        
-        System.out.println("Entered password: " + enteredPW);
-        System.out.println("Stored password: " + stored_password);
+
         return enteredPW.equals(stored_password);
     }
     

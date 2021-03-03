@@ -30,7 +30,6 @@ public class LogoutController implements Serializable{
         loginBackingBean.setLoggedin(false);
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
-        System.out.println("Hej");
         
         
     }

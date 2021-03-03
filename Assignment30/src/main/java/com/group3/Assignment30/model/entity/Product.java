@@ -23,7 +23,6 @@ public class Product implements Serializable{
     private double price;
     // Image? clob and blob
 
-    //Assuming we can do loops 
     private int fullStar;
 
     private String color;

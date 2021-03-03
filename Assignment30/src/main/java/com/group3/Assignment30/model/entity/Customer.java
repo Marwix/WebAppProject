@@ -28,7 +28,7 @@ public class Customer implements Serializable{
     
     private String first_name;
     private String last_name;
-    //Make unique
+
     @Column(unique=true)
     private String email;
     private String password;
