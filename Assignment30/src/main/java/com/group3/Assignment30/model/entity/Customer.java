@@ -36,6 +36,6 @@ public class Customer implements Serializable{
     private String city;
     private String adress;
     private String postal_code;
-    private int salt;
+    private byte[] salt;
     private boolean adminAccess = false;
 }

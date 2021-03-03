@@ -56,6 +56,14 @@ body {
   right: 5%;
   top: 45%;
 }
+#logout-logo {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 10px;
+    color: #eeeeee;
+    
+}
+
 
 .cart-notification {
   position: absolute;

@@ -7,6 +7,7 @@ import com.group3.Assignment30.service.PasswordManager;
 import com.group3.Assignment30.views.LoginBackingBean;
 import com.group3.Assignment30.views.RegisterBackingBean;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -34,7 +35,7 @@ public class RegisterController implements Serializable{
     
     
     public String onRegister(){
-        boolean emailTaken = customerDAO.checkUserExist(registerBackingBean.getEmail()).size()==1;
+        boolean emailTaken = customerDAO.checkRegistered(registerBackingBean.getEmail()).size()==1;
         
         if (emailTaken) {
             FacesMessage message = new FacesMessage();
@@ -44,13 +45,13 @@ public class RegisterController implements Serializable{
         }
         customer = new Customer();
         PasswordManager pwManager = new PasswordManager();
-        int[] pw = pwManager.HashNSalt(registerBackingBean.getPassword());
+        List<byte[]> pw = pwManager.HashNSalt(registerBackingBean.getPassword());
         
         customer.setFirst_name(registerBackingBean.getFirstname());
         customer.setLast_name(registerBackingBean.getLastname());
         customer.setEmail(registerBackingBean.getEmail());
-        customer.setPassword(String.valueOf(pw[1]));
-        customer.setSalt(pw[0]);
+        customer.setPassword(pwManager.passwordByteArrToString(pw.get(1)));
+        customer.setSalt(pw.get(0));
         customer.setPhonenumber(registerBackingBean.getPhonenumber());
         customer.setCity(registerBackingBean.getCity());
         customer.setAdress(registerBackingBean.getAddress());

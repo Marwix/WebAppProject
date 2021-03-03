@@ -34,6 +34,8 @@ public class Purchase implements Serializable{
     
     private int count;
     
+    private double price = 0;
+    
     @Id
     @GeneratedValue
     private long id;

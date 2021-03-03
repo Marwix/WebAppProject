@@ -77,7 +77,7 @@ public class ProductDAOTest {
         productDAO.create(p3);
         productDAO.create(p4);
     }
-    //@InSequence(0) bestämmer ordningen
+    
     @InSequence(0)
     @Test
     public void checkCorrectAmountInserted() {
@@ -87,7 +87,18 @@ public class ProductDAOTest {
         
         assertEquals(4L, Amount);
     }
+    
     @InSequence(1)
+    @Test
+    public void getCorrectRange(){
+        List<Product> l1 = productDAO.getXUniqueProducts(1);
+        assertTrue(l1.size() == 1);
+        
+        l1 = productDAO.getXUniqueProducts(2);
+        assertTrue(l1.size() == 2);
+    }
+    
+    @InSequence(2)
     @Test
     public void checkIfWeGetCorrectProductWithID() {
         
@@ -105,7 +116,7 @@ public class ProductDAOTest {
     }
     
     @Test
-    @InSequence(2)
+    @InSequence(3)
     public void checkIfGetProductByName() {
         List<Product> retrivedProducts = productDAO.getProductByName("Catapult");
         assertTrue(retrivedProducts.contains(p1));
@@ -116,7 +127,7 @@ public class ProductDAOTest {
     
     
     @Test
-    @InSequence(3)
+    @InSequence(4)
     public void checkIfProductRemoved() {
         List<Product> retrivedProducts = productDAO.findAll();
         assertTrue(retrivedProducts.contains(p1));
