@@ -107,8 +107,7 @@ public class CheckoutController implements Serializable {
         cartBackingBean.setCart(new HashMap<Product, Integer>());
         checkoutBackingBean.setProducts(new HashMap<Product, Integer>()); 
         priceMultiplier = 1;
-        checkoutBackingBean.setCoupon("");
-            
+        
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.redirect(ec.getRequestContextPath() + "/" + "paymentResult.xhtml");
     }
@@ -148,9 +147,10 @@ public class CheckoutController implements Serializable {
         String code = checkoutBackingBean.getCoupon();
         
         List<Coupon> couponCodes = couponDAO.getCouponByCode(code);
-        if (couponCodes.size() > 0)
+        if (couponCodes.size() > 0)   
         {
            if (priceMultiplier != 1) {
+               
                if (priceMultiplier < couponCodes.get(0).getPriceMultiplier()) {
                    priceMultiplier = couponCodes.get(0).getPriceMultiplier();
                    System.out.println("Better code applied.");
@@ -161,6 +161,7 @@ public class CheckoutController implements Serializable {
                priceMultiplier = couponCodes.get(0).getPriceMultiplier();
                sendNotification(FacesMessage.SEVERITY_INFO, "Coupon code applied!");
                System.out.println("Coupon code applied.");
+               
            }  
         }
         else
@@ -179,7 +180,7 @@ public class CheckoutController implements Serializable {
     
     // Check if coupon is applied or not.
     public boolean CouponApplied() {
-        return priceMultiplier != 1; 
+        return priceMultiplier != 10; 
     }
     
     // Remove item from checkoutpage cart.
