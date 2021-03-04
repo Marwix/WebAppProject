@@ -1,0 +1,14 @@
+.layout {
+    height: 100%;
+    background-color: white;
+    text-align:center;
+    justify-content:center;
+}
+
+p {
+    font-family:monospace;
+}
+
+h4 {
+    text-decoration: underline;
+}

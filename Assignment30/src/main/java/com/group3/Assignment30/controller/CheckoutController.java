@@ -1,5 +1,4 @@
 package com.group3.Assignment30.controller;
-
 import com.group3.Assignment30.model.dao.CouponDAO;
 import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.dao.ProductDAO;
@@ -86,7 +85,7 @@ public class CheckoutController implements Serializable {
         }     
     } 
     
-    public void addOrder() throws IOException {
+    public void PayNow() throws IOException {
         if (checkoutBackingBean.getProducts().size() == 0)
             return;
         

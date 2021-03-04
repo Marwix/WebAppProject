@@ -2,9 +2,11 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>BigStore</title>
+        <title>Checkout</title>
         <link rel="stylesheet" href="resources/css/checkoutpagestyle.css"/>
+        <link rel="icon" href="resources/Images/shop.ico"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="icon" href="resources/Images/shop.ico"/>
     </h:head>
 
     <ui:decorate template="resources/template/topbar.xhtml">
@@ -156,7 +158,7 @@
 
                                 <br></br>
                                 <h:form>
-                                    <p:commandButton id="buttonStyle" type="submit" value="Pay now" styleClass="rounded-button" process="@this" action="#{checkoutController.addOrder()}" />   
+                                    <p:commandButton id="buttonStyle" type="submit" value="Pay now" styleClass="rounded-button" process="@this" action="#{checkoutController.PayNow()}" />   
                                 </h:form> 
                                 <div class="terms-conditions-text"><br></br>
                                     <p>
