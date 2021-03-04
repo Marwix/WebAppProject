@@ -32,8 +32,9 @@ public class CouponDAO extends AbstractDAO<Coupon>{
         return coupons;
     }
     
-    public void createCoupon(String couponCode, double salePercentage){
-        super.create(new Coupon(couponCode, 1-(salePercentage/100)));
+    public void createCoupon(String couponCode, int salePercentage){
+        // Ugly math for salePercentage to get "nicer" date
+        super.create(new Coupon(couponCode, ((double)(100-salePercentage))/100));
     }
     
     public void deleteCouponByCouponCode(String couponCode){
