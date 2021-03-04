@@ -16,3 +16,8 @@ Model: Contains the DAO (Data Access Objects) classes and the entities which are
 Service: Classes that perform a service for other parts of the program.
 
 Views: Contains the data needed for each web page.
+
+# Tests
+
+Located in WebAppProject/Assignment30/src/test/java/com/group3/Assignment30/model/
+divided into packages representing the files being tested.
