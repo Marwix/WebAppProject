@@ -107,6 +107,7 @@ public class CheckoutController implements Serializable {
         cartBackingBean.setCart(new HashMap<Product, Integer>());
         checkoutBackingBean.setProducts(new HashMap<Product, Integer>()); 
         priceMultiplier = 1;
+        checkoutBackingBean.getCoupon();
         
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.redirect(ec.getRequestContextPath() + "/" + "paymentResult.xhtml");
@@ -136,7 +137,7 @@ public class CheckoutController implements Serializable {
         List<Product> items = getKeyList();
         for (Product s : items)   
         {
-            totalPrice += s.getPrice();
+            totalPrice += s.getPrice() * getCount(s);
         }
         return totalPrice;
     }
@@ -153,21 +154,17 @@ public class CheckoutController implements Serializable {
                
                if (priceMultiplier < couponCodes.get(0).getPriceMultiplier()) {
                    priceMultiplier = couponCodes.get(0).getPriceMultiplier();
-                   System.out.println("Better code applied.");
                    sendNotification(FacesMessage.SEVERITY_INFO, "Better code applied!");
                }
            }
            else {
                priceMultiplier = couponCodes.get(0).getPriceMultiplier();
                sendNotification(FacesMessage.SEVERITY_INFO, "Coupon code applied!");
-               System.out.println("Coupon code applied.");
-               
            }  
         }
         else
         {
             sendNotification(FacesMessage.SEVERITY_INFO, "Not a valid code!");
-            System.out.println("Not a valid code. ");
         }
     }
     
@@ -180,7 +177,7 @@ public class CheckoutController implements Serializable {
     
     // Check if coupon is applied or not.
     public boolean CouponApplied() {
-        return priceMultiplier != 10; 
+        return priceMultiplier != 1; 
     }
     
     // Remove item from checkoutpage cart.
@@ -199,6 +196,9 @@ public class CheckoutController implements Serializable {
                 cartBackingBean.setCart(listOfItemsCart);
             }
         }
+        
+        priceMultiplier = 1;
+        checkoutBackingBean.setCoupon("");
         
         // Refresh
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
