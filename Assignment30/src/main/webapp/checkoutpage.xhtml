@@ -43,11 +43,18 @@
                                 <f:facet class="card-coupon" name="title">COUPON CODE:</f:facet>
                                 <div class="p-grid">
                                     <div class="p-col-12">
-                                        <label for="coupon" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Code: </label>
-                                        <p:inputText id="coupon" type="text" value="#{checkoutBackingBean.coupon}"/>
-                                        <p:commandButton id="couponButton" type="submit" process="@this" update="cart-Checkout" value="Apply" action="#{checkoutController.checkValidCoupon()}">
-                                            <f:param name="action" value="#{checkoutBackingBean.coupon}"/>
-                                        </p:commandButton>
+                                        <h:form>
+                                            <label for="coupon" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Code: </label>
+                                            <p:inputText id="coupon" type="text" value="#{checkoutBackingBean.coupon}">
+                                                <p:ajax event="input" update="couponButton" process="@this"/>
+                                            </p:inputText>
+                                            <p:commandButton type="submit" 
+                                                         id="couponButton" 
+                                                         process="@this" 
+                                                         value="Apply" 
+                                                         action="#{checkoutController.checkValidCoupon()}"/>
+                                            <p:messages id="msgs"/>
+                                        </h:form>
                                     </div>
                                 </div>
                             </p:card>
@@ -59,6 +66,7 @@
                                 <f:facet class="card-mail" name="title">EMAIL ADDRESS:</f:facet>
                                 <div class="p-grid">
                                     <div class="p-col-12">
+
                                         <label for="email" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Email: </label>
                                         <p:inputText id="email" type="text" value="#{checkoutBackingBean.email}"/>
                                     </div>
@@ -115,8 +123,6 @@
                                         </p:column>
                                         <p:column headerText="Amount">                            
                                             <h:outputText value="#{checkoutController.getCount(product)}"/>
-                                            <p:button icon="pi pi-chevron-up" styleClass="rounded-button ui-button-success "/>
-                                            <p:button icon="pi pi-chevron-down" styleClass="rounded-button ui-button-danger" />
                                         </p:column>
 
                                         <p:column headerText="Color">
@@ -128,7 +134,9 @@
                                         </p:column>
 
                                         <p:column>
-                                            <p:commandButton type="button" icon="pi pi-times" styleClass="ui-button-flat"/>
+                                            <p:commandButton type="submit" icon="pi pi-times" styleClass="ui-button-flat" process="@this" action="#{checkoutController.removeItemCart()}">
+                                                <f:param name="action" value="#{product.prodoct_id}"/>
+                                        </p:commandButton>
                                         </p:column>
                                     </p:dataTable>            
                                 </div>
@@ -140,8 +148,8 @@
                                 </h:form>
 
                                 <h:form rendered="#{checkoutController.CouponApplied()}">
-                                    <h3>Original price: $#{checkoutController.totalPrice}</h3>
-                                    <h3>Discount price: $#{checkoutController.totalPrice * checkoutController.priceMultiplier}</h3>
+                                    <h3>Original price: <strike><span id="original-price">$#{checkoutController.totalPrice}</span></strike></h3>
+                                    <h3>Discount price: <span id="discount-price">$#{checkoutController.totalPrice * checkoutController.priceMultiplier}</span></h3>
                                 </h:form>
 
                                 <br></br>
