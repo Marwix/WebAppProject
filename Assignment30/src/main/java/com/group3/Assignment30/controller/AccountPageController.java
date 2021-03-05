@@ -4,17 +4,13 @@ import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.dao.ProductDAO;
 import com.group3.Assignment30.model.dao.PurchaseDAO;
 import com.group3.Assignment30.model.entity.Customer;
-import com.group3.Assignment30.model.entity.Product;
-import com.group3.Assignment30.model.entity.Purchase;
 import com.group3.Assignment30.service.PasswordManager;
 import com.group3.Assignment30.views.AccountBackingBean;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -48,14 +44,9 @@ public class AccountPageController implements Serializable{
             List<Customer> customerInfo = customerDAO.getUserInformationByID(activeUserID);
 
             customer = customerInfo.get(0);
-
-            accountBackingBean.setEmail(customer.getEmail());
-            accountBackingBean.setFirstname(customer.getFirst_name());
-            accountBackingBean.setLastname(customer.getLast_name());
-            accountBackingBean.setPhonenumber(customer.getPhonenumber());
-            accountBackingBean.setCity(customer.getCity());
-            accountBackingBean.setZip(customer.getPostal_code());
-            accountBackingBean.setAddress(customer.getAdress());
+            
+            accountBackingBean.setCustomer(customer);
+           
             getOrderHistory();
         } catch (Exception e) {
         }
@@ -63,18 +54,12 @@ public class AccountPageController implements Serializable{
         
     }
     
+    //gets all information about the customer and sends it to customerDAO
     public void updateUserInformation() {
-        customer.setEmail(accountBackingBean.getEmail());
-        customer.setFirst_name(accountBackingBean.getFirstname());
-        customer.setLast_name(accountBackingBean.getLastname());
-        customer.setPhonenumber(accountBackingBean.getPhonenumber());
-        customer.setAdress(accountBackingBean.getAddress());
-        customer.setCity(accountBackingBean.getCity());
-        customer.setPostal_code(accountBackingBean.getZip());
-        
+
         //On email change return error if email is already taken
         try {
-            customerDAO.updateUserInformation(customer);
+            customerDAO.updateUserInformation(accountBackingBean.getCustomer());
         } catch (EJBException e) {
             if(e.toString().contains("duplicate key")){
                 System.out.println("dublicate Email");
