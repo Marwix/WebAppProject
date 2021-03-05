@@ -33,14 +33,6 @@
     width:50%;
 }
 
-span#original-price {
-    color: red;
-}
-
-span#discount-price {
-    color:green;
-}
-
 .center-layout h1 {
     color: white;
     justify-content:center;

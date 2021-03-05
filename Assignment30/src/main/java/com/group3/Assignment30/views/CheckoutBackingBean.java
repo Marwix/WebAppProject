@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package com.group3.Assignment30.views;
+
 import com.group3.Assignment30.model.entity.Product;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.validation.constraints.Email;
@@ -27,12 +29,4 @@ public class CheckoutBackingBean implements Serializable {
     @NotEmpty private String postcode;
     @NotEmpty private String phonenumber;
     private HashMap<Product,Integer> products;
-    
-    public void setCode(String code) {
-        this.coupon = code;
-    }
-    
-    public String getText() {
-        return coupon;
-    }
 }
