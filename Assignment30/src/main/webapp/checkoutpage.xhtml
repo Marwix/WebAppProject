@@ -47,7 +47,7 @@
                                     <div class="p-col-12">
                                         <h:form>
                                             <label for="coupon" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Code: </label>
-                                            <p:inputText id="coupon" type="text" value="#{checkoutBackingBean.coupon}">
+                                            <p:inputText id="coupon" type="text" value="#{checkoutBackingBean.coupon.couponCode}">
                                                 <p:ajax event="input" update="couponButton" process="@this"/>
                                             </p:inputText>
                                             <p:commandButton type="submit" 
@@ -71,7 +71,7 @@
                                     <div class="p-col-12">
 
                                         <label for="email" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Email: </label>
-                                        <p:inputText id="email" type="text" value="#{checkoutBackingBean.email}"/>
+                                        <p:inputText id="email" type="text" value="#{checkoutBackingBean.customer.email}"/>
                                     </div>
                                 </div>
                             </p:card>
@@ -86,27 +86,27 @@
                                         <div class="ui-fluid p-formgrid p-grid">
                                             <div class="p-field p-col-12 p-md-6">
                                                 <label for="firstname">Firstname:</label>
-                                                <p:inputText id="firstname" type="text" value="#{checkoutBackingBean.firstname}" />
+                                                <p:inputText id="firstname" type="text" value="#{checkoutBackingBean.customer.first_name}" />
                                             </div>
                                             <div class="p-field p-col-12 p-md-6">
                                                 <label for="lastname">Lastname:</label>
-                                                <p:inputText id="lastname" type="text" value="#{checkoutBackingBean.lastname}"/>
+                                                <p:inputText id="lastname" type="text" value="#{checkoutBackingBean.customer.last_name}"/>
                                             </div>
                                             <div class="p-field p-col-12 p-md-6">
                                                 <label for="address">Address:</label>
-                                                <p:inputText id="address" type="text" value="#{checkoutBackingBean.address}"/>
+                                                <p:inputText id="address" type="text" value="#{checkoutBackingBean.customer.adress}"/>
                                             </div>
                                             <div class="p-field p-col-12 p-md-6">
                                                 <label for="city">City:</label>
-                                                <p:inputText id="city" type="text" value="#{checkoutBackingBean.city}"/>
+                                                <p:inputText id="city" type="text" value="#{checkoutBackingBean.customer.city}"/>
                                             </div>
                                             <div class="p-field p-col-12 p-md-6">      
                                                 <label for="phonenumber">Phone number:</label>
-                                                <p:inputText id="phonenumber" type="text" value="#{checkoutBackingBean.phonenumber}"/>
+                                                <p:inputText id="phonenumber" type="text" value="#{checkoutBackingBean.customer.phonenumber}"/>
                                             </div>
                                             <div class="p-field p-col-12 p-md-6">
                                                 <label for="postcode">Postcode:</label>
-                                                <p:inputText id="postcode" type="text" value="#{checkoutBackingBean.postcode}"/>
+                                                <p:inputText id="postcode" type="text" value="#{checkoutBackingBean.customer.postal_code}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -118,14 +118,14 @@
                         <div class="card-tile" align="center">
                             <p:card id="cart-Checkout">
                                 <f:facet class="card-cart" name="title">CART:</f:facet>
+                                <h:form id="cart-update-form"> 
                                 <div class="p-grid">
-
-                                    <p:dataTable id="tableRowStyle" var="product" value="#{checkoutController.keyList}" showGridlines="true" styleClass="centeredColumnContent">
+                                    <p:dataTable id="tableRowStyle" var="product" value="#{checkoutBackingBean.keyList}" showGridlines="true" styleClass="centeredColumnContent">
                                         <p:column headerText="Items">
                                             <h:outputText value="#{product.product_name}" />
                                         </p:column>
                                         <p:column headerText="Amount">                            
-                                            <h:outputText value="#{checkoutController.getCount(product)}"/>
+                                            <h:outputText value="#{checkoutBackingBean.getCount(product)}"/>
                                         </p:column>
 
                                         <p:column headerText="Color">
@@ -133,11 +133,11 @@
                                         </p:column>
 
                                         <p:column headerText="Price">
-                                            <h:outputText value="#{product.price * checkoutController.getCount(product)}" />
+                                            <h:outputText value="#{product.price * checkoutBackingBean.getCount(product)}" />
                                         </p:column>
 
                                         <p:column>
-                                            <p:commandButton type="submit" icon="pi pi-times" styleClass="ui-button-flat" process="@this" action="#{checkoutController.removeItemCart()}">
+                                            <p:commandButton icon="pi pi-times" styleClass="ui-button-flat" process="@this" update="cart-update-form" action="#{checkoutController.removeItemCart()}" >
                                                 <f:param name="action" value="#{product.prodoct_id}"/>
                                         </p:commandButton>
                                         </p:column>
@@ -146,16 +146,16 @@
 
                                 <br></br>
                                 
-                                <h:form rendered="#{!checkoutController.CouponApplied()}">
-                                    <h3>Total to pay: $#{checkoutController.totalPrice}</h3>
+                                <h:form rendered="#{!checkoutBackingBean.CouponApplied()}">
+                                    <h3>Total to pay: $#{checkoutBackingBean.totalPrice}</h3>
                                 </h:form>
 
-                                <h:form rendered="#{checkoutController.CouponApplied()}">
-                                    <h3>Original price: <strike><span id="original-price">$#{checkoutController.totalPrice}</span></strike></h3>
+                                <h:form rendered="#{checkoutBackingBean.CouponApplied()}">
+                                    <h3>Original price: <strike><span id="original-price">$#{checkoutBackingBean.totalPrice}</span></strike></h3>
                                     <h3>Coupon code: #{checkoutBackingBean.coupon}</h3>
-                                    <h3>Discount price: <span id="discount-price">$#{checkoutController.totalPrice * checkoutController.priceMultiplier}</span></h3>
+                                    <h3>Discount price: <span id="discount-price">$#{checkoutBackingBean.totalPrice * checkoutBackingBean.coupon.priceMultiplier}</span></h3>
                                 </h:form>
-
+                            </h:form>
                                 <br></br>
                                 <h:form>
                                     <p:commandButton id="buttonStyle" type="submit" value="Pay now" styleClass="rounded-button" process="@this" action="#{checkoutController.payNow()}" />   
