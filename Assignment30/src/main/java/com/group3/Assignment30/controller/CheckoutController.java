@@ -111,7 +111,6 @@ public class CheckoutController implements Serializable {
         checkoutBackingBean.setProducts(new HashMap<Product, Integer>()); 
         priceMultiplier = 1;
         checkoutBackingBean.getCoupon(); 
-        cartController.setAmount(0);
         
         // Go to payment result and forward to product/main page again.
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
@@ -199,13 +198,10 @@ public class CheckoutController implements Serializable {
             {
                 listOfItemsCart.remove(product);
                 cartBackingBean.setCart(listOfItemsCart); 
-                //cartController.setAmount(cartController.amount() - getCount(product));
-                
             }
         }
         priceMultiplier = 1;
         checkoutBackingBean.setCoupon("");
-        cartController.setAmount(0);
         
         // Refresh current page.
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();

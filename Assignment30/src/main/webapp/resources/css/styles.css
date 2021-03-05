@@ -49,8 +49,8 @@ body {
 
 /* Logos */
 #logout-logo {
-    width: 2rem;
-    height: 2rem;
+    width: 2em;
+    height: 2em;
     color: #eeeeee;
 }
 
@@ -62,20 +62,20 @@ body {
 }
 
 #login-logo {
-  width: 2rem;
-  height: 2rem;
+  width: 2em;
+  height: 2em;
   margin-right: 4px;
 }
 
 #logo {
-  width: 2.625rem;
-  height: 2.625rem;
+  width: 2.625em;
+  height: 2.625em;
 }
 
 #cart-logo 
 {
-  width: 2rem;
-  height: 2rem;
+  width: 2em;
+  height: 2em;
   margin-bottom:2px;
 }
 /* -- */
