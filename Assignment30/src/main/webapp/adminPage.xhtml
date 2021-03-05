@@ -25,7 +25,7 @@
                         <div class="ui-fluid p-formgrid p-grid">
                             <div class="p-field p-col-12 p-md-3">
                                 <p:outputLabel for="product-name" value="Product and image name" />
-                                <p:inputText id="product-name" required="true" value="#{adminBackingBean.productName}">
+                                <p:inputText id="product-name" required="true" value="#{adminBackingBean.product.product_name}">
                                     <f:validateLength minimum="3" maximum="30"/>
                                 </p:inputText>
                                 <p:message for="product-name" display="both"/> 
@@ -33,7 +33,7 @@
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="product-price" value="Price" />
-                                <p:inputText id="product-price" type="number" required="true" value="#{adminBackingBean.price}">
+                                <p:inputText id="product-price" type="number" required="true" value="#{adminBackingBean.product.price}">
                                     <f:validateLength minimum="1" maximum="9" />
                                 </p:inputText>
                                 <p:message for="product-price" display="both"/>
@@ -41,13 +41,13 @@
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="stars" value="Stars (1-5)" />
-                                <p:inputText id="stars" required="true" type="number" value="#{adminBackingBean.stars}"/>
+                                <p:inputText id="stars" required="true" type="number" value="#{adminBackingBean.product.fullStar}"/>
                                 <p:message for="stars" display="both"/> 
                             </div>
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="productColor" value="Color" />
-                                <p:inputText id="productColor" required="true" value="#{adminBackingBean.color}">
+                                <p:inputText id="productColor" required="true" value="#{adminBackingBean.product.color}">
                                     <f:validateLength minimum="2" maximum="15" />
                                 </p:inputText>
                                 <p:message for="productColor" display="both"/> 
@@ -55,19 +55,19 @@
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="productMeasurements" value="Measurements (Width * Length * Height)" />
-                                <p:inputText id="productMeasurements" required="true" value="#{adminBackingBean.measurements}"/>
+                                <p:inputText id="productMeasurements" required="true" value="#{adminBackingBean.product.measurements}"/>
                                 <p:message for="productMeasurements" display="both"/> 
                             </div>
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="productWeight" value="Weight" />
-                                <p:inputText id="productWeight" required="true" value="#{adminBackingBean.weight}"/>
+                                <p:inputText id="productWeight" required="true" value="#{adminBackingBean.product.weight}"/>
                                 <p:message for="productWeight" display="both"/> 
                             </div>
 
                             <div class="p-field p-col-12 p-md-3">
                                 <p:outputLabel for="productDescription" value="Product description" />
-                                <p:inputText id="productDescription" required="true" value="#{adminBackingBean.description}"/>
+                                <p:inputText id="productDescription" required="true" value="#{adminBackingBean.product.description}"/>
                                 <p:message for="productDescription" display="both"/> 
                             </div>
 
@@ -84,7 +84,7 @@
                         <div class="ui-fluid p-formgrid p-grid">
                             <div class="p-field p-col-12 p-md-3">
                                 <p:outputLabel for="coupon-code" value="Coupon Code" />
-                                <p:inputText id="coupon-code" required="true" value="#{adminBackingBean.newCouponCode}">
+                                <p:inputText id="coupon-code" required="true" value="#{adminBackingBean.coupon.couponCode}">
                                     <f:validateLength minimum="2" maximum="10"/>
                                 </p:inputText>
                                 <p:message for="coupon-code" display="both"/> 
@@ -92,7 +92,7 @@
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="coupon-multiplier" value="Multiplier" />
-                                <p:inputNumber id="coupon-multiplier" required="true" symbol="%"  symbolPosition="s" value="#{adminBackingBean.newCouponMultiplier}" >
+                                <p:inputNumber id="coupon-multiplier" decimalPlaces="0" required="true" symbol="%"  symbolPosition="s" value="#{adminBackingBean.coupon.priceMultiplier}" >
                                     <f:validateDoubleRange minimum="1" maximum="100"/>
                                 </p:inputNumber>
                                 <p:message for="coupon-multiplier" display="both" showDetail="true"/>

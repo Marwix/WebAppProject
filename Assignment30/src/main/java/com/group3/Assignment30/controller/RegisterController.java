@@ -19,15 +19,13 @@ import lombok.Data;
 
 @Data
 @Named
-@SessionScoped
+@ViewScoped
 public class RegisterController implements Serializable{
     
     @Inject
     private RegisterBackingBean registerBackingBean;
     @Inject
     private LoginBackingBean loginBackingBean;
-    
-    private Customer customer;
     @EJB
     private CustomerDAO customerDAO;
     
@@ -35,38 +33,29 @@ public class RegisterController implements Serializable{
     
     
     public String onRegister(){
-        boolean emailTaken = customerDAO.checkRegistered(registerBackingBean.getEmail()).size()==1;
+        // Retrieve user and check if email in use
+        Customer newCustomer = registerBackingBean.getCustomer();
+        boolean emailTaken = customerDAO.checkRegistered(newCustomer.getEmail()).size()==1;
         
         if (emailTaken) {
+            // Move to message service class?
             FacesMessage message = new FacesMessage();
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
             message.setSummary("Email already in use.");
             FacesContext.getCurrentInstance().addMessage(null,message);
         }
-        customer = new Customer();
+        
+        //Hash and Salt password
+        // Turn PasswordManager to singleton/inject (?)
         PasswordManager pwManager = new PasswordManager();
-        List<byte[]> pw = pwManager.HashNSalt(registerBackingBean.getPassword());
+        List<byte[]> pw = pwManager.HashNSalt(newCustomer.getPassword());
+        newCustomer.setPassword(pwManager.passwordByteArrToString(pw.get(1)));
+        newCustomer.setSalt(pw.get(0));
         
-        customer.setFirst_name(registerBackingBean.getFirstname());
-        customer.setLast_name(registerBackingBean.getLastname());
-        customer.setEmail(registerBackingBean.getEmail());
-        customer.setPassword(pwManager.passwordByteArrToString(pw.get(1)));
-        customer.setSalt(pw.get(0));
-        customer.setPhonenumber(registerBackingBean.getPhonenumber());
-        customer.setCity(registerBackingBean.getCity());
-        customer.setAdress(registerBackingBean.getAddress());
-        customer.setPostal_code(registerBackingBean.getZip());
+        //Add user to DB
+        customerDAO.create(newCustomer);
         
-        customerDAO.create(customer);
-        
-        System.out.println(registerBackingBean.getLastname());
-        System.out.println(registerBackingBean.getEmail());
-        System.out.println(registerBackingBean.getFirstname());
-        System.out.println(registerBackingBean.getPassword());
-        System.out.println(registerBackingBean.getZip());
-        System.out.println(registerBackingBean.getAddress());
-        System.out.println(registerBackingBean.getCity());
-        sessionContextController.setAttribute("user_id", customer.getUser_id());
+        sessionContextController.setAttribute("user_id", newCustomer.getUser_id());
         loginBackingBean.setLoggedin(true);
         
         return "homepage";
