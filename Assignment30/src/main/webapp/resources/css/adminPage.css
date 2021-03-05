@@ -5,6 +5,14 @@
   align-content: center;
 }
 
+.class-s {
+    padding: 0px;
+}
+
+.col-lg-12.col-md-12.col-sm-12 {
+    padding: 0;
+}
+
 .accountInfoFormStyle {
   margin-top: 2%;
   padding: 1rem 5rem;
@@ -13,7 +21,6 @@
   background-color: rgb(15, 76, 117);
   color: #eeeeee;
   border-radius: 10px;
-  
 }
 
 .buttonPadding {

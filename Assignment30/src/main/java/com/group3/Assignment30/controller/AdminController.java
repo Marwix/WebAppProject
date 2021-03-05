@@ -124,6 +124,13 @@ public class AdminController implements Serializable{
     }
     
     public void addCoupon(){
+        System.out.println(adminBackinBean.getNewCouponMultiplier());
+        for (Coupon c: adminBackinBean.getCouponList()){
+            if(c.getCouponCode().equals(adminBackinBean.getNewCouponCode())){
+                sendWarning(FacesMessage.SEVERITY_ERROR,"Coupon code already used!");
+                return;
+            }
+        }
         couponDAO.createCoupon(adminBackinBean.getNewCouponCode(), adminBackinBean.getNewCouponMultiplier());
         refreshCoupons();
     }
