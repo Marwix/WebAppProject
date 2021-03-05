@@ -85,27 +85,27 @@
                                     <div class="p-col-12">
                                         <div class="ui-fluid p-formgrid p-grid">
                                             <div class="p-field p-col-12 p-md-6">
-                                                <label for="firstname">Firstname</label>
+                                                <label for="firstname">Firstname:</label>
                                                 <p:inputText id="firstname" type="text" value="#{checkoutBackingBean.firstname}" />
                                             </div>
                                             <div class="p-field p-col-12 p-md-6">
-                                                <label for="lastname">Lastname</label>
+                                                <label for="lastname">Lastname:</label>
                                                 <p:inputText id="lastname" type="text" value="#{checkoutBackingBean.lastname}"/>
                                             </div>
                                             <div class="p-field p-col-12 p-md-6">
-                                                <label for="address">Address</label>
+                                                <label for="address">Address:</label>
                                                 <p:inputText id="address" type="text" value="#{checkoutBackingBean.address}"/>
                                             </div>
                                             <div class="p-field p-col-12 p-md-6">
-                                                <label for="city">City</label>
+                                                <label for="city">City:</label>
                                                 <p:inputText id="city" type="text" value="#{checkoutBackingBean.city}"/>
                                             </div>
                                             <div class="p-field p-col-12 p-md-6">      
-                                                <label for="phonenumber">Phone number</label>
+                                                <label for="phonenumber">Phone number:</label>
                                                 <p:inputText id="phonenumber" type="text" value="#{checkoutBackingBean.phonenumber}"/>
                                             </div>
                                             <div class="p-field p-col-12 p-md-6">
-                                                <label for="postcode">Postcode</label>
+                                                <label for="postcode">Postcode:</label>
                                                 <p:inputText id="postcode" type="text" value="#{checkoutBackingBean.postcode}"/>
                                             </div>
                                         </div>
@@ -158,7 +158,7 @@
 
                                 <br></br>
                                 <h:form>
-                                    <p:commandButton id="buttonStyle" type="submit" value="Pay now" styleClass="rounded-button" process="@this" action="#{checkoutController.PayNow()}" />   
+                                    <p:commandButton id="buttonStyle" type="submit" value="Pay now" styleClass="rounded-button" process="@this" action="#{checkoutController.payNow()}" />   
                                 </h:form> 
                                 <div class="terms-conditions-text"><br></br>
                                     <p>

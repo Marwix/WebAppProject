@@ -14,8 +14,8 @@ body {
 }
 
 .top-bar {
-  height: 7rem;
-  width: 100%;
+  height: 112px !important;
+  width: 100% !important;
   background: rgb(15, 76, 117);
   background: linear-gradient(
     0deg,
@@ -68,8 +68,8 @@ body {
 }
 
 #logo {
-  width: 3rem;
-  height: 3rem;
+  width: 2.625rem;
+  height: 2.625rem;
 }
 
 #cart-logo 
@@ -90,8 +90,10 @@ body {
 }
 
 .cart-notification h6 {
+  border-radius: 50%;
   text-align: center;
   font-size: small;
+  background-color:red;
 }
 
 .logo-link {

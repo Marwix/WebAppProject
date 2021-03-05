@@ -37,6 +37,9 @@ public class CheckoutController implements Serializable {
     private CheckoutBackingBean checkoutBackingBean;
     
     @Inject
+    private CartController cartController;
+    
+    @Inject
     private CartBackingBean cartBackingBean;
     
     private int activeUserID;
@@ -85,7 +88,7 @@ public class CheckoutController implements Serializable {
         }     
     } 
     
-    public void PayNow() throws IOException {
+    public void payNow() throws IOException {
         if (checkoutBackingBean.getProducts().size() == 0)
             return;
         
@@ -94,7 +97,7 @@ public class CheckoutController implements Serializable {
         
         for (Product product : listOfProducts.keySet()) {
             Purchase purchase = new Purchase();
-            
+           
             purchase.setOrder_id(orderidForThisPurchase);
             purchase.setCustomer(customer);
             purchase.setProducts(product);
@@ -103,11 +106,14 @@ public class CheckoutController implements Serializable {
             purchaseDAO.create(purchase);
         }
         
+        // Reset states.
         cartBackingBean.setCart(new HashMap<Product, Integer>());
         checkoutBackingBean.setProducts(new HashMap<Product, Integer>()); 
         priceMultiplier = 1;
-        checkoutBackingBean.getCoupon();
+        checkoutBackingBean.getCoupon(); 
+        cartController.setAmount(0);
         
+        // Go to payment result and forward to product/main page again.
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.redirect(ec.getRequestContextPath() + "/" + "paymentResult.xhtml");
     }
@@ -167,6 +173,7 @@ public class CheckoutController implements Serializable {
         }
     }
     
+    // Send message about invalid input.
     public void sendNotification(FacesMessage.Severity severity, String message){
             FacesMessage fMessage = new FacesMessage();
             fMessage.setSeverity(severity);
@@ -186,20 +193,21 @@ public class CheckoutController implements Serializable {
         String id = params.get("action");
        
         HashMap<Product,Integer> listOfItemsCart = cartBackingBean.getCart();
-        
         for (Product product : listOfItemsCart.keySet())
         {
             if (product.getProdoct_id() == Integer.parseInt(id))
             {
                 listOfItemsCart.remove(product);
-                cartBackingBean.setCart(listOfItemsCart);
+                cartBackingBean.setCart(listOfItemsCart); 
+                //cartController.setAmount(cartController.amount() - getCount(product));
+                
             }
         }
-        
         priceMultiplier = 1;
         checkoutBackingBean.setCoupon("");
+        cartController.setAmount(0);
         
-        // Refresh
+        // Refresh current page.
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.redirect(((HttpServletRequest)ec.getRequest()).getRequestURI());
     }
