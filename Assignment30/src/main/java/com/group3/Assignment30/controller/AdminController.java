@@ -11,6 +11,7 @@ import com.group3.Assignment30.model.dao.ProductDAO;
 import com.group3.Assignment30.model.entity.Coupon;
 import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.model.entity.Product;
+import com.group3.Assignment30.service.MessageCenter;
 import com.group3.Assignment30.views.AdminBackingBean;
 import java.io.Serializable;
 import java.util.List;
@@ -71,67 +72,49 @@ public class AdminController implements Serializable{
         return customerInfo.get(0).isAdminAccess();
     }
     
-    public void clearForm(){
-        
-        adminBackinBean.setProductName("");
-        adminBackinBean.setPrice(0);
-        adminBackinBean.setStars(0);
-        adminBackinBean.setColor("");
-        adminBackinBean.setMeasurements("");
-        adminBackinBean.setWeight("");
-        adminBackinBean.setDescription("");
-        
-    }
+    
     
     public void addProduct(){
-        Product product = new Product();
-        product.setProduct_name(adminBackinBean.getProductName());
+        Product product = adminBackinBean.getProduct();
         
-        if (adminBackinBean.getPrice() <= 0){
-            sendWarning(FacesMessage.SEVERITY_ERROR, "Price must be >0");
+        if (product.getPrice() <= 0){
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Price must be >0", "productForm:product-price");
             return;
         }
-        product.setPrice(adminBackinBean.getPrice());
         
-        if (adminBackinBean.getStars() < 1 || adminBackinBean.getStars() > 5 ) {
-            sendWarning(FacesMessage.SEVERITY_ERROR, "Stars must be within 1-5 range");
+        if (product.getFullStar() < 1 || product.getFullStar() > 5 ) {
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Stars must be between 1-5 (inclusive)", "productForm:stars");
             return;
         }
-        product.setFullStar(adminBackinBean.getStars());
-        
-        product.setColor(adminBackinBean.getColor());
-        product.setMeasurements(adminBackinBean.getMeasurements());
-        product.setWeight(adminBackinBean.getWeight());
-        product.setDescription(adminBackinBean.getDescription());
         
         if (productExists(product)){
-            sendWarning(FacesMessage.SEVERITY_ERROR, "Product already exists in database");
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Product already exists in database");
             return;
         }
         
         try {
             productDAO.create(product);
-            sendWarning(FacesMessage.SEVERITY_INFO, "Successfully added product to database");
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_INFO, "Successfully added product to database");
             
         } catch (Exception e) {
-            sendWarning(FacesMessage.SEVERITY_FATAL, "Error while adding product");
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_FATAL, "Error while adding product");
             System.out.println("###########################################");
-            System.out.println("ERROR ENCOUNTERED IN AdminController ROW 101");
+            System.out.println("ERROR ENCOUNTERED IN AdminController");
             System.out.println("###########################################");
             e.printStackTrace();
         }
-        clearForm();
+        adminBackinBean.setProduct(new Product());
     }
     
     public void addCoupon(){
-        System.out.println(adminBackinBean.getNewCouponMultiplier());
         for (Coupon c: adminBackinBean.getCouponList()){
-            if(c.getCouponCode().equals(adminBackinBean.getNewCouponCode())){
-                sendWarning(FacesMessage.SEVERITY_ERROR,"Coupon code already used!");
+            if(c.getCouponCode().equals(adminBackinBean.getCoupon().getCouponCode())){
+                MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Coupon code already used!");
                 return;
             }
         }
-        couponDAO.createCoupon(adminBackinBean.getNewCouponCode(), adminBackinBean.getNewCouponMultiplier());
+        // Intentionally ugly to get prettier DB values
+        couponDAO.createCoupon(adminBackinBean.getCoupon().getCouponCode(), (int) adminBackinBean.getCoupon().getPriceMultiplier());
         refreshCoupons();
     }
     
@@ -142,13 +125,6 @@ public class AdminController implements Serializable{
         
         couponDAO.deleteCouponByCouponCode(couponCode);
         refreshCoupons();
-    }
-    
-    private void sendWarning(FacesMessage.Severity severity, String message){
-            FacesMessage fMessage = new FacesMessage();
-            fMessage.setSeverity(severity);
-            fMessage.setSummary(message);
-            FacesContext.getCurrentInstance().addMessage(null,fMessage);
     }
     
     private boolean productExists(Product product){

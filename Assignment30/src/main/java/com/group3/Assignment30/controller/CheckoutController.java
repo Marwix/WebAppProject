@@ -7,13 +7,11 @@ import com.group3.Assignment30.model.entity.Coupon;
 import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.model.entity.Purchase;
-import com.group3.Assignment30.views.CartBackingBean;
 import com.group3.Assignment30.views.CheckoutBackingBean;
 import java.io.IOException;
 import javax.faces.context.ExternalContext;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +22,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import lombok.Data;
-import org.primefaces.PrimeFaces;
 
 @Data
 @Named
@@ -36,13 +32,9 @@ public class CheckoutController implements Serializable {
     @Inject
     private CheckoutBackingBean checkoutBackingBean;
     
-    @Inject
-    private CartController cartController;
-    
-    @Inject
-    private CartBackingBean cartBackingBean;
     
     private int activeUserID;
+    
     private SessionContextController sessionContextController = SessionContextController.getInstance();
     
     @EJB
@@ -58,8 +50,8 @@ public class CheckoutController implements Serializable {
     private PurchaseDAO purchaseDAO;
     
     private Customer customer;
-    private double priceMultiplier = 1;
     
+    //loads customer info and sends it to backingbean
     @PostConstruct
     public void init() 
     {
@@ -68,108 +60,74 @@ public class CheckoutController implements Serializable {
             List<Customer> customerInfo = customerDAO.getUserInformationByID(activeUserID);
 
             customer = customerInfo.get(0);
-            checkoutBackingBean.setEmail(customer.getEmail());
-            checkoutBackingBean.setFirstname(customer.getFirst_name());
-            checkoutBackingBean.setLastname(customer.getLast_name());
-            checkoutBackingBean.setAddress(customer.getAdress());
-            checkoutBackingBean.setCity(customer.getCity());
-            checkoutBackingBean.setPostcode(customer.getPostal_code());
-            checkoutBackingBean.setLastname(customer.getLast_name());
-            checkoutBackingBean.setPhonenumber(customer.getPhonenumber());
             
-            // Add test data to grid table
-            HashMap<Product,Integer> listProducts = cartBackingBean.getCart();
-            checkoutBackingBean.setProducts(listProducts);     
+            //setting customer in checkout to correct info
+            checkoutBackingBean.setCustomer(customer);
+   
         } 
         catch (NullPointerException e) 
         {
-           HashMap<Product,Integer> listProducts = new HashMap<Product,Integer>();
-            checkoutBackingBean.setProducts(listProducts);   
+             
         }     
     } 
     
-    public void payNow() throws IOException {
-        if (checkoutBackingBean.getProducts().size() == 0)
-            return;
+   public void payNow() throws IOException {
+       
+       HashMap<Product,Integer> cartInventory = checkoutBackingBean.getCart().getCartInventory();
+       
+       if (cartInventory.isEmpty())
+           return;
+       
+
+       
+      int orderidForThisPurchase = purchaseDAO.getMaxOrderID() + 1;
         
-        HashMap<Product,Integer> listOfProducts = checkoutBackingBean.getProducts();
-        int orderidForThisPurchase = purchaseDAO.getMaxOrderID() + 1;
-        
-        for (Product product : listOfProducts.keySet()) {
-            Purchase purchase = new Purchase();
-           
-            purchase.setOrder_id(orderidForThisPurchase);
-            purchase.setCustomer(customer);
-            purchase.setProducts(product);
-            purchase.setTime(LocalDate.now());
-            purchase.setCount(listOfProducts.get(product));
-            purchaseDAO.create(purchase);
-        }
-        
-        // Reset states.
-        cartBackingBean.setCart(new HashMap<Product, Integer>());
-        checkoutBackingBean.setProducts(new HashMap<Product, Integer>()); 
-        priceMultiplier = 1;
-        checkoutBackingBean.getCoupon(); 
-        
-        // Go to payment result and forward to product/main page again.
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(ec.getRequestContextPath() + "/" + "paymentResult.xhtml");
+       for (Product product : cartInventory.keySet()) {
+          Purchase purchase = new Purchase();
+          
+          purchase.setOrder_id(orderidForThisPurchase);
+          if(checkoutBackingBean.CouponApplied()){
+           purchase.setPrice(product.getPrice() * checkoutBackingBean.getCoupon().getPriceMultiplier());
+          }else{
+              purchase.setPrice(product.getPrice());
+          }
+          purchase.setCustomer(customer);
+          purchase.setProducts(product);
+          purchase.setTime(LocalDate.now());
+          purchase.setCount(cartInventory.get(product));
+          purchaseDAO.create(purchase);
+      }
+       
+      // Reset states.
+      if(checkoutBackingBean.resetCartAndCoupon()){
+          // Go to payment result and forward to product/main page again.
+          ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+          ec.redirect(ec.getRequestContextPath() + "/" + "paymentResult.xhtml");
+      }
     }
     
-    // Retrieve all items added to cart and display them at checkout.
-    public List<Product> getKeyList()
-    {  try {
-            
-        return new ArrayList<>(checkoutBackingBean.getProducts().keySet());
-        } catch (NullPointerException e) {
-            return new ArrayList<Product>();
-        }
-    }
   
-    // Count the number of products available. 
-    public int getCount(Product product)
-    {
-        HashMap<Product,Integer> listOfProducts = checkoutBackingBean.getProducts();
-        return listOfProducts.get(product);
-    }
-    
-    // Add price of all items in cart and return total.
-    public double getTotalPrice()
-    {
-        double totalPrice = 0;
-        List<Product> items = getKeyList();
-        for (Product s : items)   
-        {
-            totalPrice += s.getPrice() * getCount(s);
-        }
-        return totalPrice;
-    }
-    
-    // Check if coupon code is valid.
+   // Check if coupon code is valid.
     public void checkValidCoupon()
     {
-        String code = checkoutBackingBean.getCoupon();
+        String code = checkoutBackingBean.getCoupon().getCouponCode();
         
-        List<Coupon> couponCodes = couponDAO.getCouponByCode(code);
-        if (couponCodes.size() > 0)   
+        List<Coupon> couponCode = couponDAO.getCouponByCode(code);
+        
+        if (couponCode.size() > 0)   
         {
-           if (priceMultiplier != 1) {
-               
-               if (priceMultiplier < couponCodes.get(0).getPriceMultiplier()) {
-                   priceMultiplier = couponCodes.get(0).getPriceMultiplier();
-                   sendNotification(FacesMessage.SEVERITY_INFO, "Better code applied!");
-               }
-           }
-           else {
-               priceMultiplier = couponCodes.get(0).getPriceMultiplier();
-               sendNotification(FacesMessage.SEVERITY_INFO, "Coupon code applied!");
-           }  
-        }
-        else
-        {
+           String confirm =  checkoutBackingBean.applyCoupon(couponCode);
+            if (confirm.equals("Coupon code applied!")) {
+                sendNotification(FacesMessage.SEVERITY_INFO, "Coupon code applied!");
+            }else if (confirm.equals("Better code applied!")) {
+                sendNotification(FacesMessage.SEVERITY_INFO, "Better code applied!");
+            }
+           
+           
+        }else{
             sendNotification(FacesMessage.SEVERITY_INFO, "Not a valid code!");
         }
+
     }
     
     // Send message about invalid input.
@@ -180,31 +138,17 @@ public class CheckoutController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null,fMessage);
     }
     
-    // Check if coupon is applied or not.
-    public boolean CouponApplied() {
-        return priceMultiplier != 1; 
-    }
     
     // Remove item from checkoutpage cart.
     public void removeItemCart() throws IOException {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        Map<String,String> params = facesContext.getExternalContext().getRequestParameterMap();
+       Map<String,String> params = facesContext.getExternalContext().getRequestParameterMap();
         String id = params.get("action");
        
-        HashMap<Product,Integer> listOfItemsCart = cartBackingBean.getCart();
-        for (Product product : listOfItemsCart.keySet())
-        {
-            if (product.getProdoct_id() == Integer.parseInt(id))
-            {
-                listOfItemsCart.remove(product);
-                cartBackingBean.setCart(listOfItemsCart); 
-            }
-        }
-        priceMultiplier = 1;
-        checkoutBackingBean.setCoupon("");
-        
-        // Refresh current page.
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(((HttpServletRequest)ec.getRequest()).getRequestURI());
-    }
+        List<Product> product = productDAO.getProductByID(Integer.parseInt(id));
+         //send the product id to remove from cart
+        checkoutBackingBean.removeItemCart(product.get(0));
+       
+   }
+    
 }

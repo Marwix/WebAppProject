@@ -47,7 +47,7 @@ and open the template in the editor.
                                 <div class="ui-fluid p-formgrid p-grid">
                                     <div class="p-field p-col-12 p-md-3">
                                         <p:outputLabel for="email" value="Email" />
-                                        <p:inputText id="email" required="true" value="#{registerBackingBean.email}" validatorMessage="The provided email is not using a valid email format">
+                                        <p:inputText id="email" required="true" value="#{registerBackingBean.customer.email}" validatorMessage="The provided email is not using a valid email format">
                                             <f:validateRegex pattern="[a-z0-9][-a-z0-9._]+@([-a-z0-9]+[.])+[a-z]{2,5}$"/>
                                         </p:inputText>
                                             <p:message for="email" display="both"/> 
@@ -56,7 +56,7 @@ and open the template in the editor.
                                     <div class="p-field  p-col-12 p-md-3">
                                         <p:outputLabel for="pwd1" styleClass="p-col-fixed" style="width:100px" value="Password"/>
                                         <div class="p-col">
-                                            <p:password id="pwd1" feedback="true" match="pwd2" validatorMessage="Passwords do not match!" label="Password 1" required="true" value="#{registerBackingBean.password}">
+                                            <p:password id="pwd1" feedback="true" match="pwd2" validatorMessage="Passwords do not match!" label="Password 1" required="true" value="#{registerBackingBean.customer.password}">
                                                 <f:validateLength minimum="6" maximum="20"/>
                                             </p:password>
                                         </div>
@@ -66,7 +66,7 @@ and open the template in the editor.
                                     <div class="p-field  p-col-12 p-md-3">
                                         <p:outputLabel for="pwd2" styleClass="p-col-fixed" style="width:100px" value="Password"/>
                                         <div class="p-col">
-                                            <p:password id="pwd2" value="#{registerBackingBean.password}" label="Password 2" required="true">
+                                            <p:password id="pwd2" value="#{registerBackingBean.customer.password}" label="Password 2" required="true">
                                                 <f:validateLength minimum="6" maximum="20"/>
                                             </p:password>
                                             
@@ -76,42 +76,42 @@ and open the template in the editor.
                                     </div>
                                     <div class="p-field  p-col-12 p-md-3">
                                         <p:outputLabel for="firstname" value="Firstname" />
-                                        <p:inputText id="firstname" required="true" value="#{registerBackingBean.firstname}">
+                                        <p:inputText id="firstname" required="true" value="#{registerBackingBean.customer.first_name}">
                                             <f:validateLength minimum="2" maximum="50" />
                                         </p:inputText>
                                         <p:message for="firstname" display="both"/> 
                                     </div>
                                     <div class="p-field  p-col-12 p-md-3">
                                         <p:outputLabel for="lastname" value="Lastname" />
-                                        <p:inputText id="lastname" required="true" value="#{registerBackingBean.lastname}">
+                                        <p:inputText id="lastname" required="true" value="#{registerBackingBean.customer.last_name}">
                                             <f:validateLength minimum="2" maximum="50" />
                                         </p:inputText>
                                         <p:message for="lastname" display="both"/> 
                                     </div>
                                     <div class="p-field  p-col-12 p-md-3">
                                         <p:outputLabel for="phonenumber" value="Phonenumber" />
-                                        <p:inputText id="phonenumber" type="number" required="true" value="#{registerBackingBean.phonenumber}">
+                                        <p:inputText id="phonenumber" type="number" required="true" value="#{registerBackingBean.customer.phonenumber}">
                                             <f:validateLength minimum="8" maximum="20" />
                                         </p:inputText>
                                         <p:message for="phonenumber" display="both"/> 
                                     </div>
                                     <div class="p-field  p-col-12 p-md-3">
                                         <p:outputLabel for="address" value="Address" />
-                                        <p:inputText id="address" required="true" value="#{registerBackingBean.address}">
+                                        <p:inputText id="address" required="true" value="#{registerBackingBean.customer.adress}">
                                             <f:validateLength minimum="5" maximum="100" />
                                         </p:inputText>
                                         <p:message for="address" display="both"/> 
                                     </div>
                                     <div class="p-field  p-col-12 p-md-3">
                                         <p:outputLabel for="city" value="City" />
-                                        <p:inputText id="city" required="true" value="#{registerBackingBean.city}">
+                                        <p:inputText id="city" required="true" value="#{registerBackingBean.customer.city}">
                                             <f:validateLength minimum="2" maximum="100" />
                                         </p:inputText>
                                         <p:message for="city" display="both"/> 
                                     </div>
                                     <div class="p-field p-col-12 p-md-3">
                                         <p:outputLabel for="zip" value="Zip" />
-                                        <p:inputText id="zip" type="number" required="true" value="#{registerBackingBean.zip}">
+                                        <p:inputText id="zip" type="number" required="true" value="#{registerBackingBean.customer.postal_code}">
                                             <f:validateLength minimum="5" maximum="5" />
                                         </p:inputText>
                                         <p:message for="zip" display="both"/> 
