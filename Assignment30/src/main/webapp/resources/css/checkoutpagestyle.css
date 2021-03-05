@@ -30,7 +30,19 @@
 
 #tableRowStyle {
     text-align:center;
-    width:50%;
+    width:75%;
+}
+
+#tableRowStyle * {
+    text-align:center;
+}
+
+span#original-price {
+    color: red;
+}
+
+span#discount-price {
+    color:green;
 }
 
 .center-layout h1 {

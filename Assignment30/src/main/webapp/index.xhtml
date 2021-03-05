@@ -2,7 +2,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>TODO supply a title</title>
+        <link rel="icon" href="resources/Images/shop.ico"/>
+        <title>Products</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <h:outputStylesheet name="css/primeflex/primeflex.min.css" />
         <h:outputStylesheet name="css/primeflex/dataView.css" />
@@ -67,6 +68,7 @@
                                                                  action="#{cartController.addToCart()}"
                                                                  value="Add To Cart"
                                                                  icon="pi pi-shopping-cart">
+                                                     
                                                      <f:param name="action" value="#{product.prodoct_id}" />
                                                 </p:commandButton>
                                                 

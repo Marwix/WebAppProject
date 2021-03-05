@@ -16,7 +16,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="resources/css/normalize.css" />
     <link rel="stylesheet" href="resources/css/styles.css" />
-    
 
    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   </h:head>
@@ -37,20 +36,18 @@
                           <b class="title"> BigStore </b>
                           <!-- TODO: Change to h1 -->
                       </a>
-                      <a href="index.xhtml">
-                          <b class="producttitletext"> Products </b>
-                      </a>
                   </div>
 
                   <div class="cart-button">
 
                       <!-- Amount of items in cart-->
                       <div class="cart-notification">
-                          <h6></h6>
+                          <h6>#{cartController.amount}</h6>
                       </div>
 
                       <!-- Account page-->
                       <a href="accountPage.xhtml"><img id="login-logo" src="resources/Images/profile.png" alt="accountpage button"/></a>
+                      <a href="index.xhtml"><img id="products-logo" src="resources/Images/products.png" alt="Products button"/></a>
                       
                       <ui:fragment rendered="#{loginBackingBean.loggedin}">
                       <!-- Login page -->

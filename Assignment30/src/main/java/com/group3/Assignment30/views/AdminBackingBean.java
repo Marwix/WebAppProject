@@ -27,7 +27,7 @@ public class AdminBackingBean implements Serializable{
     @NotEmpty private String description;
     
     @NotEmpty private String newCouponCode;
-    private double newCouponMultiplier;
+    private int newCouponMultiplier;
     
     List<Product> productList;
     List<Coupon> couponList;
