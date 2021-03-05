@@ -21,10 +21,5 @@ public class CartBackingBean implements Serializable{
     private int id;
     private int uniqueItems;
     
-    public int getAmount() {
-        for (Product s : cart.keySet()) {
-            
-        }
-        return 0;
-    }
+    
 }

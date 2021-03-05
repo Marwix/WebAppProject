@@ -7,15 +7,26 @@ body {
   margin: -1rem;
   overflow-x: hidden;
 }
-
 /*Top bar*/
+#logo {
+  width: 3rem;
+  height: 3rem;
+}
+
+#cart-logo 
+{
+  width: 2rem;
+  height: 2rem;
+  margin-bottom:px;
+}
+
 .title {
   color: #eeeeee;
 }
 
 .top-bar {
-  height: 112px !important;
-  width: 100% !important;
+  height: 7rem;
+  width: 100%;
   background: rgb(15, 76, 117);
   background: linear-gradient(
     0deg,
@@ -24,7 +35,6 @@ body {
   );
   position: relative;
   animation: topanim 4s infinite;
-  font-size:16px;
 }
 
 .logo-and-text {
@@ -46,39 +56,14 @@ body {
   right: 5%;
   top: 45%;
 }
-
-/* Logos */
 #logout-logo {
-    width: 2em;
-    height: 2em;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 10px;
     color: #eeeeee;
+    
 }
 
-#products-logo {
-    width: 28px;
-    height: 28px;
-    margin-right: 4px;
-    color: #eeeeee;
-}
-
-#login-logo {
-  width: 2em;
-  height: 2em;
-  margin-right: 4px;
-}
-
-#logo {
-  width: 2.625em;
-  height: 2.625em;
-}
-
-#cart-logo 
-{
-  width: 2em;
-  height: 2em;
-  margin-bottom:2px;
-}
-/* -- */
 
 .cart-notification {
   position: absolute;
@@ -90,15 +75,20 @@ body {
 }
 
 .cart-notification h6 {
-  border-radius: 50%;
   text-align: center;
   font-size: small;
-  background-color:red;
 }
 
 .logo-link {
   text-decoration: none;
   color: black;
+}
+
+
+#login-logo {
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-right: 10px;
 }
 
 

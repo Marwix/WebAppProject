@@ -7,8 +7,6 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <link rel="stylesheet" href="resources/css/adminPage.css" />
-    <title>Admin</title>
-    <link rel="icon" href="resources/Images/shop.ico"/>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <ui:decorate template="resources/template/topbar.xhtml">
@@ -92,15 +90,15 @@
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="coupon-multiplier" value="Multiplier" />
-                                <p:inputNumber id="coupon-multiplier" required="true" symbol="%"  symbolPosition="s" value="#{adminBackingBean.newCouponMultiplier}" >
+                                <p:inputNumber id="coupon-multiplier" required="true" symbol="%" symbolPosition="s" value="#{adminBackingBean.price}" >
                                     <f:validateDoubleRange minimum="1" maximum="100"/>
                                 </p:inputNumber>
-                                <p:message for="coupon-multiplier" display="both" showDetail="true"/>
+                                <p:message for="coupon-multiplier" display="both"/>
                             </div>
                             
                             <br/>
                             <p:messages id="msgs"/> 
-                            <p:commandButton type="submit" value="Add coupon" update="couponTable @form" styleClass="rounded-button" action="#{adminController.addCoupon()}" />
+                            <p:commandButton type="submit" value="Add coupon" update="couponTable" styleClass="rounded-button" action="#{adminController.addCoupon()}" />
 
                         </div>
                     </h:form>
@@ -114,6 +112,7 @@
                         </p:column>
 
                         <p:column headerText=" ">
+                            <p:messages id="msgs"/>
                             <p:commandButton process="@this" update="couponTable" icon="pi pi-times" styleClass="rounded-button ui-button-danger" action="#{adminController.removeCoupon()}">
                                 <f:param name="action" value="#{coupon.couponCode}"/>
                             </p:commandButton>
