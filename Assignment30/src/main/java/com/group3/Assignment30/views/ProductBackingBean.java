@@ -16,21 +16,6 @@ import lombok.Data;
 public class ProductBackingBean implements Serializable {
     
     
-    private int id;
-
-    @NotEmpty private String product_name;
-    private int price;
-   
-    private int fullStar;
-
-    @NotEmpty private String color;
-    @NotEmpty private String height;
-    @NotEmpty private String width;
-    @NotEmpty private String length;
-    @NotEmpty private String weight;
-    @NotEmpty private String value;
-    @NotEmpty private String description;
-    
     @NotEmpty private List<Product> products; 
     
 }
