@@ -11,6 +11,7 @@ import com.group3.Assignment30.model.dao.ProductDAO;
 import com.group3.Assignment30.model.entity.Coupon;
 import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.model.entity.Product;
+import com.group3.Assignment30.service.MessageCenter;
 import com.group3.Assignment30.views.AdminBackingBean;
 import java.io.Serializable;
 import java.util.List;
@@ -77,26 +78,26 @@ public class AdminController implements Serializable{
         Product product = adminBackinBean.getProduct();
         
         if (product.getPrice() <= 0){
-            sendWarning(FacesMessage.SEVERITY_ERROR, "Price must be >0");
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Price must be >0", "productForm:product-price");
             return;
         }
         
         if (product.getFullStar() < 1 || product.getFullStar() > 5 ) {
-            sendWarning(FacesMessage.SEVERITY_ERROR, "Stars must be within 1-5 range");
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Stars must be between 1-5 (inclusive)", "productForm:stars");
             return;
         }
         
         if (productExists(product)){
-            sendWarning(FacesMessage.SEVERITY_ERROR, "Product already exists in database");
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Product already exists in database");
             return;
         }
         
         try {
             productDAO.create(product);
-            sendWarning(FacesMessage.SEVERITY_INFO, "Successfully added product to database");
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_INFO, "Successfully added product to database");
             
         } catch (Exception e) {
-            sendWarning(FacesMessage.SEVERITY_FATAL, "Error while adding product");
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_FATAL, "Error while adding product");
             System.out.println("###########################################");
             System.out.println("ERROR ENCOUNTERED IN AdminController");
             System.out.println("###########################################");
@@ -108,7 +109,7 @@ public class AdminController implements Serializable{
     public void addCoupon(){
         for (Coupon c: adminBackinBean.getCouponList()){
             if(c.getCouponCode().equals(adminBackinBean.getCoupon().getCouponCode())){
-                sendWarning(FacesMessage.SEVERITY_ERROR,"Coupon code already used!");
+                MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Coupon code already used!");
                 return;
             }
         }
@@ -124,14 +125,6 @@ public class AdminController implements Serializable{
         
         couponDAO.deleteCouponByCouponCode(couponCode);
         refreshCoupons();
-    }
-    
-    // Move to service class?
-    private void sendWarning(FacesMessage.Severity severity, String message){
-            FacesMessage fMessage = new FacesMessage();
-            fMessage.setSeverity(severity);
-            fMessage.setSummary(message);
-            FacesContext.getCurrentInstance().addMessage(null,fMessage);
     }
     
     private boolean productExists(Product product){

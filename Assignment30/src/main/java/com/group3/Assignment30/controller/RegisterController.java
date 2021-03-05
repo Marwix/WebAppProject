@@ -3,6 +3,7 @@ package com.group3.Assignment30.controller;
 
 import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.entity.Customer;
+import com.group3.Assignment30.service.MessageCenter;
 import com.group3.Assignment30.service.PasswordManager;
 import com.group3.Assignment30.views.LoginBackingBean;
 import com.group3.Assignment30.views.RegisterBackingBean;
@@ -38,11 +39,7 @@ public class RegisterController implements Serializable{
         boolean emailTaken = customerDAO.checkRegistered(newCustomer.getEmail()).size()==1;
         
         if (emailTaken) {
-            // Move to message service class?
-            FacesMessage message = new FacesMessage();
-            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-            message.setSummary("Email already in use.");
-            FacesContext.getCurrentInstance().addMessage(null,message);
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Email already in use!", "accountInfoForm:email");
         }
         
         //Hash and Salt password

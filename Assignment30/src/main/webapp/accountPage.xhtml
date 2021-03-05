@@ -26,7 +26,7 @@
                                 <p:linkButton class="localButton" outcome="adminPage" value="Admin tools" style="margin-right:20px; border-radius: 2rem;"/>
                             </h:form>
                             <div class="account-information">
-                                <h:form class="accountInfoFormStyle" >
+                                <h:form id="accountInfoForm" class="accountInfoFormStyle" >
                                     <div>
                                         <h1>Account Information</h1>
                                     </div>
@@ -81,7 +81,7 @@
                                             <p:message for="zip" display="both"/> 
                                         </div>
                                         <br/>
-
+                                        <p:messages id="msgs" redisplay="false"/> 
                                         <p:commandButton type="submit" value="Save changes" update="@form" styleClass="rounded-button" action="#{accountPageController.updateUserInformation()}" />
                                     </div>
                                 </h:form>

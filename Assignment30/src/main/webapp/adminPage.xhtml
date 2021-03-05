@@ -18,7 +18,7 @@
                     <f:viewAction action="#{adminController.init()}" />
                 </f:metadata>
                 <div class="accountInfoFormStyle">
-                    <h:form rendered="#{adminController.authorize()}">
+                    <h:form id="productForm" rendered="#{adminController.authorize()}">
                         <div>
                             <h1>Add new product</h1>
                         </div>
@@ -72,7 +72,7 @@
                             </div>
 
                             <br/>
-                            <p:messages id="msgs"/> 
+                            <p:messages id="msgs" redisplay="false"/> 
                             <p:commandButton type="submit" value="Add product" update="@form" styleClass="rounded-button" action="#{adminController.addProduct()}" />
 
                         </div>
@@ -99,7 +99,7 @@
                             </div>
                             
                             <br/>
-                            <p:messages id="msgs"/> 
+                            <p:messages id="msgs" redisplay="false"/> 
                             <p:commandButton type="submit" value="Add coupon" update="couponTable @form" styleClass="rounded-button" action="#{adminController.addCoupon()}" />
 
                         </div>

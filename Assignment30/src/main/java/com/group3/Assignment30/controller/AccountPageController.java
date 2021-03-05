@@ -4,6 +4,7 @@ import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.dao.ProductDAO;
 import com.group3.Assignment30.model.dao.PurchaseDAO;
 import com.group3.Assignment30.model.entity.Customer;
+import com.group3.Assignment30.service.MessageCenter;
 import com.group3.Assignment30.service.PasswordManager;
 import com.group3.Assignment30.views.AccountBackingBean;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -58,17 +60,16 @@ public class AccountPageController implements Serializable{
     public void updateUserInformation() {
 
         //On email change return error if email is already taken
-        try {
-            customerDAO.updateUserInformation(accountBackingBean.getCustomer());
-        } catch (EJBException e) {
-            if(e.toString().contains("duplicate key")){
-                System.out.println("dublicate Email");
-                
-            }
-
-        }
+        List<Customer> existingCustomer = customerDAO.checkRegistered(accountBackingBean.getCustomer().getEmail());
         
+        if (existingCustomer.size() > 0 && existingCustomer.get(0).getUser_id() != accountBackingBean.getCustomer().getUser_id()){
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Email already in use!", "accountInfoForm:email");
+            return;
+        }
+        customerDAO.updateUserInformation(accountBackingBean.getCustomer()); 
+        MessageCenter.SendPageMessage(FacesMessage.SEVERITY_INFO, "User information successfully updated!");
     }
+        
     
     public void changePassword(){
        
