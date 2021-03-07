@@ -78,6 +78,14 @@ body {
   height: 2em;
   margin-bottom:2px;
 }
+
+#about-logo {
+    width: 28px;
+    height: 28px;
+    margin-top:3px;
+    margin-left:2px;
+}
+
 /* -- */
 
 .cart-notification {

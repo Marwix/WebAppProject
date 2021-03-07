@@ -1,7 +1,5 @@
 
 package com.group3.Assignment30.views;
-
-
 import com.group3.Assignment30.model.entity.Cart;
 import com.group3.Assignment30.model.entity.Product;
 import java.io.Serializable;
@@ -19,10 +17,9 @@ import lombok.Data;
 public class CartBackingBean implements Serializable{
     
    @EJB
-    private Cart cart;
+   private Cart cart;
     
-    
-    public void addItemToCart(Product product){
+   public void addItemToCart(Product product){
         if (cart.getCartInventory() != null) {
             HashMap<Product,Integer> cartItems = cart.getCartInventory();
             if(cartItems.containsKey(product)){
@@ -35,8 +32,6 @@ public class CartBackingBean implements Serializable{
             HashMap<Product,Integer> cartItems = new HashMap<>();
             cartItems.put(product, 1);
             cart.setCartInventory(cartItems);
-//        }
         }
-        System.out.println("här är jag" + cart.getCartInventory());
     }
 }

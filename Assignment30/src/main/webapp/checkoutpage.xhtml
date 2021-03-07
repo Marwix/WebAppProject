@@ -152,7 +152,7 @@
 
                                 <h:form rendered="#{checkoutBackingBean.CouponApplied()}">
                                     <h3>Original price: <strike><span id="original-price">$#{checkoutBackingBean.totalPrice}</span></strike></h3>
-                                    <h3>Coupon code: #{checkoutBackingBean.coupon}</h3>
+                                    <h3>Coupon code: #{checkoutBackingBean.coupon.couponCode}</h3>
                                     <h3>Discount price: <span id="discount-price">$#{checkoutBackingBean.totalPrice * checkoutBackingBean.coupon.priceMultiplier}</span></h3>
                                 </h:form>
                             </h:form>
