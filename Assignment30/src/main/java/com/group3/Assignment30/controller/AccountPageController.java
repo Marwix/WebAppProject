@@ -92,7 +92,7 @@ public class AccountPageController implements Serializable{
     }
     
     public boolean adminAuthorize(){
-        return customer.isAdminAccess();
+        return accountBackingBean.getCustomer().isAdminAccess();
     }
     
     
