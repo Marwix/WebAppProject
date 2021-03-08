@@ -12,17 +12,18 @@
         <meta name="description" content=""/>
         <meta name="generator" content="Hugo 0.80.0"/>
         <title>Home Page</title>
-        <!--<h:outputStylesheet name="resources/css/primeflex/primeflex.css"/>-->
         <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/" />
         <link href="./resources/css/bootsrap/bootstrap.min.css" rel="stylesheet"/>
-        <link href="./resources/css/bootsrap/style.css" rel="stylesheet" />
         <link href="./resources/css/carousel.css" rel="stylesheet" />
+        <h:outputStylesheet name="css/primeflex/primeflex.min.css" />
+        <h:outputStylesheet name="css/primeflex/dataView.css" />
+        <link rel="stylesheet" href="resources/css/productView.css" />
     </h:head>
     <ui:decorate template="resources/template/topbar.xhtml">
         <ui:define name="content">
             <h:body>
                 <f:metadata>
-                    <f:viewAction action="#{productController.init()}" />
+                    <f:viewAction action="#{homePageController.init()}" />
                 </f:metadata>
                 
                 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -73,6 +74,36 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
+                <h:form id="form">
+                    <div class="card">
+                        <h1>High Rated Products</h1>
+                        <p:carousel var="product" value="#{homePageBackingBean.products}" responsive="true">
+                            <div class="product">
+                                <div class="product-grid-item p-p-5">
+                                    
+                                    <div class="product-grid-item-content">
+                                        <p:graphicImage library="Images" name="products/#{product.product_name}.png"/>
+                                        <div class="product-name">#{product.product_name}</div>
+                                        <div class="product-description">#{product.description}</div>
+                                        <p:rating readonly="true" value="#{product.fullStar}"/>
+                                    </div>
+                                    <div class="product-grid-item-bottom">
+                                        <h:outputText value="#{product.price}" styleClass="product-price">
+                                            <f:convertNumber currencySymbol="$" type="currency"/>
+                                        </h:outputText>
+                                        <p:commandButton process="@this"
+                                                         type="submit"
+                                                         action="#{cartController.addToCart()}"
+                                                         value="Add To Cart"
+                                                         icon="pi pi-shopping-cart">
+                                            <f:param name="action" value="#{product.prodoct_id}" />
+                                        </p:commandButton>
+                                    </div>
+                                </div>
+                            </div>
+                       </p:carousel>
+                    </div>
+                </h:form>
                 <script src="./assets/JS/bootstrap.bundle.min.js"></script>
             </h:body>
         </ui:define>

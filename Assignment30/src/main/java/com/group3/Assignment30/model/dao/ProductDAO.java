@@ -68,6 +68,15 @@ public class ProductDAO extends AbstractDAO<Product> {
     
     }
     
+    public List<Product> getHighestRatingProduct (int count) {
+        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
+        QProduct product = QProduct.product;
+        
+        List<Product> products = queryFactory.selectFrom(product).orderBy(product.fullStar.desc()).limit(count).fetch();
+        
+       return products; 
+    }
+    
     public void cleanAll(){
         em.createQuery("DELETE FROM Product where 1=1").executeUpdate();
     }

@@ -2,6 +2,12 @@
 .card {
     background-color: #1f2d40 !important;
 }
+.card h1 {
+    font-family: 'Times New Roman', serif;
+    font-size: 3rem;
+    color: #fff;
+    margin: 20px;
+}
 .product img {
     object-fit: contain;
     background-color: #fff !important;
