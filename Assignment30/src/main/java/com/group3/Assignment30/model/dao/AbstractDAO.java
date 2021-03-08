@@ -5,6 +5,7 @@
  */
 package com.group3.Assignment30.model.dao;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public abstract class AbstractDAO<T> {
     private final Class<T> entityType;
     protected abstract EntityManager getEntityManager();
+    protected abstract JPAQueryFactory getJPAQueryFactory();
     
     public long count() {
         final CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
@@ -42,4 +44,6 @@ public abstract class AbstractDAO<T> {
     public void remove(T entity) {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
+    
+    
 }

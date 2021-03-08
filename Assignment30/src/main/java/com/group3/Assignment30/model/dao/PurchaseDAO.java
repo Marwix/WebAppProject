@@ -20,28 +20,25 @@ import lombok.Getter;
 public class PurchaseDAO extends AbstractDAO<Purchase> {
     @Getter @PersistenceContext(unitName = "BigStoreDB")
     private EntityManager em;
+    private JPAQueryFactory queryFactory;
+    private QPurchase purchase;
+    
 
     public PurchaseDAO() {
         super(Purchase.class);
+        purchase = QPurchase.purchase;
     }
    
     public List<Purchase>  getOrderByCustumer(Customer customer){
         
-        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
-        QPurchase purchase = QPurchase.purchase;
-        
-        List<Purchase> orders = queryFactory.selectFrom(purchase).where(purchase.customer.eq(customer)).orderBy(purchase.time.desc()).fetch();
+        List<Purchase> orders = getJPAQueryFactory().selectFrom(purchase).where(purchase.customer.eq(customer)).orderBy(purchase.time.desc()).fetch();
         
         return orders;
     
     }
     
-     public int getMaxOrderID(){
-        
-        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
-        QPurchase purchase = QPurchase.purchase;
-        
-        Purchase latestorder = queryFactory.selectFrom(purchase).orderBy(purchase.order_id.desc()).fetchFirst();
+     public int getMaxOrderID(){       
+        Purchase latestorder = getJPAQueryFactory().selectFrom(purchase).orderBy(purchase.order_id.desc()).fetchFirst();
         
         if (latestorder == null)
             return 0;
@@ -53,21 +50,14 @@ public class PurchaseDAO extends AbstractDAO<Purchase> {
     
     
     public List<Purchase>  getOrderPurchasesByCustomer(Customer customer){
-        
-        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
-        QPurchase purchase = QPurchase.purchase;
-        
-        List<Purchase> orders = queryFactory.selectFrom(purchase).where(purchase.customer.eq(customer)).fetch();
-        
+        List<Purchase> orders = getJPAQueryFactory().selectFrom(purchase).where(purchase.customer.eq(customer)).fetch();
         return orders;
     
     }
     
     public List<Purchase> getOrdersByOrderID(int order_id){
-        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
-        QPurchase purchase = QPurchase.purchase;
         
-        List<Purchase> orders = queryFactory.selectFrom(purchase).where(purchase.order_id.eq(order_id)).fetch();
+        List<Purchase> orders = getJPAQueryFactory().selectFrom(purchase).where(purchase.order_id.eq(order_id)).fetch();
         
         return orders;
     }
@@ -82,6 +72,13 @@ public class PurchaseDAO extends AbstractDAO<Purchase> {
     protected EntityManager getEntityManager() {
         return em;
     }
+
+    @Override
+    protected JPAQueryFactory getJPAQueryFactory() {
+        queryFactory = new JPAQueryFactory(em);
+       return queryFactory;
+    }
+    
 
     
     
