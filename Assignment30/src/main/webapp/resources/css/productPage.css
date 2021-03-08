@@ -20,3 +20,13 @@
 .p-grid>.p-col, .p-grid>[class*=p-col] {
     height: 60vh;
 }
+
+.buttonSortRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonSortRow .ui-button{
+    margin: 1rem;
+}

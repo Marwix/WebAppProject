@@ -25,7 +25,7 @@
           <div class="col-lg-12 col-md-12 col-sm-12">
               <div class="top-bar">
                   <div class="logo-and-text col-lg-4 col-md-4 col-sm-4">
-                      <a class="logo-link col-lg-4 col-md-4 col-sm-4" href="./index.xhtml">
+                      <a class="logo-link col-lg-4 col-md-4 col-sm-4" href="./productPage.xhtml">
                           <img
                               class="col-lg-2 col-md-2 col-sm-2"
                               id="logo"
@@ -46,21 +46,21 @@
                       </div>
 
                       <!-- Account page-->
-                      <a href="accountPage.xhtml"><img id="login-logo" src="resources/Images/profile.png" alt="accountpage button"/></a>
-                      <a href="index.xhtml"><img id="products-logo" src="resources/Images/products.png" alt="Products button"/></a>
+                      <a href="accountPage.xhtml"><img id="login-logo" src="resources/Images/icons/profile.png" alt="accountpage button"/></a>
+                      <a href="productPage.xhtml"><img id="products-logo" src="resources/Images/icons/products.png" alt="Products button"/></a>
                       
                       <ui:fragment rendered="#{loginBackingBean.loggedin}">
                       <!-- Login page -->
-                      <a href="logoutpage.xhtml"> <img id="logout-logo" src="resources/Images/logout.svg"/></a>
+                      <a href="logoutpage.xhtml"> <img id="logout-logo" src="resources/Images/icons/logout.svg"/></a>
                       </ui:fragment>
                       
                       <ui:fragment rendered="#{!loginBackingBean.loggedin}">
                       <!-- Login page -->
-                      <a href="loginregister.xhtml"><img id="login-logo" src="resources/Images/login.svg"/></a>
+                      <a href="loginregister.xhtml"><img id="login-logo" src="resources/Images/icons/login.svg"/></a>
                       </ui:fragment> 
 
                       <!-- Checkout page -->
-                      <a href="checkoutpage.xhtml"><img id="cart-logo" src="resources/Images/cart4.svg" alt="checkout button"/></a>
+                      <a href="checkoutpage.xhtml"><img id="cart-logo" src="resources/Images/icons/cart4.svg" alt="checkout button"/></a>
                   </div>
               </div>
           </div>

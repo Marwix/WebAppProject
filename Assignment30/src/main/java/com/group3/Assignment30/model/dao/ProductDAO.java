@@ -68,6 +68,14 @@ public class ProductDAO extends AbstractDAO<Product> {
     
     }
     
+    public List<Product> getProductLike(String userInput){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
+        QProduct product = QProduct.product;
+        
+        List<Product> p = queryFactory.selectFrom(product).where(product.product_name.likeIgnoreCase("%"+userInput+"%")).fetch();
+        return p;
+    }
+    
     public void cleanAll(){
         em.createQuery("DELETE FROM Product where 1=1").executeUpdate();
     }
