@@ -7,7 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <h:outputStylesheet name="css/primeflex/primeflex.min.css" />
         <h:outputStylesheet name="css/primeflex/dataView.css" />
-<!--        <h:outputStylesheet name="css/primeflex/vela.css" />-->
         <link rel="stylesheet" href="resources/css/productPage.css" />
     </h:head>
     
@@ -29,7 +28,7 @@
                                         <p:inputText value="#{productBackingBean.searchString}" placeholder="Keyboard">
                                             <p:ajax event="input" update="searchButton" process="@this"/>
                                         </p:inputText>
-                                        <p:commandButton id="searchButton" process="@this" icon="pi pi-search" update="form" action="#{productController.getProductsLike()}" styleClass="ui-button-warning">
+                                        <p:commandButton id="searchButton" process="@this" icon="pi pi-search" update="form" action="#{productController.getProductsLike()}">
                                             <f:param name="action" value="#{productBackingBean.searchString}" />
                                         </p:commandButton>
                                     </div>

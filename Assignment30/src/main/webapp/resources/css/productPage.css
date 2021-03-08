@@ -28,5 +28,18 @@
 }
 
 .buttonSortRow .ui-button{
-    margin: 1rem;
+    margin: 1em;
+}
+
+.ui-inputgroup .ui-inputfield {
+    margin-bottom: 1em;
+    margin-left: 1em;
+    margin-right: 0em;
+    margin-top: 1em;
+}
+
+.ui-inputgroup .ui-button {
+    margin-bottom: 1em;
+    margin-left: 0em;
+    margin-top: 1em;
 }
