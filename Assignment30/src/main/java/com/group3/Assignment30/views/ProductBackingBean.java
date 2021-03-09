@@ -22,9 +22,9 @@ public class ProductBackingBean implements Serializable {
     
     public void orderProductsByPrice(){
         if (sortToggleOrder)
-            products.sort((Product p1, Product p2) -> (int)p2.getPrice()-(int)p1.getPrice());
+            products.sort((Product p1, Product p2) -> (int)(p2.getPrice()*p2.getPriceMultiplier())-(int)(p1.getPrice()*p1.getPriceMultiplier()));
         else 
-            products.sort((Product p1, Product p2) -> (int)p1.getPrice()-(int)p2.getPrice());
+            products.sort((Product p1, Product p2) -> (int)(p1.getPrice()*p1.getPriceMultiplier())-(int)(p2.getPrice()*p2.getPriceMultiplier()));
         sortToggleOrder = !sortToggleOrder;
     }
     

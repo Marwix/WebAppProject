@@ -133,7 +133,7 @@
                                         </p:column>
 
                                         <p:column headerText="Price">
-                                            <h:outputText value="#{product.price * checkoutBackingBean.getCount(product)}" />
+                                            <h:outputText value="#{product.price * product.priceMultiplier *  checkoutBackingBean.getCount(product)}" />
                                         </p:column>
 
                                         <p:column>

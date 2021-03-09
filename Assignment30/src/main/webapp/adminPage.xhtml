@@ -77,6 +77,58 @@
 
                         </div>
                     </h:form>
+                    <h:form id="sales-form" rendered="#{adminController.authorize()}">
+                        <div>
+                            <h1>Add new Sale</h1>
+                        </div>
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-3">
+                                <p:outputLabel for="product-id" value="Product ID" />
+                                <p:inputText id="product-id" required="true" value="#{adminBackingBean.product.prodoct_id}">
+                                    <f:validateLength minimum="1" maximum="10"/>
+                                </p:inputText>
+                                <p:message for="product-id" display="both"/> 
+                            </div>
+
+                            <div class="p-field  p-col-12 p-md-3">
+                                <p:outputLabel for="sale-multiplier" value="Sale" />
+                                <p:inputNumber id="sale-multiplier" decimalPlaces="0" required="true" symbol="%"  symbolPosition="s" value="#{adminBackingBean.product.priceMultiplier}" >
+                                    <f:validateDoubleRange minimum="1" maximum="100"/>
+                                </p:inputNumber>
+                                <p:message for="sale-multiplier" display="both" showDetail="true"/>
+                            </div>
+                            
+                            <br/>
+                            <p:messages id="msgs" redisplay="false"/> 
+                            <p:commandButton type="submit" value="Add coupon" update="saleTable @form" styleClass="rounded-button" action="#{adminController.addSale()}" />
+
+                        </div>
+                    </h:form>
+                    <p:dataTable var="product" value="#{adminBackingBean.productList}" rows="10"
+                                 id="saleTable"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                 rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+
+                        <p:column headerText="Product ID">
+                            <h:outputText value="#{product.prodoct_id}" />
+                        </p:column>
+
+                        <p:column headerText="Product name">
+                            <h:outputText value="#{product.product_name}" />
+                        </p:column>
+
+                        <p:column headerText="Price Multiplier">
+                            <h:outputText value="#{product.priceMultiplier}" />
+                        </p:column>
+
+                        <p:column headerText="Remove sale">
+                            <p:commandButton rendered="#{1 > product.priceMultiplier}" process="@this" update="saleTable" icon="pi pi-times" styleClass="rounded-button ui-button-danger" action="#{adminController.removeSale()}">
+                                <f:param name="prod_id" value="#{product.prodoct_id}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
                     <h:form rendered="#{adminController.authorize()}">
                         <div>
                             <h1>Add new Coupon</h1>

@@ -76,6 +76,13 @@ public class ProductDAO extends AbstractDAO<Product> {
         return p;
     }
     
+    public long setProductSale(int prod_id, int newSale){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
+        QProduct product = QProduct.product;
+        
+        return queryFactory.update(product).where(product.prodoct_id.eq(prod_id)).set(product.priceMultiplier, ((double)(100-newSale))/100).execute();
+    }
+    
     public void cleanAll(){
         em.createQuery("DELETE FROM Product where 1=1").executeUpdate();
     }
