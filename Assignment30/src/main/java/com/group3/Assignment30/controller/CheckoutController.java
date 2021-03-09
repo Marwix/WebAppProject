@@ -67,7 +67,7 @@ public class CheckoutController implements Serializable {
             //setting customer in checkout to correct info
             checkoutBackingBean.setCustomer(customer);
         } 
-        catch (NullPointerException e) { System.out.println(e.toString());}   
+        catch (NullPointerException e) {};
     } 
     
    public void payNow() throws IOException {
