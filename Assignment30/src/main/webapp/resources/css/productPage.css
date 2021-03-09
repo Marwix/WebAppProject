@@ -17,9 +17,6 @@
     justify-content: space-around;
     margin-bottom: 20px;
 }
-.p-grid>.p-col, .p-grid>[class*=p-col] {
-    height: 60vh;
-}
 
 .buttonSortRow {
     display: flex;
