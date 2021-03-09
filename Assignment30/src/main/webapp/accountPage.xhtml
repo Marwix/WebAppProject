@@ -135,37 +135,47 @@
                                 </div>
                                 <div class="orderlist col-12">
                                     <ul class="list">
-                                        <li>
+                                        <ui:repeat value="#{accountBackingBean.purchases}" var="order">
+                                            <div> Order nr. #{order.get(0).order_id} (#{order.get(0).time})</div>
+                                          <ul class="internal-list">
+                                            <li>
                                             <div class="header">
-                                                <div class="order-column-date">Date</div>
-                                                <div class="order-column-order-number">Order Number</div>
-                                                <div class="order-column-status">Status</div>
-                                                <div class="order-column-total">Order value</div>
+                                                <div class="order-column-status"><u><b>Item</b></u></div>
+                                                <div class="order-column-total"><u><b>Amount</b></u></div>
                                             </div>
-                                        </li>
-                                        <ui:repeat value="#{accountBackingBean.purchases}" var="purchase">
+                                            </li>
+                                            <ui:repeat value="#{order}" var="purchase">
                                             <li>
                                                 <div class="header">
-                                                    <div class="order-column-date">#{purchase.time}</div>
-                                                    <div class="order-column-order-number">#{purchase.order_id}</div>
-                                                    <div class="order-column-status">Sent</div>
+                                                    <div class="order-column-status">#{purchase.products.product_name}</div>
                                                     <div class="order-column-total">#{purchase.price * purchase.count}</div>
                                                 </div>
-                                            </li>
+                                            </li>    
+                                                
+                                            </ui:repeat>
+                                               <li>
+                                                   <div class="header">
+                                                    <div class="order-column-status">Total: </div>
+                                                    <div class="order-column-total">#{accountBackingBean.getTotalPriceOfOrder(order)}</div> 
+                                                   </div> 
+                                               </li>
+                                           </ul>
                                         </ui:repeat>
                                     </ul>
                                 </div>
                             </div>
-
+                           <br></br>
                         </div>
                     </div>  
                 </div>
               </ui:fragment>
                 <ui:fragment rendered="#{!loginBackingBean.loggedin}">
-                    <h3 class="errortext">
-                        Sorry you need to login to visit accountpage.
-                    </h3>
-                    <p:button value="Click here to register/login" styleClass="rounded-button" outcome="loginregister" />
+                    <h2 id="errortext">
+                        <div class="inside-text">
+                            <h2>Sorry you need to login/register to view accountpage.</h2>
+                        </div>
+                    </h2>
+                    <p:button id="register-login-button" value="Click here to register/login" styleClass="rounded-button" outcome="loginregister" />
                 </ui:fragment>
                 
             </h:body>

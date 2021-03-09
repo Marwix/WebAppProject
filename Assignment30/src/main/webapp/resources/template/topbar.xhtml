@@ -34,17 +34,19 @@
                               />
                           <div></div>
                           <b class="title"> BigStore </b>
-                          <!-- TODO: Change to h1 -->
                       </a>
                   </div>
 
                   <div class="cart-button">
-
                       <!-- Amount of items in cart-->
-                      <div class="cart-notification">
-                          <h6></h6>
-                      </div>
-
+                      <h:form id="cart">
+                          <div class="cart-notification">
+                              <h6>
+                                  <h:outputText id="cart-amount" value="#{cartBackingBean.amountItemsCart}"/>
+                              </h6>
+                          </div>
+                      </h:form>
+                      
                       <!-- Account page-->
                       <a href="accountPage.xhtml"><img id="login-logo" src="resources/Images/profile.png" alt="accountpage button"/></a>
                       
@@ -69,10 +71,8 @@
                   </div>
               </div>
           </div>
-        </div>
-            
+        </div>  
             <ui:insert name="content" />
-           
       </div>
       
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 

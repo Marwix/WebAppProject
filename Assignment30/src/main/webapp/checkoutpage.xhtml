@@ -21,24 +21,6 @@
                         <!-- Title -->
                         <h1>CHECKOUT</h1>
 
-                        <!-- Delivery Country -->
-                        <div class="card-tile">
-                            <p:card>
-                                <f:facet class="card-title" name="title">DELIVERY COUNTRY:</f:facet>
-                                <div class="p-grid">
-                                    <div class="p-col-12">
-                                        <label for="country" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Country: </label>
-                                        <h:selectOneMenu required="true" label="Select Country">
-                                            <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
-                                            <f:selectItem itemLabel="USA" itemValue="1"/>
-                                            <f:selectItem itemLabel="Canada" itemValue="2"/>
-                                            <f:selectItem itemLabel="Sweden" itemValue="3"/>
-                                        </h:selectOneMenu>
-                                    </div>
-                                </div>
-                            </p:card>
-                        </div>
-
                         <!-- Coupon Code -->
                         <div class="card-tile">
                             <p:card>
@@ -133,13 +115,13 @@
                                         </p:column>
 
                                         <p:column headerText="Price">
-                                            <h:outputText value="#{product.price * checkoutBackingBean.getCount(product)}" />
+                                            <h:outputText value="#{checkoutBackingBean.getCount(product)} x #{product.price}" />
                                         </p:column>
 
                                         <p:column>
-                                            <p:commandButton icon="pi pi-times" styleClass="ui-button-flat" process="@this" update="cart-update-form" action="#{checkoutController.removeItemCart()}" >
+                                            <p:commandButton icon="pi pi-times" styleClass="ui-button-flat" process="@this" update="cart-update-form :cart:cart-amount" action="#{checkoutController.removeItemCart()}" >
                                                 <f:param name="action" value="#{product.prodoct_id}"/>
-                                        </p:commandButton>
+                                            </p:commandButton>
                                         </p:column>
                                     </p:dataTable>            
                                 </div>
@@ -175,11 +157,12 @@
 
                 <ui:fragment rendered="#{!loginBackingBean.loggedin}">
                     <h2 id="errortext">
-                        Sorry you need to login/register to visit buy items.
+                        <div class="inside-text">
+                            <h2>Sorry you need to login/register to view cart. </h2>
+                        </div>
                     </h2>
-                    <p:button value="Click here to register/login" styleClass="rounded-button" outcome="loginregister" />
+                    <p:button id="register-login-button" value="Click here to register/login" styleClass="rounded-button" outcome="loginregister" />
                 </ui:fragment>
-
             </h:body>
         </ui:define>
     </ui:decorate>

@@ -7,6 +7,7 @@ import com.group3.Assignment30.model.entity.Coupon;
 import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.model.entity.Purchase;
+import com.group3.Assignment30.views.CartBackingBean;
 import com.group3.Assignment30.views.CheckoutBackingBean;
 import java.io.IOException;
 import javax.faces.context.ExternalContext;
@@ -32,6 +33,8 @@ public class CheckoutController implements Serializable {
     @Inject
     private CheckoutBackingBean checkoutBackingBean;
     
+    @Inject
+    private CartBackingBean cartBackingBean;
     
     private int activeUserID;
     
@@ -63,24 +66,18 @@ public class CheckoutController implements Serializable {
             
             //setting customer in checkout to correct info
             checkoutBackingBean.setCustomer(customer);
-   
         } 
-        catch (NullPointerException e) 
-        {
-             
-        }     
+        catch (NullPointerException e) { System.out.println(e.toString());}   
     } 
     
    public void payNow() throws IOException {
-       
        HashMap<Product,Integer> cartInventory = checkoutBackingBean.getCart().getCartInventory();
        
        if (cartInventory.isEmpty())
+           
            return;
-       
 
-       
-      int orderidForThisPurchase = purchaseDAO.getMaxOrderID() + 1;
+       int orderidForThisPurchase = purchaseDAO.getMaxOrderID() + 1;
         
        for (Product product : cartInventory.keySet()) {
           Purchase purchase = new Purchase();
@@ -103,15 +100,14 @@ public class CheckoutController implements Serializable {
           // Go to payment result and forward to product/main page again.
           ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
           ec.redirect(ec.getRequestContextPath() + "/" + "paymentResult.xhtml");
+          cartBackingBean.setCount(0);
       }
     }
-    
-  
-   // Check if coupon code is valid.
+   
+    // Check if coupon code is valid.
     public void checkValidCoupon()
     {
         String code = checkoutBackingBean.getCoupon().getCouponCode();
-        
         List<Coupon> couponCode = couponDAO.getCouponByCode(code);
         
         if (couponCode.size() > 0)   
@@ -122,12 +118,10 @@ public class CheckoutController implements Serializable {
             }else if (confirm.equals("Better code applied!")) {
                 sendNotification(FacesMessage.SEVERITY_INFO, "Better code applied!");
             }
-           
-           
-        }else{
+        } 
+        else {
             sendNotification(FacesMessage.SEVERITY_INFO, "Not a valid code!");
         }
-
     }
     
     // Send message about invalid input.
@@ -138,17 +132,18 @@ public class CheckoutController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null,fMessage);
     }
     
-    
     // Remove item from checkoutpage cart.
     public void removeItemCart() throws IOException {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-       Map<String,String> params = facesContext.getExternalContext().getRequestParameterMap();
+        Map<String,String> params = facesContext.getExternalContext().getRequestParameterMap();
         String id = params.get("action");
        
         List<Product> product = productDAO.getProductByID(Integer.parseInt(id));
-         //send the product id to remove from cart
+        
+        // Remove amount of items from cart icon.
+        cartBackingBean.removeItemFromCart(product.get(0));
+        
+        // Send the product id to remove from cart.
         checkoutBackingBean.removeItemCart(product.get(0));
-       
    }
-    
 }

@@ -7,7 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <h:outputStylesheet name="css/primeflex/primeflex.min.css" />
         <h:outputStylesheet name="css/primeflex/dataView.css" />
-<!--        <h:outputStylesheet name="css/primeflex/vela.css" />-->
         <link rel="stylesheet" href="resources/css/productPage.css" />
     </h:head>
     
@@ -43,7 +42,8 @@
                                                                  type="submit"
                                                                  action="#{cartController.addToCart()}"
                                                                  value="Add To Cart"
-                                                                 icon="pi pi-shopping-cart">
+                                                                 icon="pi pi-shopping-cart"
+                                                                 update=":cart:cart-amount">
                                                      <f:param name="action" value="#{product.prodoct_id}" />
                                                 </p:commandButton>
                                             </div>
@@ -53,12 +53,13 @@
                                     <p:dataViewListItem>
                                         <div class="product-list-item">
                                            <p:graphicImage library="Images" name="products/#{product.product_name}.png" />
+                                           
                                             <div class="product-list-detail">
                                                 <div class="product-name">#{product.product_name}</div>
                                                 <div class="product-description">#{product.description}</div>
                                                 <p:rating readonly="true" value="#{product.fullStar}"/>
-                                                
                                             </div>
+                                           
                                             <div class="product-list-action">
                                                 <h:outputText value="#{product.price}" styleClass="product-price">
                                                     <f:convertNumber currencySymbol="$" type="currency"/>
@@ -71,16 +72,13 @@
                                                      
                                                      <f:param name="action" value="#{product.prodoct_id}" />
                                                 </p:commandButton>
-                                                
                                             </div>
                                         </div>
                                     </p:dataViewListItem>
                                 </p:dataView>
-
                             </h:form>
                         </div>
                     </h:body>
 		</ui:define>
         </ui:decorate>
-    
 </html>
