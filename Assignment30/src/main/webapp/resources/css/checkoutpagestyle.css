@@ -30,7 +30,19 @@
 
 #tableRowStyle {
     text-align:center;
-    width:50%;
+    width:75%;
+}
+
+#tableRowStyle * {
+    text-align:center;
+}
+
+span#original-price {
+    color: red;
+}
+
+span#discount-price {
+    color:green;
 }
 
 .center-layout h1 {
@@ -44,4 +56,17 @@
 
 .terms-conditions-text {
     text-align:center;
+}
+
+#errortext h2 {
+    text-align:center;
+    background-color:#1b262c;
+    color:white;
+    margin-top:1em;
+    margin-bottom:1em;
+}
+
+#register-login-button {
+    width: 25%;
+    align-self: center;
 }

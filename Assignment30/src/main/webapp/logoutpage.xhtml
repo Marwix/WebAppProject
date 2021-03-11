@@ -7,7 +7,8 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>TODO supply a title</title>
+        <link rel="icon" href="resources/Images/shop.ico"/>
+        <title>Logout</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
          <h:outputStylesheet name="resources/css/primeflex/primeflex.css"/>
     </h:head>
@@ -19,7 +20,7 @@
                         <ui:fragment rendered="#{loginBackingBean.loggedin}">
                             <div class="logout-info">
                                 <h1 class="logout-text">
-                                    Press here to logout
+                                    Press here to logout.
                                 </h1>
                                 <h:form>
                                     <p:commandButton value="Press here to logout" styleClass="rounded-button" action="#{logoutController.onLogout()}" />
@@ -30,7 +31,7 @@
                         <ui:fragment rendered="#{!loginBackingBean.loggedin}">
                             <div class="logout-info">
                                 <h1 class="logout-text">
-                                    Successfully logged out
+                                    Successfully logged out.
                                 </h1>
                                 <p:button value="Press here to login again" styleClass="rounded-button" href="loginregister.xhtml" />
                                 <br/>

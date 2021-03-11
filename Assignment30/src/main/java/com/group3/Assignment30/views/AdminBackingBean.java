@@ -9,6 +9,7 @@ import com.group3.Assignment30.model.entity.Coupon;
 import com.group3.Assignment30.model.entity.Product;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.validation.constraints.NotEmpty;
@@ -18,18 +19,16 @@ import lombok.Data;
 @Named
 @ViewScoped
 public class AdminBackingBean implements Serializable{
-    @NotEmpty private String productName;
-    private int price;
-    private int stars;
-    @NotEmpty private String color;
-    @NotEmpty private String measurements;
-    @NotEmpty private String weight;
-    @NotEmpty private String description;
     
-    @NotEmpty private String newCouponCode;
-    private double newCouponMultiplier;
+    private Product product;
+    private Coupon coupon;
     
     List<Product> productList;
     List<Coupon> couponList;
     
+    @PostConstruct
+    public void init(){
+        product = new Product();
+        coupon = new Coupon();
+    }    
 }

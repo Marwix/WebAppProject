@@ -14,9 +14,12 @@ import lombok.Getter;
 public class CouponDAO extends AbstractDAO<Coupon>{
     @Getter @PersistenceContext(unitName = "BigStoreDB")
     private EntityManager em;
+    private JPAQueryFactory queryFactory;
+    private  QCoupon coupon;
     
     public CouponDAO() {
         super(Coupon.class);
+        coupon = QCoupon.coupon;
     }
     
     @Override
@@ -25,21 +28,25 @@ public class CouponDAO extends AbstractDAO<Coupon>{
     }
     
     public List<Coupon> getCouponByCode(String couponCode){
-        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
-        QCoupon coupon = QCoupon.coupon;
-        
-        List<Coupon> coupons = queryFactory.selectFrom(coupon).where(coupon.couponCode.eq(couponCode)).fetch();
+ 
+        List<Coupon> coupons = getJPAQueryFactory().selectFrom(coupon).where(coupon.couponCode.eq(couponCode)).fetch();
         return coupons;
     }
     
-    public void createCoupon(String couponCode, double salePercentage){
-        super.create(new Coupon(couponCode, 1-(salePercentage/100)));
+    public void createCoupon(String couponCode, int salePercentage){
+        // Ugly math for salePercentage to get "nicer" date
+        super.create(new Coupon(couponCode, ((double)(100-salePercentage))/100));
     }
     
     public void deleteCouponByCouponCode(String couponCode){
-        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
-        QCoupon coupon = QCoupon.coupon;
+      
         
-        queryFactory.delete(coupon).where(coupon.couponCode.eq(couponCode)).execute();
+       getJPAQueryFactory().delete(coupon).where(coupon.couponCode.eq(couponCode)).execute();
+    }
+
+    @Override
+    protected JPAQueryFactory getJPAQueryFactory() {
+        queryFactory = new JPAQueryFactory(em);
+       return queryFactory;
     }
 }

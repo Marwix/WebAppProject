@@ -4,8 +4,10 @@ import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.views.ProductBackingBean;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,9 +27,21 @@ public class ProductController implements Serializable {
     
     @PostConstruct
     public void init() {
+        getAllProducts();
+    }
+    
+    public void getAllProducts(){
         List<Product> products = productDAO.findAll();
         productBackingBean.setProducts(products);
     }
-
+    
+    public void getProductsLike(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Map<String,String> params = facesContext.getExternalContext().getRequestParameterMap();
+        String userInput = params.get("action");
+        
+        List<Product> products = productDAO.getProductLike(userInput);
+        productBackingBean.setProducts(products);
+    }
     
 }

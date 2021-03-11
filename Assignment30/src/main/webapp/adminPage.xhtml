@@ -7,6 +7,8 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <link rel="stylesheet" href="resources/css/adminPage.css" />
+    <title>Admin</title>
+    <link rel="icon" href="resources/Images/shop.ico"/>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <ui:decorate template="resources/template/topbar.xhtml">
@@ -16,14 +18,14 @@
                     <f:viewAction action="#{adminController.init()}" />
                 </f:metadata>
                 <div class="accountInfoFormStyle">
-                    <h:form rendered="#{adminController.authorize()}">
+                    <h:form id="productForm" rendered="#{adminController.authorize()}">
                         <div>
                             <h1>Add new product</h1>
                         </div>
                         <div class="ui-fluid p-formgrid p-grid">
                             <div class="p-field p-col-12 p-md-3">
                                 <p:outputLabel for="product-name" value="Product and image name" />
-                                <p:inputText id="product-name" required="true" value="#{adminBackingBean.productName}">
+                                <p:inputText id="product-name" required="true" value="#{adminBackingBean.product.product_name}">
                                     <f:validateLength minimum="3" maximum="30"/>
                                 </p:inputText>
                                 <p:message for="product-name" display="both"/> 
@@ -31,7 +33,7 @@
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="product-price" value="Price" />
-                                <p:inputText id="product-price" type="number" required="true" value="#{adminBackingBean.price}">
+                                <p:inputText id="product-price" type="number" required="true" value="#{adminBackingBean.product.price}">
                                     <f:validateLength minimum="1" maximum="9" />
                                 </p:inputText>
                                 <p:message for="product-price" display="both"/>
@@ -39,13 +41,13 @@
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="stars" value="Stars (1-5)" />
-                                <p:inputText id="stars" required="true" type="number" value="#{adminBackingBean.stars}"/>
+                                <p:inputText id="stars" required="true" type="number" value="#{adminBackingBean.product.fullStar}"/>
                                 <p:message for="stars" display="both"/> 
                             </div>
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="productColor" value="Color" />
-                                <p:inputText id="productColor" required="true" value="#{adminBackingBean.color}">
+                                <p:inputText id="productColor" required="true" value="#{adminBackingBean.product.color}">
                                     <f:validateLength minimum="2" maximum="15" />
                                 </p:inputText>
                                 <p:message for="productColor" display="both"/> 
@@ -53,28 +55,80 @@
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="productMeasurements" value="Measurements (Width * Length * Height)" />
-                                <p:inputText id="productMeasurements" required="true" value="#{adminBackingBean.measurements}"/>
+                                <p:inputText id="productMeasurements" required="true" value="#{adminBackingBean.product.measurements}"/>
                                 <p:message for="productMeasurements" display="both"/> 
                             </div>
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="productWeight" value="Weight" />
-                                <p:inputText id="productWeight" required="true" value="#{adminBackingBean.weight}"/>
+                                <p:inputText id="productWeight" required="true" value="#{adminBackingBean.product.weight}"/>
                                 <p:message for="productWeight" display="both"/> 
                             </div>
 
                             <div class="p-field p-col-12 p-md-3">
                                 <p:outputLabel for="productDescription" value="Product description" />
-                                <p:inputText id="productDescription" required="true" value="#{adminBackingBean.description}"/>
+                                <p:inputText id="productDescription" required="true" value="#{adminBackingBean.product.description}"/>
                                 <p:message for="productDescription" display="both"/> 
                             </div>
 
                             <br/>
-                            <p:messages id="msgs"/> 
+                            <p:messages id="msgs" redisplay="false"/> 
                             <p:commandButton type="submit" value="Add product" update="@form" styleClass="rounded-button" action="#{adminController.addProduct()}" />
 
                         </div>
                     </h:form>
+                    <h:form id="sales-form" rendered="#{adminController.authorize()}">
+                        <div>
+                            <h1>Add new Sale</h1>
+                        </div>
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-3">
+                                <p:outputLabel for="product-id" value="Product ID" />
+                                <p:inputText id="product-id" required="true" value="#{adminBackingBean.product.prodoct_id}">
+                                    <f:validateLength minimum="1" maximum="10"/>
+                                </p:inputText>
+                                <p:message for="product-id" display="both"/> 
+                            </div>
+
+                            <div class="p-field  p-col-12 p-md-3">
+                                <p:outputLabel for="sale-multiplier" value="Sale" />
+                                <p:inputNumber id="sale-multiplier" decimalPlaces="0" required="true" symbol="%"  symbolPosition="s" value="#{adminBackingBean.product.priceMultiplier}" >
+                                    <f:validateDoubleRange minimum="1" maximum="100"/>
+                                </p:inputNumber>
+                                <p:message for="sale-multiplier" display="both" showDetail="true"/>
+                            </div>
+                            
+                            <br/>
+                            <p:messages id="msgs" redisplay="false"/> 
+                            <p:commandButton type="submit" value="Add coupon" update="saleTable @form" styleClass="rounded-button" action="#{adminController.addSale()}" />
+
+                        </div>
+                    </h:form>
+                    <p:dataTable var="product" value="#{adminBackingBean.productList}" rows="10"
+                                 id="saleTable"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                 rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+
+                        <p:column headerText="Product ID">
+                            <h:outputText value="#{product.prodoct_id}" />
+                        </p:column>
+
+                        <p:column headerText="Product name">
+                            <h:outputText value="#{product.product_name}" />
+                        </p:column>
+
+                        <p:column headerText="Price Multiplier">
+                            <h:outputText value="#{product.priceMultiplier}" />
+                        </p:column>
+
+                        <p:column headerText="Remove sale">
+                            <p:commandButton rendered="#{1 > product.priceMultiplier}" process="@this" update="saleTable" icon="pi pi-times" styleClass="rounded-button ui-button-danger" action="#{adminController.removeSale()}">
+                                <f:param name="prod_id" value="#{product.prodoct_id}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
                     <h:form rendered="#{adminController.authorize()}">
                         <div>
                             <h1>Add new Coupon</h1>
@@ -82,7 +136,7 @@
                         <div class="ui-fluid p-formgrid p-grid">
                             <div class="p-field p-col-12 p-md-3">
                                 <p:outputLabel for="coupon-code" value="Coupon Code" />
-                                <p:inputText id="coupon-code" required="true" value="#{adminBackingBean.newCouponCode}">
+                                <p:inputText id="coupon-code" required="true" value="#{adminBackingBean.coupon.couponCode}">
                                     <f:validateLength minimum="2" maximum="10"/>
                                 </p:inputText>
                                 <p:message for="coupon-code" display="both"/> 
@@ -90,15 +144,15 @@
 
                             <div class="p-field  p-col-12 p-md-3">
                                 <p:outputLabel for="coupon-multiplier" value="Multiplier" />
-                                <p:inputNumber id="coupon-multiplier" required="true" symbol="%" symbolPosition="s" value="#{adminBackingBean.price}" >
+                                <p:inputNumber id="coupon-multiplier" decimalPlaces="0" required="true" symbol="%"  symbolPosition="s" value="#{adminBackingBean.coupon.priceMultiplier}" >
                                     <f:validateDoubleRange minimum="1" maximum="100"/>
                                 </p:inputNumber>
-                                <p:message for="coupon-multiplier" display="both"/>
+                                <p:message for="coupon-multiplier" display="both" showDetail="true"/>
                             </div>
                             
                             <br/>
-                            <p:messages id="msgs"/> 
-                            <p:commandButton type="submit" value="Add coupon" update="couponTable" styleClass="rounded-button" action="#{adminController.addCoupon()}" />
+                            <p:messages id="msgs" redisplay="false"/> 
+                            <p:commandButton type="submit" value="Add coupon" update="couponTable @form" styleClass="rounded-button" action="#{adminController.addCoupon()}" />
 
                         </div>
                     </h:form>
@@ -112,7 +166,6 @@
                         </p:column>
 
                         <p:column headerText=" ">
-                            <p:messages id="msgs"/>
                             <p:commandButton process="@this" update="couponTable" icon="pi pi-times" styleClass="rounded-button ui-button-danger" action="#{adminController.removeCoupon()}">
                                 <f:param name="action" value="#{coupon.couponCode}"/>
                             </p:commandButton>
@@ -123,7 +176,7 @@
                             <div class="error-info">
                                 <h2>Error: 404</h2>
                                 <p>The requested page does not exist</p>
-                                <a href="index.xhtml">Return to main page</a>
+                                <a href="productPage.xhtml">Return to main page</a>
                             </div>
                         </div>
                     </h:form>
