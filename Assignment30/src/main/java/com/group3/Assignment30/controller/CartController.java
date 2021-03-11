@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Data;
 
-
 @Data
 @Named
 @SessionScoped
@@ -35,11 +34,6 @@ public class CartController implements Serializable{
         int id = Integer.parseInt(action);
 
         List<Product> products = productDAO.getProductByID(id);
-        System.out.println(products);
-        System.out.println("nu går jag in");
         cartBackingBean.addItemToCart(products.get(0));
-        System.out.println("nu går jag ut");
-
     }
-
 }

@@ -52,7 +52,6 @@ public class CheckoutBackingBean implements Serializable {
     }
     
     public void removeItemCart(Product product){
-
         if(cart.getCartInventory().containsKey(product)){
             cart.getCartInventory().remove(product);
         }
@@ -62,14 +61,12 @@ public class CheckoutBackingBean implements Serializable {
             coupon.setCouponCode("");
             coupon.setPriceMultiplier(1);
         }
-
     }
     
     public String applyCoupon(List<Coupon> couponCode)
     {
         Coupon newCoupon = couponCode.get(0);
-        
-        
+
            if (coupon.getPriceMultiplier() != 1) {
                
                if (coupon.getPriceMultiplier() < newCoupon.getPriceMultiplier()) {
@@ -97,7 +94,7 @@ public class CheckoutBackingBean implements Serializable {
         
         for (Product s : items)   
         {
-            totalPrice += s.getPrice() * getCount(s);
+            totalPrice += s.getPrice() * s.getPriceMultiplier() * getCount(s);
         }
         return totalPrice;
     }
@@ -107,18 +104,4 @@ public class CheckoutBackingBean implements Serializable {
        coupon.setPriceMultiplier(1);
        return true;
     }
-    
-//    @NotEmpty private String country;
-//    @NotEmpty private String coupon;
-//    
-//    private HashMap<Product,Integer> products;
-//    
-//    public void setCode(String code) {
-//        this.coupon = code;
-//    }
-//    
-//    public String getText() {
-//        return coupon;
-//    }
-
 }

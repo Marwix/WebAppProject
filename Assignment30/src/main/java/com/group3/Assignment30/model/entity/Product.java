@@ -21,6 +21,7 @@ public class Product implements Serializable{
 
     private String product_name;
     private double price;
+    private double priceMultiplier = 1;
     // Image? clob and blob
 
     private int fullStar;

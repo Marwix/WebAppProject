@@ -7,6 +7,10 @@
     align-items: center;
 }
 
+.cart-button {
+    margin-top: 16px;
+}
+
 .logout-info{
     background-color: #0f4c75;
     width: 80vw;

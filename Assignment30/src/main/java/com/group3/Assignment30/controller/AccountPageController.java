@@ -4,6 +4,7 @@ import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.dao.ProductDAO;
 import com.group3.Assignment30.model.dao.PurchaseDAO;
 import com.group3.Assignment30.model.entity.Customer;
+import com.group3.Assignment30.model.entity.Purchase;
 import com.group3.Assignment30.service.MessageCenter;
 import com.group3.Assignment30.service.PasswordManager;
 import com.group3.Assignment30.views.AccountBackingBean;
@@ -48,12 +49,9 @@ public class AccountPageController implements Serializable{
             customer = customerInfo.get(0);
             
             accountBackingBean.setCustomer(customer);
-           
-            getOrderHistory();
-        } catch (Exception e) {
-        }
             
-        
+            getOrderHistory();
+        } catch (Exception e) { }
     }
     
     //gets all information about the customer and sends it to customerDAO
@@ -85,16 +83,15 @@ public class AccountPageController implements Serializable{
         }
     }
     
-    public void getOrderHistory(){
-        
-        accountBackingBean.setPurchases(purchaseDAO.getOrderByCustumer(customer));
-       
+    public void getOrderHistory() 
+    {
+        accountBackingBean.showOrderHistory(purchaseDAO.getOrderByCustumer(accountBackingBean.getCustomer()));
+
+        //accountBackingBean.setPurchases(purchaseDAO.getOrderByCustumer(customer));
     }
     
     public boolean adminAuthorize(){
         return accountBackingBean.getCustomer().isAdminAccess();
     }
-    
-    
 }
     
