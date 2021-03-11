@@ -32,12 +32,12 @@ public class CheckoutController implements Serializable {
     
     @Inject
     private CheckoutBackingBean checkoutBackingBean;
-    
+
     @Inject
     private CartBackingBean cartBackingBean;
     
     private int activeUserID;
-    
+
     private SessionContextController sessionContextController = SessionContextController.getInstance();
     
     @EJB
@@ -51,18 +51,16 @@ public class CheckoutController implements Serializable {
 
     @EJB
     private PurchaseDAO purchaseDAO;
-    
-    private Customer customer;
-    
+
     //loads customer info and sends it to backingbean
     @PostConstruct
     public void init() 
     {
         try {
-            activeUserID = (int) sessionContextController.getAttribu("user_id");
+          int activeUserID = (int) sessionContextController.getAttribu("user_id");
             List<Customer> customerInfo = customerDAO.getUserInformationByID(activeUserID);
 
-            customer = customerInfo.get(0);
+            Customer customer = customerInfo.get(0);
             
             //setting customer in checkout to correct info
             checkoutBackingBean.setCustomer(customer);
@@ -77,7 +75,9 @@ public class CheckoutController implements Serializable {
            
            return;
 
-       int orderidForThisPurchase = purchaseDAO.getMaxOrderID() + 1;
+       Customer customer = checkoutBackingBean.getCustomer();
+      int orderidForThisPurchase = purchaseDAO.getMaxOrderID() + 1;
+
         
        for (Product product : cartInventory.keySet()) {
           Purchase purchase = new Purchase();

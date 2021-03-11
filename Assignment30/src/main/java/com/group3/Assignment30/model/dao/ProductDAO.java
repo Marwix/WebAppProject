@@ -20,18 +20,18 @@ import lombok.Getter;
 public class ProductDAO extends AbstractDAO<Product> {
     @Getter @PersistenceContext(unitName = "BigStoreDB")
     private EntityManager em;
-    
+    private JPAQueryFactory queryFactory;
+    private QProduct product;
     
     public ProductDAO() {
         super(Product.class);
+        product = QProduct.product;
     }
     
 
     public List<Product> getProductByName(String name){
-        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
-        QProduct product = QProduct.product;
-        
-        List<Product> p = queryFactory.selectFrom(product).where(product.product_name.eq(name)).fetch();
+ 
+        List<Product> p = getJPAQueryFactory().selectFrom(product).where(product.product_name.eq(name)).fetch();
         
         return p;
         
@@ -39,10 +39,8 @@ public class ProductDAO extends AbstractDAO<Product> {
     
     // CREATE TEST FOR THIS METHOD!
     public List<Product> getXUniqueProducts(long count){
-        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
-        QProduct product = QProduct.product;
-        
-        List<Product> temp = queryFactory.selectFrom(product).orderBy(product.product_name.desc()).fetch();
+ 
+        List<Product> temp = getJPAQueryFactory().selectFrom(product).orderBy(product.product_name.desc()).fetch();
         
         List<Product> p = new ArrayList<Product>();
         
@@ -59,10 +57,7 @@ public class ProductDAO extends AbstractDAO<Product> {
    
     public List<Product>  getProductByID(int product_id){
         
-        JPAQueryFactory queryFactory = new JPAQueryFactory(getEntityManager());
-        QProduct product = QProduct.product;
-        
-        List<Product> p = queryFactory.selectFrom(product).where(product.prodoct_id.eq(product_id)).fetch();
+        List<Product> p = getJPAQueryFactory().selectFrom(product).where(product.prodoct_id.eq(product_id)).fetch();
         
         return p;
     
@@ -100,5 +95,12 @@ public class ProductDAO extends AbstractDAO<Product> {
     protected EntityManager getEntityManager() {
         return em;
     }
+
+    @Override
+    protected JPAQueryFactory getJPAQueryFactory() {
+        queryFactory = new JPAQueryFactory(em);
+       return queryFactory;
+    }
   
+    
 }
