@@ -64,7 +64,8 @@
                                                                  type="submit"
                                                                  action="#{cartController.addToCart()}"
                                                                  value="Add To Cart"
-                                                                 icon="pi pi-shopping-cart">
+                                                                 icon="pi pi-shopping-cart"
+                                                                 update=":cart:cart-amount">
                                                      <f:param name="action" value="#{product.prodoct_id}" />
                                                 </p:commandButton>
                                             </div>
