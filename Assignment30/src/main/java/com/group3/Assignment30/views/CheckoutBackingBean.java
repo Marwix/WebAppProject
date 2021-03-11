@@ -97,7 +97,7 @@ public class CheckoutBackingBean implements Serializable {
         
         for (Product s : items)   
         {
-            totalPrice += s.getPrice() * getCount(s);
+            totalPrice += s.getPrice() * s.getPriceMultiplier() * getCount(s);
         }
         return totalPrice;
     }
