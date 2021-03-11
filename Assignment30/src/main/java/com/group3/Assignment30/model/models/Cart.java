@@ -1,10 +1,9 @@
-package com.group3.Assignment30.model.entity;
+package com.group3.Assignment30.model.models;
 
-import java.io.Serializable;
+import com.group3.Assignment30.model.entity.Product;
 import java.util.HashMap;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;

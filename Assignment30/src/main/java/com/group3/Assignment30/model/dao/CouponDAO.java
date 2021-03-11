@@ -39,8 +39,6 @@ public class CouponDAO extends AbstractDAO<Coupon>{
     }
     
     public void deleteCouponByCouponCode(String couponCode){
-      
-        
        getJPAQueryFactory().delete(coupon).where(coupon.couponCode.eq(couponCode)).execute();
     }
 

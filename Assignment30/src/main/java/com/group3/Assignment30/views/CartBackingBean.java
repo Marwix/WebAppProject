@@ -1,5 +1,5 @@
 package com.group3.Assignment30.views;
-import com.group3.Assignment30.model.entity.Cart;
+import com.group3.Assignment30.model.models.Cart;
 import com.group3.Assignment30.model.entity.Product;
 import java.io.Serializable;
 import java.util.HashMap;

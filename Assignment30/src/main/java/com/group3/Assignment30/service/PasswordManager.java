@@ -1,8 +1,6 @@
 
 package com.group3.Assignment30.service;
 
-import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -12,7 +10,6 @@ import java.util.Base64;
 import java.util.List;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import sun.security.krb5.internal.PAData;
 
 public class PasswordManager {
     private int PASSWORD_STRENGTH = 65536;
