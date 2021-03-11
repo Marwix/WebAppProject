@@ -131,7 +131,7 @@ body {
 }
 
 .list-group-item:focus {
-  background-color: 3282b8;
+  background-color: #3282b8;
   color: #eeeeee;
 }
 
