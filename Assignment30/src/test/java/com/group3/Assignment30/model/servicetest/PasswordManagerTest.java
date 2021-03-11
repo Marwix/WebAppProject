@@ -1,9 +1,10 @@
-/*
+
 package com.group3.Assignment30.model.servicetest;
 
 import com.group3.Assignment30.service.PasswordManager;
 import java.util.List;
 import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
@@ -23,11 +24,21 @@ public class PasswordManagerTest {
     public void singleTest() {
         String password = "myTestPassword7234";
         List<byte[]> SaltNHash = pwManager.HashNSalt(password);
+        byte[] badSalt = SaltNHash.get(0).clone();
+        badSalt[2] = 2;
         
-        assertTrue(pwManager.passwordMatching(new String(SaltNHash.get(1)), SaltNHash.get(0), password));
-        assertFalse(pwManager.passwordMatching(new String(SaltNHash.get(1)), SaltNHash.get(0), password));
-        assertFalse(pwManager.passwordMatching(new String(SaltNHash.get(1))+5, SaltNHash.get(0), password));
-        assertFalse(pwManager.passwordMatching(new String(SaltNHash.get(1)), SaltNHash.get(0), "someotherpassword"));
+        assertTrue(pwManager.passwordMatching(pwManager.passwordByteArrToString(SaltNHash.get(1)), SaltNHash.get(0), password));
+        assertFalse(pwManager.passwordMatching(pwManager.passwordByteArrToString(SaltNHash.get(1)), badSalt, password));
+        assertFalse(pwManager.passwordMatching(pwManager.passwordByteArrToString(SaltNHash.get(1))+5, SaltNHash.get(0), password));
+        assertFalse(pwManager.passwordMatching(pwManager.passwordByteArrToString(SaltNHash.get(1)), SaltNHash.get(0), "someotherpassword"));
+    }
+    
+    @Test
+    public void byteToarrToStringTest(){
+        String pw = "TestPassword";
+        String testString = pwManager.passwordByteArrToString(pwManager.passwordStringToByteArr(pw));
+        
+        assertEquals(pw, testString);
     }
     
     @Test
@@ -44,4 +55,3 @@ public class PasswordManagerTest {
     
     
 }
-*/
