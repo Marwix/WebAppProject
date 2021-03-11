@@ -34,19 +34,22 @@
                               />
                           <div></div>
                           <b class="title"> BigStore </b>
-                          <!-- TODO: Change to h1 -->
                       </a>
                   </div>
 
                   <div class="cart-button">
-
                       <!-- Amount of items in cart-->
-                      <div class="cart-notification">
-                          <h6></h6>
-                      </div>
-
+                      <h:form id="cart">
+                          <div class="cart-notification">
+                              <h6>
+                                  <h:outputText id="cart-amount" value="#{cartBackingBean.amountItemsCart}"/>
+                              </h6>
+                          </div>
+                      </h:form>
+                      
                       <!-- Account page-->
                       <a href="accountPage.xhtml"><img id="login-logo" src="resources/Images/icons/profile.png" alt="accountpage button"/></a>
+                      <!-- Products page -->
                       <a href="productPage.xhtml"><img id="products-logo" src="resources/Images/icons/products.png" alt="Products button"/></a>
                       
                       <ui:fragment rendered="#{loginBackingBean.loggedin}">
@@ -58,16 +61,19 @@
                       <!-- Login page -->
                       <a href="loginregister.xhtml"><img id="login-logo" src="resources/Images/icons/login.svg"/></a>
                       </ui:fragment> 
-
-                      <!-- Checkout page -->
+                      
+                       <!-- Checkout page -->
                       <a href="checkoutpage.xhtml"><img id="cart-logo" src="resources/Images/icons/cart4.svg" alt="checkout button"/></a>
+                    
+                      <!-- About page -->
+                      <a href="aboutpage.xhtml"><img id="about-logo" src="resources/Images/about.png" alt="about button"/></a>
+
+                    
                   </div>
               </div>
           </div>
-        </div>
-            
+        </div>  
             <ui:insert name="content" />
-           
       </div>
       
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 

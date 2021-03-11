@@ -45,6 +45,7 @@ body {
   position: absolute;
   right: 5%;
   top: 45%;
+  vertical-align: top;
 }
 
 /* Logos */
@@ -78,15 +79,25 @@ body {
   height: 2em;
   margin-bottom:2px;
 }
+
+#about-logo {
+    width: 28px;
+    height: 28px;
+    margin-top:3px;
+    margin-left:2px;
+}
+
 /* -- */
 
 .cart-notification {
   position: absolute;
-  width: 1rem;
-  height: 1rem;
+  width: 1em;
+  height: 1em;
   background: transparent;
   right: 0%;
   border-radius: 50%;
+  right: 34px;
+  bottom: 23px;
 }
 
 .cart-notification h6 {
