@@ -104,7 +104,7 @@ public class CheckoutController implements Serializable {
       if(checkoutBackingBean.resetCartAndCoupon()){
           // Go to payment result and forward to product/main page again.
           ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-          ec.redirect(ec.getRequestContextPath() + "/" + "paymentResult.xhtml");
+          ec.redirect(ec.getRequestContextPath() + "/" + "paymentresult.xhtml");
           cartBackingBean.setCount(0);
       }
     }
