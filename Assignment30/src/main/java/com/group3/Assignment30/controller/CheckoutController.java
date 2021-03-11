@@ -84,9 +84,14 @@ public class CheckoutController implements Serializable {
           
           purchase.setOrder_id(orderidForThisPurchase);
           if(checkoutBackingBean.CouponApplied()){
-           purchase.setPrice(product.getPrice() * checkoutBackingBean.getCoupon().getPriceMultiplier());
+           purchase.setPrice(product.getPrice()* product.getPriceMultiplier() * checkoutBackingBean.getCoupon().getPriceMultiplier());
+              System.out.println(product.getPrice()* product.getPriceMultiplier() * checkoutBackingBean.getCoupon().getPriceMultiplier());
+              System.out.println("Coupon");
           }else{
-              purchase.setPrice(product.getPrice());
+              purchase.setPrice(product.getPrice() * product.getPriceMultiplier());
+              System.out.println(product.getPrice());
+              System.out.println(product.getPriceMultiplier());
+              System.out.println("No coupon");
           }
           purchase.setCustomer(customer);
           purchase.setProducts(product);

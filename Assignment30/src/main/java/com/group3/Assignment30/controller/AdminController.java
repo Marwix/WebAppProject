@@ -107,6 +107,8 @@ public class AdminController implements Serializable{
     }
     
     public void addCoupon(){
+        
+        // move to view
         for (Coupon c: adminBackinBean.getCouponList()){
             if(c.getCouponCode().equals(adminBackinBean.getCoupon().getCouponCode())){
                 MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Coupon code already used!");
@@ -125,6 +127,30 @@ public class AdminController implements Serializable{
         
         couponDAO.deleteCouponByCouponCode(couponCode);
         refreshCoupons();
+    }
+    
+    public void addSale(){
+        if (productDAO.getProductByID(adminBackinBean.getProduct().getProdoct_id()).size() != 1) {
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Product does not exist!", "sales-form:product-id");
+            return;
+        }
+        long res = productDAO.setProductSale(adminBackinBean.getProduct().getProdoct_id(), (int)adminBackinBean.getProduct().getPriceMultiplier());
+        if (res == 1L) {
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_INFO, "Sale successfully added!");
+        } else {
+            MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Unable to add sale " + res + " products were edited");
+            return;
+        }
+        refreshProducts();
+    }
+    
+    public void removeSale(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
+        String product_id = params.get("prod_id");
+        
+        productDAO.setProductSale(Integer.parseInt(product_id), 0);
+        refreshProducts();
     }
     
     private boolean productExists(Product product){
