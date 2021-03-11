@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.group3.Assignment30.model.dao;
 import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.model.entity.QCustomer;
@@ -10,10 +6,8 @@ import com.group3.Assignment30.service.PasswordManager;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import jdk.internal.misc.Signal;
 import lombok.Getter;
 
 @Stateless
