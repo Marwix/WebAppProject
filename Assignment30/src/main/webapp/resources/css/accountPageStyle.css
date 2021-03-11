@@ -31,6 +31,12 @@
   width: 100%;
   color: #eeeeee;
 }
+
+.orderlist .internal-list {
+  list-style: none;
+  width: 100%;
+  color: #eeeeee;
+}
 .orderlist .list .header {
   display: flex;
   justify-content: space-between;
@@ -58,5 +64,18 @@ div[class*="order-column"] {
 
 .errortext{
  color: #eeeeee; 
+}
+
+#errortext h2 {
+    text-align:center;
+    background-color:#1b262c;
+    color:white;
+    margin-top:1em;
+    margin-bottom:1em;
+}
+
+#register-login-button {
+    width: 25%;
+    align-self: center;
 }
 
