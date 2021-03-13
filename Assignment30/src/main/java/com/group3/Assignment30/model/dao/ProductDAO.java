@@ -83,35 +83,21 @@ public class ProductDAO extends AbstractDAO<Product> {
     
     // Sort by Price
     public List<Product> findAllSortedByPrice(boolean descending) {
-        if (descending) {
-            return getJPAQueryFactory().selectFrom(product).orderBy(product.priceMultiplier.desc(), product.price.desc()).fetch();
-        }
-        else
-        {
-            return getJPAQueryFactory().selectFrom(product).orderBy(product.price.asc(), product.priceMultiplier.asc()).fetch();
-        }
+
+       return getJPAQueryFactory().selectFrom(product).orderBy(descending ? product.priceMultiplier.desc() : product.priceMultiplier.asc(), descending ? product.price.desc() : product.price.asc()).fetch();
     }
     
     // Sort by Stars
     public List<Product> findAllSortedByStars(boolean descending) {
-        if (descending) {
-            return getJPAQueryFactory().selectFrom(product).orderBy(product.fullStar.desc()).fetch();
-        }
-        else
-        {
-            return getJPAQueryFactory().selectFrom(product).orderBy(product.fullStar.asc()).fetch();
-        }
+        
+            return getJPAQueryFactory().selectFrom(product).orderBy(descending ? product.fullStar.desc() : product.fullStar.asc()).fetch();
     }
     
     // Sort by Date Added (IE product_id since ID + 1 for new product)
     public List<Product> findAllSortedByDateAdded(boolean descending) {
-        if (descending) {
-            return getJPAQueryFactory().selectFrom(product).orderBy(product.prodoct_id.desc()).fetch();
-        }
-        else
-        {
-            return getJPAQueryFactory().selectFrom(product).orderBy(product.prodoct_id.asc()).fetch();
-        }
+        
+        return getJPAQueryFactory().selectFrom(product).orderBy(descending ? product.prodoct_id.desc() : product.prodoct_id.asc() ).fetch();   
+        
     }
     
     @Override

@@ -44,17 +44,19 @@ public class ProductController implements Serializable {
         productBackingBean.setProducts(products);
     }
     
-    public void sortAllSOrtedByPrice() {
+    public void sortProductsByPrice() {
        
         productBackingBean.setProducts(productDAO.findAllSortedByPrice(productBackingBean.isSortToggleOrder()));
         productBackingBean.setSortToggleOrder(!productBackingBean.isSortToggleOrder());
     }
     
-    public void getAllSOrtedByStars() {
-        
+    public void sortProductsByStars() {
+        productBackingBean.setProducts(productDAO.findAllSortedByStars(productBackingBean.isSortToggleOrder()));
+        productBackingBean.setSortToggleOrder(!productBackingBean.isSortToggleOrder());
     }
     
-    public void getAllSOrtedByDateAdded() {
-        
+    public void sortProductsByDateAdded() {
+        productBackingBean.setProducts(productDAO.findAllSortedByDateAdded(productBackingBean.isSortToggleOrder()));
+        productBackingBean.setSortToggleOrder(!productBackingBean.isSortToggleOrder());
     }
 }
