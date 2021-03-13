@@ -81,6 +81,39 @@ public class ProductDAO extends AbstractDAO<Product> {
         em.createQuery("DELETE FROM Product where 1=1").executeUpdate();
     }
     
+    // Sort by Price
+    public List<Product> findAllSortedByPrice(boolean descending) {
+        if (descending) {
+            return getJPAQueryFactory().selectFrom(product).orderBy(product.priceMultiplier.desc(), product.price.desc()).fetch();
+        }
+        else
+        {
+            return getJPAQueryFactory().selectFrom(product).orderBy(product.price.asc(), product.priceMultiplier.asc()).fetch();
+        }
+    }
+    
+    // Sort by Stars
+    public List<Product> findAllSortedByStars(boolean descending) {
+        if (descending) {
+            return getJPAQueryFactory().selectFrom(product).orderBy(product.fullStar.desc()).fetch();
+        }
+        else
+        {
+            return getJPAQueryFactory().selectFrom(product).orderBy(product.fullStar.asc()).fetch();
+        }
+    }
+    
+    // Sort by Date Added (IE product_id since ID + 1 for new product)
+    public List<Product> findAllSortedByDateAdded(boolean descending) {
+        if (descending) {
+            return getJPAQueryFactory().selectFrom(product).orderBy(product.prodoct_id.desc()).fetch();
+        }
+        else
+        {
+            return getJPAQueryFactory().selectFrom(product).orderBy(product.prodoct_id.asc()).fetch();
+        }
+    }
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -91,6 +124,6 @@ public class ProductDAO extends AbstractDAO<Product> {
         queryFactory = new JPAQueryFactory(em);
        return queryFactory;
     }
-  
     
+
 }
