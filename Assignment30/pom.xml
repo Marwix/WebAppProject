@@ -93,7 +93,8 @@
             <artifactId>omnifaces</artifactId>
             <version>3.10.1</version>
         </dependency>
-<!--        <dependency>
+
+         <dependency>
             <groupId>org.jboss.arquillian.graphene</groupId>
             <artifactId>graphene-webdriver</artifactId>
             <version>2.1.0.Final</version>
@@ -105,9 +106,9 @@
             <artifactId>wildfly-arquillian-container-remote</artifactId>
             <version>2.0.0.Final</version>
             <scope>test</scope>
-        </dependency>-->
+        </dependency>
     </dependencies>
-    
+   
      <build>
         <plugins>
             <plugin>
