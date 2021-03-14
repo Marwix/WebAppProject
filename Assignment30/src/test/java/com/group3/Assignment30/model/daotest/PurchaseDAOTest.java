@@ -211,8 +211,7 @@ public class PurchaseDAOTest {
         purchaseDAO.create(o8);
         
     }
-    //@InSequence(0) bestämmer ordningen
-    @InSequence(0)
+    
     @Test
     public void checkCorrectAmountInserted() {
         
@@ -223,7 +222,6 @@ public class PurchaseDAOTest {
         assertEquals(8L, Amount2);
     }
     
-    @InSequence(1)
     @Test
     public void CheckCorectOrderByCustomer() {
         
@@ -240,7 +238,6 @@ public class PurchaseDAOTest {
         assertEquals(c2, retrievedOrder2.get(0).getCustomer());
     }
     
-    @InSequence(2)
     @Test
     public void getCorrectOrderHistoryFormat() {
         
@@ -261,7 +258,7 @@ public class PurchaseDAOTest {
         
     }
     
-    @InSequence(3)
+    
     @Test
     public void CheckOrderHistoryAfterDeleting() {
         
@@ -277,7 +274,6 @@ public class PurchaseDAOTest {
         
     }
     
-    @InSequence(4)
     @Test
     public void checkRetrievedCorrectOrder(){
         List<Purchase> ordersId1 = purchaseDAO.getOrdersByOrderID(1);
@@ -290,11 +286,39 @@ public class PurchaseDAOTest {
         
     }
     
+    @Test
+    public void getMaxOrderIDTest(){
+        assertTrue(8 == purchaseDAO.getMaxOrderID());
+        purchaseDAO.remove(o1);
+        purchaseDAO.remove(o2);
+        purchaseDAO.remove(o3);
+        purchaseDAO.remove(o4);
+        purchaseDAO.remove(o5);
+        purchaseDAO.remove(o6);
+        purchaseDAO.remove(o7);
+        purchaseDAO.remove(o8);
+        assertTrue(0 == purchaseDAO.getMaxOrderID());
+        
+    }
+    
      @After
     public void cleanup(){
-        purchaseDAO.cleanAll();
-        customerDAO.cleanAll();
-        productDAO.cleanAll();
+        purchaseDAO.remove(o1);
+        purchaseDAO.remove(o2);
+        purchaseDAO.remove(o3);
+        purchaseDAO.remove(o4);
+        purchaseDAO.remove(o5);
+        purchaseDAO.remove(o6);
+        purchaseDAO.remove(o7);
+        purchaseDAO.remove(o8);
+        
+        customerDAO.remove(c1);
+        customerDAO.remove(c2);
+        
+        productDAO.remove(p1);
+        productDAO.remove(p2);
+        productDAO.remove(p3);
+        productDAO.remove(p4);
     }
     
 }

@@ -14,7 +14,7 @@ import lombok.Getter;
 
 @Stateless
 public class PurchaseDAO extends AbstractDAO<Purchase> {
-    @Getter @PersistenceContext(unitName = "BigStoreDB")
+    @PersistenceContext(unitName = "BigStoreDB")
     private EntityManager em;
     private JPAQueryFactory queryFactory;
     private QPurchase purchase;
@@ -44,25 +44,12 @@ public class PurchaseDAO extends AbstractDAO<Purchase> {
     
     }
     
-    
-    public List<Purchase>  getOrderPurchasesByCustomer(Customer customer){
-        List<Purchase> orders = getJPAQueryFactory().selectFrom(purchase).where(purchase.customer.eq(customer)).fetch();
-        return orders;
-    
-    }
-    
     public List<Purchase> getOrdersByOrderID(int order_id){
         
         List<Purchase> orders = getJPAQueryFactory().selectFrom(purchase).where(purchase.order_id.eq(order_id)).fetch();
         
         return orders;
     }
-    
-    public void cleanAll(){
-        em.createQuery("DELETE FROM Purchase where 1=1").executeUpdate();
-    }
-    
-    
     
     @Override
     protected EntityManager getEntityManager() {
