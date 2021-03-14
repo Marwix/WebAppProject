@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group3.Assigment30.model.backingbeantest;
+package com.group3.Assignment30.model.backingbeantest;
 
 import com.group3.Assignment30.model.dao.CouponDAO;
 import com.group3.Assignment30.model.entity.Coupon;

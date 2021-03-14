@@ -201,6 +201,9 @@ public class CustomerDAOTest {
     
     @After
     public void cleanup(){
-       customerDAO.cleanAll();
+       customerDAO.remove(user1);
+       customerDAO.remove(user2);
+       customerDAO.remove(user3);
+       customerDAO.remove(user4);
     }
 }

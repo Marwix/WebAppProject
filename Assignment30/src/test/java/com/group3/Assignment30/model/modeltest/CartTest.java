@@ -19,18 +19,6 @@ public class CartTest {
     }
     
     @Test
-    public void cartTest(){
-        assertEquals(null, cart.getCartInventory());
-        HashMap<Product, Integer> newCartInv = new HashMap<Product,Integer>();
-        cart.setCartInventory(newCartInv);
-        assertEquals(newCartInv, cart.getCartInventory());
-        
-        assertTrue(0 == cart.getUniqueItems());
-        cart.setUniqueItems(5);
-        assertTrue(5 == cart.getUniqueItems());
-    }
-    
-    @Test
     public void cartInitTest(){
         assertEquals(null, cart.getCartInventory());
         cart.init();

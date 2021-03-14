@@ -2,8 +2,10 @@ package com.group3.Assignment30.model.daotest;
 
 import com.group3.Assignment30.model.dao.ProductDAO;
 import com.group3.Assignment30.model.entity.Product;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
@@ -193,6 +195,63 @@ public class ProductDAOTest {
     @Test
     public void getEntityManagerTest(){
         
+    }
+    
+    @Test
+    public void findAllSortedByPriceTest(){
+        List<Product> sortedByDescending = new ArrayList<Product>();
+        List<Product> sortedByAscending = new ArrayList<Product>();
+        
+        sortedByDescending.add(p4);
+        sortedByDescending.add(p3);
+        sortedByDescending.add(p2);
+        sortedByDescending.add(p1);
+        
+        sortedByAscending.add(p1);
+        sortedByAscending.add(p3);
+        sortedByAscending.add(p2);
+        sortedByAscending.add(p4);
+        assertEquals(sortedByDescending, productDAO.findAllSortedByPrice(true));
+        assertEquals(sortedByAscending, productDAO.findAllSortedByPrice(false));
+    
+    }
+    
+    @Test
+    public void findAllSortedByStarsTest(){
+        List<Product> sortedByDescending = new ArrayList<Product>();
+        List<Product> sortedByAscending = new ArrayList<Product>();
+        
+        sortedByDescending.add(p4);
+        sortedByDescending.add(p3);
+        sortedByDescending.add(p2);
+        sortedByDescending.add(p1);
+        
+        sortedByAscending.add(p1);
+        sortedByAscending.add(p2);
+        sortedByAscending.add(p3);
+        sortedByAscending.add(p4);
+        assertEquals(sortedByDescending, productDAO.findAllSortedByStars(true));
+        assertEquals(sortedByAscending, productDAO.findAllSortedByStars(false));
+    
+    }
+    
+    @Test
+    public void findAllSortedByDateAddedTest(){
+        List<Product> sortedByDescending = new ArrayList<Product>();
+        List<Product> sortedByAscending = new ArrayList<Product>();
+        
+        sortedByDescending.add(p4);
+        sortedByDescending.add(p3);
+        sortedByDescending.add(p2);
+        sortedByDescending.add(p1);
+        
+        sortedByAscending.add(p1);
+        sortedByAscending.add(p2);
+        sortedByAscending.add(p3);
+        sortedByAscending.add(p4);
+        assertEquals(sortedByDescending, productDAO.findAllSortedByDateAdded(true));
+        assertEquals(sortedByAscending, productDAO.findAllSortedByDateAdded(false));
+    
     }
     
     @After

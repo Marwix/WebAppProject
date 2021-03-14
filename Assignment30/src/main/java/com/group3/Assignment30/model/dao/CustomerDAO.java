@@ -59,9 +59,6 @@ public class CustomerDAO extends AbstractDAO<Customer> {
                 .where(user.user_id.eq(customer.getUser_id())).execute();
     }
     
-    public void cleanAll(){
-        em.createQuery("DELETE FROM Customer where 1=1").executeUpdate();
-    }
 
     @Override
     protected EntityManager getEntityManager() {
