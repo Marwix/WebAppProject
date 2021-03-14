@@ -21,9 +21,9 @@
                             <h:form id="form">
                                 <div class="buttonSortRow">
                                     <p:commandButton process="@this" value="Reset Filter" update="form" action="#{productController.getAllProducts()}" icon="pi pi-times-circle"/>
-                                    <p:commandButton process="@this" value="Sort by Price" update="form" action="#{productBackingBean.orderProductsByPrice()}" icon="pi pi-dollar"/>
-                                    <p:commandButton process="@this" value="Sort by Date Added" update="form" action="#{productBackingBean.orderProductsDateAdded()}" icon="pi pi-calendar"/>
-                                    <p:commandButton process="@this" value="Sort by Rating" update="form" action="#{productBackingBean.orderProductsByStars()}" icon="pi pi-star"/>
+                                    <p:commandButton process="@this" value="Sort by Price" update="form" action="#{productController.sortProductsByPrice()}" icon="pi pi-dollar"/>
+                                    <p:commandButton process="@this" value="Sort by Date Added" update="form" action="#{productController.sortProductsByDateAdded()}" icon="pi pi-calendar"/>
+                                    <p:commandButton process="@this" value="Sort by Rating" update="form" action="#{productController.sortProductsByStars()}" icon="pi pi-star"/>
                                     
                                     <div class="ui-inputgroup">
                                         <p:inputText value="#{productBackingBean.searchString}" placeholder="Search...">

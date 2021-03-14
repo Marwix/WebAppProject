@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-   version="4.0">
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
     <session-config>
         <session-timeout>
             30
@@ -29,24 +26,30 @@
         <param-value>vela</param-value>
     </context-param>
     <mime-mapping>
-      <extension>ttf</extension>
-      <mime-type>css/fonts</mime-type>
+        <extension>ttf</extension>
+        <mime-type>css/fonts</mime-type>
     </mime-mapping>
     <mime-mapping>
-      <extension>otf</extension>
-      <mime-type>font/opentype</mime-type>
+        <extension>otf</extension>
+        <mime-type>font/opentype</mime-type>
     </mime-mapping>
     <mime-mapping>
-      <extension>woff2</extension>
-      <mime-type>font/woff2</mime-type>
-    </mime-mapping>  
-    <mime-mapping>
-      <extension>woff</extension>
-      <mime-type>font/woff</mime-type>
-    </mime-mapping>  
-    <mime-mapping>
-      <extension>eot</extension>
-      <mime-type>application/vnd.ms-fontobject</mime-type>
+        <extension>woff2</extension>
+        <mime-type>font/woff2</mime-type>
     </mime-mapping>
-    
+    <mime-mapping>
+        <extension>woff</extension>
+        <mime-type>font/woff</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>eot</extension>
+        <mime-type>application/vnd.ms-fontobject</mime-type>
+    </mime-mapping>
+
+    <ejb-local-ref>
+        <ejb-ref-name>cart1</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <ejb-link>#Cart</ejb-link>
+    </ejb-local-ref>
+
 </web-app>

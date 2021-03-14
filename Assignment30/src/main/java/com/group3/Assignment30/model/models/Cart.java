@@ -18,6 +18,4 @@ public class Cart {
     public void init() {
         cartInventory = new HashMap<Product,Integer>();
     }
-    private int uniqueItems;
-    
 }

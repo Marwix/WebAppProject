@@ -117,7 +117,7 @@ public class CheckoutController implements Serializable {
         
         if (couponCode.size() > 0)   
         {
-           String confirm =  checkoutBackingBean.applyCoupon(couponCode);
+           String confirm =  checkoutBackingBean.applyCoupon(couponCode.get(0));
             if (confirm.equals("Coupon code applied!")) {
                 sendNotification(FacesMessage.SEVERITY_INFO, "Coupon code applied!");
             }else if (confirm.equals("Better code applied!")) {
