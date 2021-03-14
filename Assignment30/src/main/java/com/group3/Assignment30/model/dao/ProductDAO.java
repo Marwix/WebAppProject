@@ -14,7 +14,7 @@ import lombok.Getter;
 
 @Stateless
 public class ProductDAO extends AbstractDAO<Product> {
-    @Getter @PersistenceContext(unitName = "BigStoreDB")
+    @PersistenceContext(unitName = "BigStoreDB")
     private EntityManager em;
     private JPAQueryFactory queryFactory;
     private QProduct product;
@@ -77,6 +77,7 @@ public class ProductDAO extends AbstractDAO<Product> {
         return getJPAQueryFactory().update(product).where(product.prodoct_id.eq(prod_id)).set(product.priceMultiplier, ((double)(100-newSale))/100).execute();
     }
     
+
     public void cleanAll(){
         em.createQuery("DELETE FROM Product where 1=1").executeUpdate();
     }
@@ -99,7 +100,7 @@ public class ProductDAO extends AbstractDAO<Product> {
         return getJPAQueryFactory().selectFrom(product).orderBy(descending ? product.prodoct_id.desc() : product.prodoct_id.asc() ).fetch();   
         
     }
-    
+
     @Override
     protected EntityManager getEntityManager() {
         return em;

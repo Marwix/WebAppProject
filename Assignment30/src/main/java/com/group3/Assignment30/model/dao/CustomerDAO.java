@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Stateless
 public class CustomerDAO extends AbstractDAO<Customer> {
-    @Getter @PersistenceContext(unitName = "BigStoreDB")
+    @PersistenceContext(unitName = "BigStoreDB")
     private EntityManager em;
     private JPAQueryFactory queryFactory;
     private QCustomer user;

@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Stateless
 public class CouponDAO extends AbstractDAO<Coupon>{
-    @Getter @PersistenceContext(unitName = "BigStoreDB")
+    @PersistenceContext(unitName = "BigStoreDB")
     private EntityManager em;
     private JPAQueryFactory queryFactory;
     private  QCoupon coupon;
