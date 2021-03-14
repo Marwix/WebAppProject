@@ -3,7 +3,6 @@ package com.group3.Assignment30.model.servicetest;
 
 import com.group3.Assignment30.service.PasswordManager;
 import java.util.List;
-import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;

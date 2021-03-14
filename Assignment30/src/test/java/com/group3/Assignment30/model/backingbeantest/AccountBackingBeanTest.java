@@ -1,7 +1,5 @@
 package com.group3.Assignment30.model.backingbeantest;
 
-import com.group3.Assignment30.controller.AccountPageController;
-import com.group3.Assignment30.controller.SessionContextController;
 import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.dao.ProductDAO;
 import com.group3.Assignment30.model.dao.PurchaseDAO;
@@ -22,10 +20,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import javax.faces.context.FacesContext;
 import org.jboss.arquillian.junit.Arquillian;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(Arquillian.class)
 public class AccountBackingBeanTest{

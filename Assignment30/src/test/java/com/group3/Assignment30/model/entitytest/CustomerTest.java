@@ -2,7 +2,6 @@
 package com.group3.Assignment30.model.entitytest;
 
 import com.group3.Assignment30.model.entity.Customer;
-import org.junit.Assert;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

@@ -1,7 +1,6 @@
 
 package com.group3.Assignment30.model.modeltest;
 
-import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.model.models.Cart;
 import java.util.HashMap;
 import static org.junit.Assert.assertEquals;

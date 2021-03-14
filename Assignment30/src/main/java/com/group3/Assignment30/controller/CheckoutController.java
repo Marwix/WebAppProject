@@ -65,7 +65,9 @@ public class CheckoutController implements Serializable {
             //setting customer in checkout to correct info
             checkoutBackingBean.setCustomer(customer);
         } 
-        catch (NullPointerException e) {};
+        catch (NullPointerException e) {
+        System.err.println("User not logged in. So the website cant get its userID from SessionContext");
+        };
     } 
     
    public void payNow() throws IOException {

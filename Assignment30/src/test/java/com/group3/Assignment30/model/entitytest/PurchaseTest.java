@@ -4,11 +4,9 @@ import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.model.entity.Purchase;
 import java.time.LocalDate;
-import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import org.junit.Before;
 import org.junit.Test;
 
 

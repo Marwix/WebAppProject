@@ -6,7 +6,6 @@ import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.views.AdminBackingBean;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;

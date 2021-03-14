@@ -5,7 +5,6 @@ import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.model.models.Cart;
 import com.group3.Assignment30.views.CartBackingBean;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
