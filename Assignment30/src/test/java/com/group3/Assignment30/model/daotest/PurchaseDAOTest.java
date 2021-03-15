@@ -9,21 +9,14 @@ import com.group3.Assignment30.model.entity.Purchase;
 import com.group3.Assignment30.model.entity.Product;
 import com.group3.Assignment30.service.PasswordManager;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import javax.ejb.AfterCompletion;
 import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
-import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -211,8 +204,7 @@ public class PurchaseDAOTest {
         purchaseDAO.create(o8);
         
     }
-    //@InSequence(0) bestämmer ordningen
-    @InSequence(0)
+    
     @Test
     public void checkCorrectAmountInserted() {
         
@@ -223,7 +215,6 @@ public class PurchaseDAOTest {
         assertEquals(8L, Amount2);
     }
     
-    @InSequence(1)
     @Test
     public void CheckCorectOrderByCustomer() {
         
@@ -240,7 +231,6 @@ public class PurchaseDAOTest {
         assertEquals(c2, retrievedOrder2.get(0).getCustomer());
     }
     
-    @InSequence(2)
     @Test
     public void getCorrectOrderHistoryFormat() {
         
@@ -261,7 +251,7 @@ public class PurchaseDAOTest {
         
     }
     
-    @InSequence(3)
+    
     @Test
     public void CheckOrderHistoryAfterDeleting() {
         
@@ -277,7 +267,6 @@ public class PurchaseDAOTest {
         
     }
     
-    @InSequence(4)
     @Test
     public void checkRetrievedCorrectOrder(){
         List<Purchase> ordersId1 = purchaseDAO.getOrdersByOrderID(1);
@@ -290,11 +279,39 @@ public class PurchaseDAOTest {
         
     }
     
+    @Test
+    public void getMaxOrderIDTest(){
+        assertTrue(8 == purchaseDAO.getMaxOrderID());
+        purchaseDAO.remove(o1);
+        purchaseDAO.remove(o2);
+        purchaseDAO.remove(o3);
+        purchaseDAO.remove(o4);
+        purchaseDAO.remove(o5);
+        purchaseDAO.remove(o6);
+        purchaseDAO.remove(o7);
+        purchaseDAO.remove(o8);
+        assertTrue(0 == purchaseDAO.getMaxOrderID());
+        
+    }
+    
      @After
     public void cleanup(){
-        purchaseDAO.cleanAll();
-        customerDAO.cleanAll();
-        productDAO.cleanAll();
+        purchaseDAO.remove(o1);
+        purchaseDAO.remove(o2);
+        purchaseDAO.remove(o3);
+        purchaseDAO.remove(o4);
+        purchaseDAO.remove(o5);
+        purchaseDAO.remove(o6);
+        purchaseDAO.remove(o7);
+        purchaseDAO.remove(o8);
+        
+        customerDAO.remove(c1);
+        customerDAO.remove(c2);
+        
+        productDAO.remove(p1);
+        productDAO.remove(p2);
+        productDAO.remove(p3);
+        productDAO.remove(p4);
     }
     
 }

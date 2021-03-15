@@ -39,14 +39,15 @@ public class LoginController  implements Serializable{
         if (customer.size()==0){
             MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Account not found");
         } 
-        // Claim that the account doesn't exist when password doesn't match to not indicate
-        // the existance of an account.
+        
         else {
             if (pwManager.passwordMatching(customer.get(0).getPassword(), customer.get(0).getSalt(), loginBackingBean.getPassword())){
                 sessionContextController.setAttribute("user_id", customer.get(0).getUser_id());
                 loginBackingBean.setLoggedin(true);
                 return "homepage";
             } else {
+                // Claim that the account doesn't exist when password doesn't match to not indicate
+                // the existance of an account.
                MessageCenter.SendPageMessage(FacesMessage.SEVERITY_ERROR, "Account not found"); 
             }
            
