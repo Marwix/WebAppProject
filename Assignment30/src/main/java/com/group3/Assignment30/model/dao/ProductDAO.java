@@ -78,8 +78,7 @@ public class ProductDAO extends AbstractDAO<Product> {
     
     // Sort by Price
     public List<Product> findAllSortedByPrice(boolean descending) {
-
-       return getJPAQueryFactory().selectFrom(product).orderBy(descending ? product.priceMultiplier.desc() : product.priceMultiplier.asc(), descending ? product.price.desc() : product.price.asc()).fetch();
+       return getJPAQueryFactory().selectFrom(product).orderBy(descending ? product.price.multiply(product.priceMultiplier).desc() : product.price.multiply(product.priceMultiplier).asc()).fetch();
     }
     
     // Sort by Stars
