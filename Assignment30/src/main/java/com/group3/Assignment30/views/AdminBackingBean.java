@@ -8,7 +8,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data

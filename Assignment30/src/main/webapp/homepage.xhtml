@@ -74,7 +74,8 @@
                                                          type="submit"
                                                          action="#{cartController.addToCart()}"
                                                          value="Add To Cart"
-                                                         icon="pi pi-shopping-cart">
+                                                         icon="pi pi-shopping-cart"
+                                                         update=":cart:cart-amount">
                                             <f:param name="action" value="#{product.prodoct_id}" />
                                         </p:commandButton>
                                     </div>
@@ -83,7 +84,7 @@
                        </p:carousel>
                     </div>
                 </h:form>
-                <script src="./assets/JS/bootstrap.bundle.min.js"></script>
+                <script src="resources/js/bootstrap.bundle.min.js"></script>
             </h:body>
         </ui:define>
     </ui:decorate>
