@@ -179,7 +179,6 @@ public class AccountBackingBeanTest{
        
       orders.add(order);
         
-       System.err.println("" + orders);
        
        accountBackingBean.showOrderHistory(order);
        assertEquals(orders,accountBackingBean.getPurchases());
@@ -207,8 +206,6 @@ public class AccountBackingBeanTest{
        order.add(o2);
        order.add(o4);
        
-       System.out.println("" + orders);
-       System.out.println("" + accountBackingBean.getPurchases());
         
        
        accountBackingBean.showOrderHistory(order);
@@ -232,7 +229,6 @@ public class AccountBackingBeanTest{
         orders.add(order);
         accountBackingBean.setPurchases(orders);
         
-       System.err.println("" + orders);
       
        
        double totalprice = ((o1.getPrice() * o1.getCount()) + (o2.getPrice() * o2.getCount()));

@@ -71,8 +71,7 @@ public class CartBackingBeanTest {
         cartBackingBean.addItemToCart(p1);
         cartBackingBean.addItemToCart(p2);
         cartBackingBean.addItemToCart(p2);
-        assertEquals("3", cartBackingBean.getAmountItemsCart());
-        System.out.println(cartBackingBean.getCart().getCartInventory().get(p1));
+        assertEquals("3", cartBackingBean.getAmountItemsCart());   
         assertTrue(1 == cartBackingBean.getCart().getCartInventory().get(p1));
         assertTrue(2 == cartBackingBean.getCart().getCartInventory().get(p2));
         
