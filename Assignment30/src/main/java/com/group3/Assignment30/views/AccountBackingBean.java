@@ -52,7 +52,7 @@ public class AccountBackingBean implements Serializable{
        double totalPrice = 0;
        for (Purchase s : order)
        {
-           totalPrice += s.getPrice();
+           totalPrice += s.getPrice() * s.getCount();
        }
        return totalPrice;
    }

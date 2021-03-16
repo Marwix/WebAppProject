@@ -148,7 +148,7 @@
                                             <li>
                                                 <div class="header">
                                                     <div class="order-column-status">#{purchase.products.product_name}</div>
-                                                    <div class="order-column-total">#{purchase.price * purchase.count}</div>
+                                                    <div class="order-column-total">$#{purchase.price * purchase.count}</div>
                                                 </div>
                                             </li>    
                                                 
@@ -156,7 +156,7 @@
                                                <li>
                                                    <div class="header">
                                                     <div class="order-column-status">Total: </div>
-                                                    <div class="order-column-total">#{accountBackingBean.getTotalPriceOfOrder(order)}</div> 
+                                                    <div class="order-column-total">$#{accountBackingBean.getTotalPriceOfOrder(order)}</div> 
                                                    </div> 
                                                </li>
                                            </ul>

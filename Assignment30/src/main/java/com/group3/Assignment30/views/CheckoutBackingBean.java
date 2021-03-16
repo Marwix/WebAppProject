@@ -5,6 +5,8 @@ import com.group3.Assignment30.model.entity.Coupon;
 import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.model.entity.Product;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -89,6 +91,8 @@ public class CheckoutBackingBean implements Serializable {
         {
             totalPrice += s.getPrice() * s.getPriceMultiplier() * getCount(s);
         }
+        BigDecimal bd = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
+        totalPrice = bd.doubleValue();
         return totalPrice;
     }
     public boolean resetCartAndCoupon(){

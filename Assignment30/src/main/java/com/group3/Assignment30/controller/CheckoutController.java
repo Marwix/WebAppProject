@@ -12,6 +12,8 @@ import com.group3.Assignment30.views.CheckoutBackingBean;
 import java.io.IOException;
 import javax.faces.context.ExternalContext;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -72,6 +74,7 @@ public class CheckoutController implements Serializable {
     
    public void payNow() throws IOException {
        HashMap<Product,Integer> cartInventory = checkoutBackingBean.getCart().getCartInventory();
+       double price;
        
        if (cartInventory.isEmpty())
            
@@ -86,14 +89,15 @@ public class CheckoutController implements Serializable {
           
           purchase.setOrder_id(orderidForThisPurchase);
           if(checkoutBackingBean.CouponApplied()){
-           purchase.setPrice(product.getPrice()* product.getPriceMultiplier() * checkoutBackingBean.getCoupon().getPriceMultiplier());
-              System.out.println(product.getPrice()* product.getPriceMultiplier() * checkoutBackingBean.getCoupon().getPriceMultiplier());
-              System.out.println("Coupon");
+              price = product.getPrice()* product.getPriceMultiplier() * checkoutBackingBean.getCoupon().getPriceMultiplier();
+              BigDecimal bd = new BigDecimal(price).setScale(2, RoundingMode.HALF_UP);
+              price = bd.doubleValue();
+           purchase.setPrice(price);
           }else{
-              purchase.setPrice(product.getPrice() * product.getPriceMultiplier());
-              System.out.println(product.getPrice());
-              System.out.println(product.getPriceMultiplier());
-              System.out.println("No coupon");
+              price = product.getPrice()* product.getPriceMultiplier();
+              BigDecimal bd = new BigDecimal(price).setScale(2, RoundingMode.HALF_UP);
+              price = bd.doubleValue();
+              purchase.setPrice(price);
           }
           purchase.setCustomer(customer);
           purchase.setProducts(product);

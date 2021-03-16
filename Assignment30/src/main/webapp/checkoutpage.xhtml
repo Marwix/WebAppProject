@@ -115,8 +115,15 @@
                                         </p:column>
 
                                         <p:column headerText="Price">
-
-                                            <h:outputText value="#{checkoutBackingBean.getCount(product)} x #{product.price * product.priceMultiplier}" />
+                                            
+                                            <h:outputText value="#{checkoutBackingBean.getCount(product)}"/>
+                                            
+                                            <h:outputText value=" x "/>
+                                            
+                                            <h:outputText value="#{product.price * product.priceMultiplier}">
+                                                <f:convertNumber currencySymbol="$" type="currency"/>
+                                            </h:outputText>
+                                            
 
                                         </p:column>
 
