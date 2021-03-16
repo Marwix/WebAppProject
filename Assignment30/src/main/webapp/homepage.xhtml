@@ -67,7 +67,14 @@
                                         <p:rating readonly="true" value="#{product.fullStar}"/>
                                     </div>
                                     <div class="product-grid-item-bottom">
-                                        <h:outputText value="#{product.price}" styleClass="product-price">
+                                        <h:outputText rendered="#{!(1 > product.priceMultiplier)}" value="#{product.price}" styleClass="product-price">
+                                            <f:convertNumber currencySymbol="$" type="currency"/>2
+                                        </h:outputText>
+                                        <h:outputText rendered="#{1 > product.priceMultiplier}" value="#{product.price}" styleClass="product-price" style="text-decoration: line-through">
+                                            <f:convertNumber currencySymbol="$" type="currency"/>
+                                        </h:outputText>
+
+                                        <h:outputText rendered="#{1 > product.priceMultiplier}" value="#{product.price * product.priceMultiplier}" styleClass="product-price" style="color: #28fc03" >
                                             <f:convertNumber currencySymbol="$" type="currency"/>
                                         </h:outputText>
                                         <p:commandButton process="@this"
