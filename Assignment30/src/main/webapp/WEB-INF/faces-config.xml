@@ -27,7 +27,7 @@
         <from-view-id>/loginregister.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>homepage</from-outcome>
-            <to-view-id>/productPage.xhtml</to-view-id>
+            <to-view-id>/productpage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

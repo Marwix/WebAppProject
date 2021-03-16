@@ -8,11 +8,10 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import lombok.Getter;
 
 @Stateless
 public class CouponDAO extends AbstractDAO<Coupon>{
-    @Getter @PersistenceContext(unitName = "BigStoreDB")
+    @PersistenceContext(unitName = "BigStoreDB")
     private EntityManager em;
     private JPAQueryFactory queryFactory;
     private  QCoupon coupon;

@@ -65,7 +65,9 @@ public class CheckoutController implements Serializable {
             //setting customer in checkout to correct info
             checkoutBackingBean.setCustomer(customer);
         } 
-        catch (NullPointerException e) {};
+        catch (NullPointerException e) {
+        System.err.println("User not logged in. So the website cant get its userID from SessionContext");
+        };
     } 
     
    public void payNow() throws IOException {
@@ -117,7 +119,7 @@ public class CheckoutController implements Serializable {
         
         if (couponCode.size() > 0)   
         {
-           String confirm =  checkoutBackingBean.applyCoupon(couponCode);
+           String confirm =  checkoutBackingBean.applyCoupon(couponCode.get(0));
             if (confirm.equals("Coupon code applied!")) {
                 sendNotification(FacesMessage.SEVERITY_INFO, "Coupon code applied!");
             }else if (confirm.equals("Better code applied!")) {

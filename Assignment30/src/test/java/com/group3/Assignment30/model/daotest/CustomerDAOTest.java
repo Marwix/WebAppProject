@@ -3,8 +3,6 @@ package com.group3.Assignment30.model.daotest;
 import com.group3.Assignment30.model.dao.CustomerDAO;
 import com.group3.Assignment30.model.entity.Customer;
 import com.group3.Assignment30.service.PasswordManager;
-import com.querydsl.core.QueryFactory;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -14,14 +12,11 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -201,6 +196,9 @@ public class CustomerDAOTest {
     
     @After
     public void cleanup(){
-       customerDAO.cleanAll();
+       customerDAO.remove(user1);
+       customerDAO.remove(user2);
+       customerDAO.remove(user3);
+       customerDAO.remove(user4);
     }
 }

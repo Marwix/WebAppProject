@@ -8,11 +8,10 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import lombok.Getter;
 
 @Stateless
 public class CustomerDAO extends AbstractDAO<Customer> {
-    @Getter @PersistenceContext(unitName = "BigStoreDB")
+    @PersistenceContext(unitName = "BigStoreDB")
     private EntityManager em;
     private JPAQueryFactory queryFactory;
     private QCustomer user;
@@ -59,9 +58,6 @@ public class CustomerDAO extends AbstractDAO<Customer> {
                 .where(user.user_id.eq(customer.getUser_id())).execute();
     }
     
-    public void cleanAll(){
-        em.createQuery("DELETE FROM Customer where 1=1").executeUpdate();
-    }
 
     @Override
     protected EntityManager getEntityManager() {

@@ -15,9 +15,7 @@ public class Cart {
     @NotEmpty private HashMap<Product,Integer> cartInventory;
     
     @PostConstruct
-    private void init() {
+    public void init() {
         cartInventory = new HashMap<Product,Integer>();
     }
-    private int uniqueItems;
-    
 }

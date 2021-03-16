@@ -57,20 +57,19 @@ public class CheckoutBackingBean implements Serializable {
         }
     }
     
-    public String applyCoupon(List<Coupon> couponCode)
+    public String applyCoupon(Coupon newCoupon)
     {
-        Coupon newCoupon = couponCode.get(0);
-
-           if (coupon.getPriceMultiplier() != 1) {
+           if (newCoupon.getPriceMultiplier() != 1) {
                
                if (coupon.getPriceMultiplier() < newCoupon.getPriceMultiplier()) {
                    coupon = newCoupon;
                    return "Better code applied!";
                }
-           }else {
-               coupon = newCoupon;
-               return "Coupon code applied!";
-           }  
+               else {
+                   coupon = newCoupon;
+                   return "Coupon code applied!"; 
+               }
+           }
            return "";
     }
     

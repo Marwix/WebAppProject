@@ -49,7 +49,9 @@ public class AccountPageController implements Serializable{
             accountBackingBean.setCustomer(customer);
             
             getOrderHistory();
-        } catch (Exception e) { }
+        } catch (NullPointerException e) {
+            System.err.println("User not logged in. So the website cant get its userID from SessionContext");
+        }
     }
     
     //gets all information about the customer and sends it to customerDAO

@@ -2,17 +2,18 @@ package com.group3.Assignment30.model.daotest;
 
 import com.group3.Assignment30.model.dao.ProductDAO;
 import com.group3.Assignment30.model.entity.Product;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +44,8 @@ public class ProductDAOTest {
         p1 = new Product();
         p1.setProduct_name("Catapult");
         p1.setPrice(30000);
-        p1.setFullStar(4);
+        p1.setPriceMultiplier(0.7);
+        p1.setFullStar(1);
         p1.setColor("Blue");
         p1.setMeasurements("3mx3mx3m");
         p1.setDescription("TEST");
@@ -51,7 +53,7 @@ public class ProductDAOTest {
         p2 = new Product();
         p2.setProduct_name("Catapult");
         p2.setPrice(30000);
-        p2.setFullStar(4);
+        p2.setFullStar(2);
         p2.setColor("Green");
         p2.setMeasurements("3mx3mx3m");
         p2.setDescription("TEST");
@@ -59,7 +61,7 @@ public class ProductDAOTest {
         p3 = new Product();
         p3.setProduct_name("Catapult");
         p3.setPrice(30000);
-        p3.setFullStar(4);
+        p3.setFullStar(3);
         p3.setColor("Red");
         p3.setMeasurements("3mx3mx3m");
         p3.setDescription("TEST");
@@ -78,7 +80,6 @@ public class ProductDAOTest {
         productDAO.create(p4);
     }
     
-    @InSequence(0)
     @Test
     public void checkCorrectAmountInserted() {
         
@@ -88,7 +89,6 @@ public class ProductDAOTest {
         assertEquals(4L, Amount);
     }
     
-    @InSequence(1)
     @Test
     public void getCorrectRange(){
         List<Product> l1 = productDAO.getXUniqueProducts(1);
@@ -98,7 +98,6 @@ public class ProductDAOTest {
         assertTrue(l1.size() == 2);
     }
     
-    @InSequence(2)
     @Test
     public void checkIfWeGetCorrectProductWithID() {
         
@@ -116,7 +115,6 @@ public class ProductDAOTest {
     }
     
     @Test
-    @InSequence(3)
     public void checkIfGetProductByName() {
         List<Product> retrivedProducts = productDAO.getProductByName("Catapult");
         assertTrue(retrivedProducts.contains(p1));
@@ -127,7 +125,6 @@ public class ProductDAOTest {
     
     
     @Test
-    @InSequence(4)
     public void checkIfProductRemoved() {
         List<Product> retrivedProducts = productDAO.findAll();
         assertTrue(retrivedProducts.contains(p1));
@@ -146,9 +143,121 @@ public class ProductDAOTest {
         
     }
     
+    @Test
+    public void getHighestRatingProduct(){
+        List<Product> productList = productDAO.getHighestRatingProduct(3);
+        assertTrue(productList.size() == 3);
+        assertEquals(p4, productList.get(0));
+        assertEquals(p3, productList.get(1));
+        assertEquals(p2, productList.get(2));
+        
+    }
+    
+    @Test
+    public void getProductLikeTest(){
+        List<Product> productList = productDAO.getProductLike("plA");
+        assertTrue(productList.size() == 1);
+        assertEquals(p4, productList.get(0));
+        
+        productList = productDAO.getProductLike("AtAPuLt");
+        assertTrue(productList.size() == 3);
+        assertTrue(productList.contains(p1));
+        assertTrue(productList.contains(p2));
+        assertTrue(productList.contains(p3));
+    }
+    
+    @Test
+    public void setProductSaleTest(){
+        //Change once
+        double oldSale = p1.getPriceMultiplier();
+        productDAO.setProductSale(p1.getProdoct_id(), 10);
+        double newSale = productDAO.getProductByID(p1.getProdoct_id()).get(0).getPriceMultiplier();
+        assertNotEquals(oldSale, newSale, 0.1);
+        assertEquals(newSale, 0.9, 0.01);
+        
+        // Change twice on the same product
+        oldSale = newSale;
+        productDAO.setProductSale(p1.getProdoct_id(), 55);
+        newSale = productDAO.getProductByID(p1.getProdoct_id()).get(0).getPriceMultiplier();
+        assertNotEquals(oldSale, newSale, 0.01);
+        assertEquals(newSale,0.45, 0.01);
+        
+        //Change on a different product
+        oldSale = p3.getPriceMultiplier();
+        productDAO.setProductSale(p3.getProdoct_id(), 99);
+        newSale = productDAO.getProductByID(p3.getProdoct_id()).get(0).getPriceMultiplier();
+        assertNotEquals(oldSale, newSale, 0.01);
+        assertEquals(newSale, 0.01, 0.01);
+    }
+    
+    @Test
+    public void getEntityManagerTest(){
+        
+    }
+    
+    @Test
+    public void findAllSortedByPriceTest(){
+        List<Product> sortedByDescending = new ArrayList<Product>();
+        List<Product> sortedByAscending = new ArrayList<Product>();
+        
+        sortedByDescending.add(p4);
+        sortedByDescending.add(p3);
+        sortedByDescending.add(p2);
+        sortedByDescending.add(p1);
+        
+        sortedByAscending.add(p1);
+        sortedByAscending.add(p3);
+        sortedByAscending.add(p2);
+        sortedByAscending.add(p4);
+        assertEquals(sortedByDescending, productDAO.findAllSortedByPrice(true));
+        assertEquals(sortedByAscending, productDAO.findAllSortedByPrice(false));
+    
+    }
+    
+    @Test
+    public void findAllSortedByStarsTest(){
+        List<Product> sortedByDescending = new ArrayList<Product>();
+        List<Product> sortedByAscending = new ArrayList<Product>();
+        
+        sortedByDescending.add(p4);
+        sortedByDescending.add(p3);
+        sortedByDescending.add(p2);
+        sortedByDescending.add(p1);
+        
+        sortedByAscending.add(p1);
+        sortedByAscending.add(p2);
+        sortedByAscending.add(p3);
+        sortedByAscending.add(p4);
+        assertEquals(sortedByDescending, productDAO.findAllSortedByStars(true));
+        assertEquals(sortedByAscending, productDAO.findAllSortedByStars(false));
+    
+    }
+    
+    @Test
+    public void findAllSortedByDateAddedTest(){
+        List<Product> sortedByDescending = new ArrayList<Product>();
+        List<Product> sortedByAscending = new ArrayList<Product>();
+        
+        sortedByDescending.add(p4);
+        sortedByDescending.add(p3);
+        sortedByDescending.add(p2);
+        sortedByDescending.add(p1);
+        
+        sortedByAscending.add(p1);
+        sortedByAscending.add(p2);
+        sortedByAscending.add(p3);
+        sortedByAscending.add(p4);
+        assertEquals(sortedByDescending, productDAO.findAllSortedByDateAdded(true));
+        assertEquals(sortedByAscending, productDAO.findAllSortedByDateAdded(false));
+    
+    }
+    
     @After
     public void cleanup(){
-       productDAO.cleanAll();
+       productDAO.remove(p1);
+       productDAO.remove(p2);
+       productDAO.remove(p3);
+       productDAO.remove(p4);
     }
     
 }
