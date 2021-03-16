@@ -100,6 +100,7 @@ public class AdminController implements Serializable{
             e.printStackTrace();
         }
         adminBackinBean.setProduct(new Product());
+        refreshProducts();
     }
     
     public void addCoupon(){
