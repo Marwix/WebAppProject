@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <link rel="icon" href="resources/Images/shop.ico"/>
+        <title>Wishlist</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet name="css/primeflex/primeflex.min.css" />
+        <h:outputStylesheet name="css/primeflex/dataView.css" />
+        <link rel="stylesheet" href="resources/css/productView.css" />
+    </h:head>
+    
+        <ui:decorate template="resources/template/topbar.xhtml">
+		<ui:define name="content">
+                    <h:body>
+                        <f:metadata>
+                            <f:viewAction action="#{productController.init()}" />
+                        </f:metadata>
+                        <div class="product card">
+                            <h:form>
+                                <p:dataScroller value="#{productBackingBean.products}" var="product" chunkSize="10" mode="inline"
+                                                scrollHeight="650">
+                                    <f:facet name="header">
+                                        Scroll Down to Load More Products
+                                    </f:facet>
+
+                                    <div class="product">
+                                        <div class="product-list-item p-p-5">
+                                            <p:graphicImage library="Images" name="products/#{product.product_name}.png"/>
+                                            <div class="product-list-detail">
+                                                <div class="product-name">#{product.product_name}</div>
+                                                <div class="product-description">#{product.description}</div>
+                                                <p:rating readonly="true" value="#{product.fullStar}"/>
+                                            </div>
+                                            
+                                            <div class="product-list-action">
+                                                <h:outputText value="#{product.price}" styleClass="product-price">
+                                                    <f:convertNumber currencySymbol="$" type="currency"/>
+                                                </h:outputText>
+                                                <p:commandButton process="@this"
+                                                                 type="submit"
+                                                                 action="#{cartController.addToCart()}"
+                                                                 value="Add To Cart"
+                                                                 icon="pi pi-shopping-cart"
+                                                                 update=":cart:cart-amount">
+                                                    <f:param name="action" value="#{product.prodoct_id}" />
+                                                </p:commandButton>
+                                                <p:button value="Remove" icon="pi pi-times" styleClass="ui-button-danger" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </p:dataScroller>
+                            </h:form>
+                        </div>
+                    </h:body>
+		</ui:define>
+        </ui:decorate>
+    
+</html>
