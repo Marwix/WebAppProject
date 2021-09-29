@@ -14,11 +14,11 @@
 		<ui:define name="content">
                     <h:body>
                         <f:metadata>
-                            <f:viewAction action="#{productController.init()}" />
+                            <f:viewAction action="#{wishListController.init()}" />
                         </f:metadata>
                         <div class="product card">
                             <h:form>
-                                <p:dataScroller value="#{productBackingBean.products}" var="product" chunkSize="10" mode="inline"
+                                <p:dataScroller var="product" value="#{wishListBackingBean.keyList}" chunkSize="10" mode="inline"
                                                 scrollHeight="650">
                                     <f:facet name="header">
                                         Scroll Down to Load More Products

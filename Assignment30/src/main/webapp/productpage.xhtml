@@ -59,7 +59,13 @@
                                                 <h:outputText rendered="#{1 > product.priceMultiplier}" value="#{product.price * product.priceMultiplier}" styleClass="product-price" style="color: #28fc03" >
                                                     <f:convertNumber currencySymbol="$" type="currency"/>
                                                 </h:outputText>
-                                                <p:button icon="pi pi-heart" styleClass="rounded-button ui-button-help ui-button-outlined" />
+                                                <p:commandButton process="@this"
+                                                                 type="submit"
+                                                                 action="#{wishListController.addToWishList()}"
+                                                                 icon="pi pi-heart"
+                                                                 styleClass="rounded-button ui-button-help ui-button-outlined">
+                                                    <f:param name="action" value="#{product.prodoct_id}" />
+                                                </p:commandButton>
                                                 <p:commandButton process="@this"
                                                                  type="submit"
                                                                  action="#{cartController.addToCart()}"
@@ -79,7 +85,13 @@
                                                 <div class="product-name">#{product.product_name}</div>
                                                 <div class="product-description">#{product.description}</div>
                                                 <p:rating readonly="true" value="#{product.fullStar}"/>
-                                                
+                                                <p:commandButton process="@this"
+                                                                 type="submit"
+                                                                 action="#{wishListController.addToWishList()}"
+                                                                 icon="pi pi-heart"
+                                                                 styleClass="rounded-button ui-button-help ui-button-flat">
+                                                    <f:param name="action" value="#{product.prodoct_id}" />
+                                                </p:commandButton>                                                                                            
                                             </div>
                                             <div class="product-list-action">
                                                 <h:outputText rendered="#{!(1 > product.priceMultiplier)}" value="#{product.price}" styleClass="product-price">
@@ -91,16 +103,15 @@
 
                                                 <h:outputText rendered="#{1 > product.priceMultiplier}" value="#{product.price * product.priceMultiplier}" styleClass="product-price" style="color: #28fc03" >
                                                     <f:convertNumber currencySymbol="$" type="currency"/>
-                                                </h:outputText>
-                                                 <p:commandButton process="@this"
+                                                </h:outputText>                                               
+                                                <p:commandButton process="@this"
                                                                  type="submit"
                                                                  action="#{cartController.addToCart()}"
                                                                  value="Add To Cart"
                                                                  icon="pi pi-shopping-cart"
                                                                  update=":cart:cart-amount">
                                                      <f:param name="action" value="#{product.prodoct_id}" />
-                                                </p:commandButton>
-                                                
+                                                </p:commandButton>                                                                                                
                                             </div>
                                         </div>
                                     </p:dataViewListItem>
