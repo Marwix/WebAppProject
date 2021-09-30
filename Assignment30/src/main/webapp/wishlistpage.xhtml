@@ -8,58 +8,69 @@
         <h:outputStylesheet name="css/primeflex/primeflex.min.css" />
         <h:outputStylesheet name="css/primeflex/dataView.css" />
         <link rel="stylesheet" href="resources/css/productView.css" />
+        <link rel="stylesheet" href="resources/css/wishlistpage.css" />
     </h:head>
     
         <ui:decorate template="resources/template/topbar.xhtml">
 		<ui:define name="content">
                     <h:body>
-                        <f:metadata>
-                            <f:viewAction action="#{wishListController.init()}" />
-                        </f:metadata>
-                        <div class="product card">
-                            <h:form>
-                                <p:dataScroller id="product-list" var="product" value="#{wishListBackingBean.keyList}" chunkSize="10" mode="inline"
-                                                scrollHeight="650">
-                                    <f:facet name="header">
-                                        *** YOUR WISHLIST ***
-                                    </f:facet>
+                        <ui:fragment rendered="#{loginBackingBean.loggedin}">
+                            <f:metadata>
+                                <f:viewAction action="#{wishListController.init()}" />
+                            </f:metadata>
+                            <div class="product card">
+                                <h:form>
+                                    <p:dataScroller id="product-list" var="product" value="#{wishListBackingBean.keyList}" chunkSize="10" mode="inline"
+                                                    scrollHeight="650">
+                                        <f:facet name="header">
+                                            *** YOUR WISHLIST ***
+                                        </f:facet>
 
-                                    <div class="product">
-                                        <div class="product-list-item p-p-5">
-                                            <p:graphicImage library="Images" name="products/#{product.product_name}.png"/>
-                                            <div class="product-list-detail">
-                                                <div class="product-name">#{product.product_name}</div>
-                                                <div class="product-description">#{product.description}</div>
-                                                <p:rating readonly="true" value="#{product.fullStar}"/>
-                                            </div>
-                                            
-                                            <div class="product-list-action">
-                                                <h:outputText value="#{product.price}" styleClass="product-price">
-                                                    <f:convertNumber currencySymbol="$" type="currency"/>
-                                                </h:outputText>
-                                                <p:commandButton process="@this"
-                                                                 type="submit"
-                                                                 action="#{cartController.addToCart()}"
-                                                                 value="Add To Cart"
-                                                                 icon="pi pi-shopping-cart"
-                                                                 update=":cart:cart-amount">
-                                                    <f:param name="action" value="#{product.prodoct_id}" />
-                                                </p:commandButton>
-                                                <p:commandButton process="@this"
-                                                                 action="#{wishListController.removeFromWishList()}"
-                                                                 value="Remove" 
-                                                                 icon="pi pi-times"
-                                                                 update="product-list"
-                                                                 styleClass="ui-button-danger">
-                                                     <f:param name="action" value="#{product.prodoct_id}" />
-                                                </p:commandButton>
+                                        <div class="product">
+                                            <div class="product-list-item p-p-5">
+                                                <p:graphicImage library="Images" name="products/#{product.product_name}.png"/>
+                                                <div class="product-list-detail">
+                                                    <div class="product-name">#{product.product_name}</div>
+                                                    <div class="product-description">#{product.description}</div>
+                                                    <p:rating readonly="true" value="#{product.fullStar}"/>
+                                                </div>
 
+                                                <div class="product-list-action">
+                                                    <h:outputText value="#{product.price}" styleClass="product-price">
+                                                        <f:convertNumber currencySymbol="$" type="currency"/>
+                                                    </h:outputText>
+                                                    <p:commandButton process="@this"
+                                                                     type="submit"
+                                                                     action="#{cartController.addToCart()}"
+                                                                     value="Add To Cart"
+                                                                     icon="pi pi-shopping-cart"
+                                                                     update=":cart:cart-amount">
+                                                        <f:param name="action" value="#{product.prodoct_id}" />
+                                                    </p:commandButton>
+                                                    <p:commandButton process="@this"
+                                                                     action="#{wishListController.removeFromWishList()}"
+                                                                     value="Remove" 
+                                                                     icon="pi pi-times"
+                                                                     update="product-list"
+                                                                     styleClass="ui-button-danger">
+                                                         <f:param name="action" value="#{product.prodoct_id}" />
+                                                    </p:commandButton>
+
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </p:dataScroller>
-                            </h:form>
-                        </div>
+                                    </p:dataScroller>
+                                </h:form>
+                            </div>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{!loginBackingBean.loggedin}">
+                            <h2 id="errortext">
+                                <div class="inside-text">
+                                    <h2>Sorry you need to login/register to view the wishlist </h2>
+                                </div>
+                            </h2>
+                            <p:button id="register-login-button" value="Click here to register/login" styleClass="rounded-button" outcome="loginregister" />
+                        </ui:fragment>
                     </h:body>
 		</ui:define>
         </ui:decorate>
