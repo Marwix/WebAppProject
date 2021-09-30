@@ -54,8 +54,13 @@ public class WishListBackingBean implements Serializable {
         }
     }
     
+    public void removeProduct (Product p){
+        if(wishList.getWishListInventory().containsKey(p))
+        {
+            wishList.getWishListInventory().remove(p);
+        }
+    }
+    
 }
     
     
-    
-

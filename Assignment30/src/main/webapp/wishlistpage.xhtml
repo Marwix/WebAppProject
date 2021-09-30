@@ -18,10 +18,10 @@
                         </f:metadata>
                         <div class="product card">
                             <h:form>
-                                <p:dataScroller var="product" value="#{wishListBackingBean.keyList}" chunkSize="10" mode="inline"
+                                <p:dataScroller id="product-list" var="product" value="#{wishListBackingBean.keyList}" chunkSize="10" mode="inline"
                                                 scrollHeight="650">
                                     <f:facet name="header">
-                                        Scroll Down to Load More Products
+                                        *** YOUR WISHLIST ***
                                     </f:facet>
 
                                     <div class="product">
@@ -45,7 +45,14 @@
                                                                  update=":cart:cart-amount">
                                                     <f:param name="action" value="#{product.prodoct_id}" />
                                                 </p:commandButton>
-                                                <p:button value="Remove" icon="pi pi-times" styleClass="ui-button-danger" />
+                                                <p:commandButton process="@this"
+                                                                 action="#{wishListController.removeFromWishList()}"
+                                                                 value="Remove" 
+                                                                 icon="pi pi-times"
+                                                                 update="product-list"
+                                                                 styleClass="ui-button-danger">
+                                                     <f:param name="action" value="#{product.prodoct_id}" />
+                                                </p:commandButton>
 
                                             </div>
                                         </div>
