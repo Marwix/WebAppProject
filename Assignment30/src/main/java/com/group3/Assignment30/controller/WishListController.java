@@ -31,6 +31,7 @@ public class WishListController implements Serializable{
         addToWishList();
     }
     
+    // Add product to wishlist
     public void addToWishList(){
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Map<String,String> params = facesContext.getExternalContext().getRequestParameterMap();
@@ -40,8 +41,7 @@ public class WishListController implements Serializable{
         { 
             int id = Integer.parseInt(action);
             List<Product> products = productDAO.getProductByID(id);
-            wishListBackingBean.addItemToWishList(products.get(0));
-            
+            wishListBackingBean.addItemToWishList(products.get(0));            
         } 
         catch (NumberFormatException nfe) 
         {
@@ -50,16 +50,23 @@ public class WishListController implements Serializable{
         
     }
     
+    // Remove product from wishlist
     public void removeFromWishList() throws IOException {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Map<String,String> params = facesContext.getExternalContext().getRequestParameterMap();
         String action = params.get("action"); 
         
-        int id = Integer.parseInt(action);
-        List<Product> p  = productDAO.getProductByID(id);
-        
-        wishListBackingBean.removeProduct(p.get(0));
-    
+        try 
+        {
+            int id = Integer.parseInt(action);
+            List<Product> p = productDAO.getProductByID(id);
+            wishListBackingBean.removeProduct(p.get(0));
+        }
+        catch (NumberFormatException nfe)
+        {
+            nfe.printStackTrace();           
+        }
+            
     }
        
 }

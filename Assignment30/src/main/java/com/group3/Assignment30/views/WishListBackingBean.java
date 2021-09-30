@@ -24,15 +24,14 @@ public class WishListBackingBean implements Serializable {
         if (wishList.getWishListInventory() != null)
         {
             HashMap<Product,Integer> listItems = wishList.getWishListInventory();
-            if(listItems.containsKey(product))
-            {
-                listItems.put(product, listItems.get(product) + 1);
-            } 
-            else
-            {
+           
+            // Check if the product is already in the list
+            if(!listItems.containsKey(product))
+            {              
                 listItems.put(product, 1);
+                wishList.setWishListInventory(listItems); 
             }
-            wishList.setWishListInventory(listItems);            
+                       
         }
         else 
         {
@@ -42,7 +41,7 @@ public class WishListBackingBean implements Serializable {
         }
     }
     
-    
+    // Returns a list of  all keys in wishlist
     public List<Product> getKeyList(){  
         try 
         {    
@@ -54,6 +53,7 @@ public class WishListBackingBean implements Serializable {
         }
     }
     
+    // Removes a product from wishlist
     public void removeProduct (Product p){
         if(wishList.getWishListInventory().containsKey(p))
         {

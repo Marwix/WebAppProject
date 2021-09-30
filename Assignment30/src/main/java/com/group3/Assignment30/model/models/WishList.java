@@ -1,4 +1,3 @@
-
 package com.group3.Assignment30.model.models;
 
 import com.group3.Assignment30.model.entity.Product;
